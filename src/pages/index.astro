@@ -104,14 +104,14 @@ const homepageFaq: FaqItem[] = [
       <div class="hero-visual">
         <ScreenshotFrame
           imageSrc="/images/samples/sample-portra.jpg"
-          imageAlt="Authentic analog film photograph shot on NeoFilm showing warm golden tones and organic grain"
-          filmTag="PORTRA WARM 400"
-          iso="ISO 400"
+          imageAlt="Authentic analog film photograph shot on NeoFilm showing warm golden tones and organic grain with Golden Gold 200 profile"
+          filmTag="GOLDEN GOLD 200"
+          iso="ISO 200"
           shutter="1/250s · f/1.8"
-          frameNumber="EXP 24/36"
+          frameNumber="EXP 20/24"
           aspectRatio="photo"
           priority={true}
-          caption="Actual camera output rendered on-device with Portra Warm 400 profile"
+          caption="Actual camera output rendered on-device with Golden Gold 200 profile"
         />
       </div>
     </div>
@@ -279,13 +279,10 @@ const homepageFaq: FaqItem[] = [
 
         <div class="manual-viewfinder-col">
           <ScreenshotFrame
-            imageSrc="/images/samples/sample-viewfinder.jpg"
+            imageSrc="/images/samples/viewfinder-sample.jpg"
             imageAlt="NeoFilm camera viewfinder showing live framing grid, exposure compensation dial, and film canister selector"
-            filmTag="FX-DAILY 400"
-            iso="ISO 400"
-            shutter="1/500s · EV -0.7"
-            frameNumber="EXP 12/36"
             aspectRatio="vertical"
+            clean={true}
             caption="Real-time optical viewfinder with live halation and manual focus controls"
           />
         </div>
@@ -355,15 +352,12 @@ const homepageFaq: FaqItem[] = [
     <div class="container">
       <div class="darkroom-split-grid">
         <div class="darkroom-image-col">
-          <div class="darkroom-visual-card">
-            <img
-              src="/images/samples/sample-portra.jpg"
-              alt="Photo in NeoFilm mobile darkroom being re-developed with custom borders and date stamp"
-              class="darkroom-preview-img"
-              loading="lazy"
-            />
-            <div class="darkroom-hud-badge">DARKROOM LAB · REPROCESSING</div>
-          </div>
+          <ScreenshotFrame
+            imageSrc="/images/samples/sample-darkroom.jpg"
+            imageAlt="Photo in NeoFilm mobile darkroom being re-developed with custom borders and date stamp"
+            aspectRatio="vertical"
+            clean={true}
+          />
         </div>
 
         <div class="darkroom-copy-col">
@@ -816,7 +810,7 @@ const homepageFaq: FaqItem[] = [
   }
 
   .manual-viewfinder-col {
-    max-width: 400px;
+    max-width: 310px;
     margin: 0 auto;
   }
 
@@ -856,33 +850,10 @@ const homepageFaq: FaqItem[] = [
     align-items: center;
   }
 
-  .darkroom-visual-card {
-    position: relative;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    border: 2px solid var(--color-seam);
-    box-shadow: var(--shadow-chassis);
-    background-color: #000;
-  }
-
-  .darkroom-preview-img {
+  .darkroom-image-col {
+    max-width: 310px;
+    margin: 0 auto;
     width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  .darkroom-hud-badge {
-    position: absolute;
-    bottom: 14px;
-    left: 14px;
-    background-color: rgba(10, 10, 12, 0.85);
-    border: 1px solid var(--color-seam);
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    color: var(--color-accent);
-    padding: 4px 10px;
-    border-radius: var(--radius-sm);
-    letter-spacing: 0.08em;
   }
 
   .darkroom-feature-bullets {
