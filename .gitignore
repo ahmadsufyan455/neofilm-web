@@ -12,6 +12,9 @@ node_modules/
 .env.*
 !.env.example
 
+# Vercel
+.vercel/
+
 # macOS system files
 .DS_Store
 *.swp
