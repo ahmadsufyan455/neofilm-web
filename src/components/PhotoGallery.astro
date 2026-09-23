@@ -2,16 +2,20 @@
 import { samplePhotos, categoryFilters } from '../data/samplePhotos';
 
 export interface Props {
+  limit?: number;
   initialLimit?: number;
   showFilters?: boolean;
 }
 
-const { showFilters = true } = Astro.props;
+const { limit, initialLimit, showFilters } = Astro.props;
+const maxPhotos = limit ?? initialLimit;
+const shouldShowFilters = showFilters !== undefined ? showFilters : !maxPhotos;
+const displayedPhotos = maxPhotos ? samplePhotos.slice(0, maxPhotos) : samplePhotos;
 ---
 
 <div class="photo-gallery-wrapper" id="neofilm-gallery-root">
   <!-- Category Filter Pills -->
-  {showFilters && (
+  {shouldShowFilters && (
     <nav class="gallery-filters" aria-label="Photo categories">
       <div class="filters-scroll-container">
         {categoryFilters.map((filter, index) => (
@@ -32,7 +36,7 @@ const { showFilters = true } = Astro.props;
 
   <!-- Gallery Masonry Grid -->
   <div class="gallery-masonry" id="gallery-masonry" role="region" aria-label="Sample photo grid">
-    {samplePhotos.map((photo, index) => (
+    {displayedPhotos.map((photo, index) => (
       <article
         class="gallery-item"
         data-category={photo.category}
@@ -180,7 +184,7 @@ const { showFilters = true } = Astro.props;
 </div>
 
 <!-- Embedded Catalog JSON for Client Lightbox Engine -->
-<script is:inline id="neofilm-gallery-data" type="application/json" set:html={JSON.stringify(samplePhotos)} />
+<script is:inline id="neofilm-gallery-data" type="application/json" set:html={JSON.stringify(displayedPhotos)} />
 
 <script>
   import type { SamplePhoto } from '../data/samplePhotos';
