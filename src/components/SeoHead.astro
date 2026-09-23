@@ -1,0 +1,67 @@
+---
+import { siteConfig } from '../config/site';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  includeSmartBanner?: boolean;
+}
+
+const {
+  title = `${siteConfig.formalName} – Vintage Film Camera for iPhone & Android`,
+  description = siteConfig.description,
+  canonicalPath = '',
+  ogImage = siteConfig.seo.defaultOgImage,
+  ogType = 'website',
+  includeSmartBanner = true,
+} = Astro.props;
+
+// Ensure full canonical URL
+const canonicalUrl = new URL(canonicalPath, siteConfig.url).href;
+const fullOgImage = new URL(ogImage, siteConfig.url).href;
+---
+
+<!-- Character & Viewport -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- Page Meta -->
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Favicon & Web App Manifest -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="32x32" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="theme-color" content="#141416" />
+
+<!-- Apple Smart App Banner -->
+{includeSmartBanner && (
+  <meta name="apple-itunes-app" content={`app-id=${siteConfig.stores.ios.appId}`} />
+)}
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={ogType} />
+<meta property="og:site_name" content={siteConfig.formalName} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={fullOgImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="NeoFilm - Vintage Film Camera for iPhone and Android" />
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonicalUrl} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={fullOgImage} />
+{siteConfig.seo.twitterHandle && (
+  <meta name="twitter:site" content={siteConfig.seo.twitterHandle} />
+)}

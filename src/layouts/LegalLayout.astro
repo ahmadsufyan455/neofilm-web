@@ -1,0 +1,237 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { siteConfig } from '../config/site';
+
+export interface Props {
+  title: string;
+  documentTitle: string;
+  description: string;
+  canonicalPath: string;
+  effectiveDate?: string;
+  lastUpdated?: string;
+}
+
+const {
+  title,
+  documentTitle,
+  description,
+  canonicalPath,
+  effectiveDate = siteConfig.legal.privacyEffectiveDate,
+  lastUpdated = siteConfig.legal.lastUpdated,
+} = Astro.props;
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: documentTitle, url: canonicalPath },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  breadcrumbs={breadcrumbs}
+>
+  <div class="legal-page-wrapper">
+    <div class="container-narrow">
+      <!-- Legal Header -->
+      <div class="legal-header">
+        <div class="legal-badge-row">
+          <span class="badge-mono badge-accent">LEGAL &amp; COMPLIANCE</span>
+          <span class="compliance-badge">APP STORE &amp; PLAY CONSOLE AUDITED</span>
+        </div>
+        <h1 class="legal-h1">{documentTitle}</h1>
+        <p class="legal-lead">Official policy for NeoFilm iOS and Android applications.</p>
+
+        <!-- Document Metadata Box -->
+        <div class="legal-meta-box">
+          <div class="meta-item">
+            <span class="meta-label">Original Effective Date</span>
+            <span class="meta-value">{effectiveDate}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Last Updated</span>
+            <span class="meta-value">{lastUpdated}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Developer / Operator</span>
+            <span class="meta-value">{siteConfig.publisher.developer}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Direct Contact</span>
+            <a href={`mailto:${siteConfig.supportEmail}`} class="meta-value link-email">
+              {siteConfig.supportEmail}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Legal Content Body -->
+      <article class="legal-prose-content">
+        <slot />
+      </article>
+
+      <!-- Bottom Confirmation Card -->
+      <div class="legal-footer-contact">
+        <h3>Questions Regarding Our Policies?</h3>
+        <p>
+          For privacy inquiries, rights requests (data access, deletion, or portability), or licensing questions, contact our support team at <a href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .legal-page-wrapper {
+    padding-top: 56px;
+    padding-bottom: 96px;
+  }
+
+  .legal-header {
+    margin-bottom: 48px;
+    border-bottom: 1px solid var(--color-seam);
+    padding-bottom: 32px;
+  }
+
+  .legal-badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .compliance-badge {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: var(--color-success);
+    background-color: var(--color-success-subtle);
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+    letter-spacing: 0.08em;
+  }
+
+  .legal-h1 {
+    font-size: clamp(2.25rem, 3.5vw, 3rem);
+    margin-bottom: 12px;
+  }
+
+  .legal-lead {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 24px;
+  }
+
+  /* Metadata Box */
+  .legal-meta-box {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    background-color: var(--color-surface-chassis);
+    border: 1px solid var(--color-seam);
+    border-radius: var(--radius-md);
+    padding: 20px;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .meta-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .meta-value {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .link-email {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* Prose Styling */
+  .legal-prose-content {
+    color: var(--color-text-secondary);
+    font-size: 1.0625rem;
+    line-height: 1.75;
+  }
+
+  .legal-prose-content :global(h2) {
+    font-size: 1.5rem;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    color: var(--color-text-primary);
+    border-bottom: 1px solid var(--color-seam);
+    padding-bottom: 8px;
+  }
+
+  .legal-prose-content :global(h3) {
+    font-size: 1.1875rem;
+    margin-top: 28px;
+    margin-bottom: 12px;
+    color: var(--color-text-primary);
+  }
+
+  .legal-prose-content :global(p) {
+    margin-bottom: 18px;
+  }
+
+  .legal-prose-content :global(ul), .legal-prose-content :global(ol) {
+    margin-bottom: 20px;
+    padding-left: 24px;
+  }
+
+  .legal-prose-content :global(li) {
+    margin-bottom: 8px;
+  }
+
+  .legal-prose-content :global(a) {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .legal-prose-content :global(strong) {
+    color: var(--color-text-primary);
+  }
+
+  .legal-prose-content :global(.callout-notice) {
+    background-color: var(--color-surface-elevated);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 0.9375rem;
+  }
+
+  .legal-footer-contact {
+    margin-top: 64px;
+    padding: 32px;
+    background-color: var(--color-surface-chassis);
+    border: 1px solid var(--color-seam);
+    border-radius: var(--radius-md);
+    text-align: center;
+  }
+
+  .legal-footer-contact h3 {
+    margin-bottom: 10px;
+  }
+
+  @media (max-width: 600px) {
+    .legal-meta-box {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,64 @@
+---
+import SeoHead from '../components/SeoHead.astro';
+import JsonLd, { type BreadcrumbItem, type FaqItem } from '../components/JsonLd.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  includeSmartBanner?: boolean;
+  breadcrumbs?: BreadcrumbItem[];
+  faqItems?: FaqItem[];
+  includeAppSchema?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonicalPath,
+  ogImage,
+  ogType,
+  includeSmartBanner,
+  breadcrumbs = [],
+  faqItems = [],
+  includeAppSchema = false,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <SeoHead
+      title={title}
+      description={description}
+      canonicalPath={canonicalPath}
+      ogImage={ogImage}
+      ogType={ogType}
+      includeSmartBanner={includeSmartBanner}
+    />
+
+    {includeAppSchema && <JsonLd type="application" />}
+    {breadcrumbs.length > 0 && <JsonLd type="breadcrumb" breadcrumbs={breadcrumbs} />}
+    {faqItems.length > 0 && <JsonLd type="faq" faqItems={faqItems} />}
+  </head>
+  <body>
+    <!-- Accessibility Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Global Header -->
+    <Header currentPath={canonicalPath} />
+
+    <!-- Main Content Landmark -->
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <!-- Global Footer -->
+    <Footer />
+  </body>
+</html>

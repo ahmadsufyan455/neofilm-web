@@ -1,0 +1,248 @@
+---
+export interface Props {
+  imageSrc: string;
+  imageAlt: string;
+  caption?: string;
+  filmTag?: string;
+  iso?: string;
+  shutter?: string;
+  frameNumber?: string;
+  aspectRatio?: 'vertical' | 'photo';
+  priority?: boolean;
+}
+
+const {
+  imageSrc,
+  imageAlt,
+  caption,
+  filmTag = 'K-PORTRA 400',
+  iso = 'ISO 400',
+  shutter = '1/125s',
+  frameNumber = 'EXP 24/36',
+  aspectRatio = 'photo',
+  priority = false,
+} = Astro.props;
+---
+
+<div class:list={['tactile-frame-container', `aspect-${aspectRatio}`]}>
+  <div class="viewfinder-bezel">
+    <!-- Camera Top HUD -->
+    <div class="viewfinder-hud-top" aria-hidden="true">
+      <div class="hud-left">
+        <span class="hud-film-badge">{filmTag}</span>
+        <span class="hud-mono">{iso}</span>
+      </div>
+      <div class="hud-right">
+        <span class="hud-mono">{shutter}</span>
+        <span class="hud-counter">{frameNumber}</span>
+      </div>
+    </div>
+
+    <!-- Framing Area -->
+    <div class="viewfinder-media-wrap">
+      <img
+        src={imageSrc}
+        alt={imageAlt}
+        loading={priority ? 'eager' : 'lazy'}
+        decoding={priority ? 'sync' : 'async'}
+        class="viewfinder-img"
+      />
+
+      <!-- Reticle / Focus Crosshairs Overlay -->
+      <div class="reticle-overlay" aria-hidden="true">
+        <div class="crosshair center"></div>
+        <div class="grid-line horizontal top"></div>
+        <div class="grid-line horizontal bottom"></div>
+        <div class="grid-line vertical left"></div>
+        <div class="grid-line vertical right"></div>
+      </div>
+    </div>
+
+    <!-- Camera Bottom Details -->
+    <div class="viewfinder-hud-bottom" aria-hidden="true">
+      <span class="hud-brand">NEOFILM OPTICAL ENGINE</span>
+      <span class="hud-raw-badge">RAW DNG</span>
+    </div>
+  </div>
+
+  {caption && <p class="frame-caption">{caption}</p>}
+</div>
+
+<style>
+  .tactile-frame-container {
+    position: relative;
+    max-width: 100%;
+  }
+
+  .viewfinder-bezel {
+    position: relative;
+    background: #141417;
+    background: linear-gradient(180deg, #1c1c20 0%, #101012 100%);
+    border: 2px solid #2e2e36;
+    border-radius: var(--radius-lg);
+    padding: 12px;
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.7),
+      inset 0 1px 1px rgba(255, 255, 255, 0.1),
+      inset 0 0 16px rgba(0, 0, 0, 0.9);
+  }
+
+  .viewfinder-hud-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+  }
+
+  .hud-left, .hud-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hud-film-badge {
+    background-color: var(--color-accent-subtle);
+    color: var(--color-accent);
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .hud-mono {
+    color: #e0e0e6;
+    letter-spacing: 0.05em;
+  }
+
+  .hud-counter {
+    color: #ff9900;
+    font-weight: 700;
+  }
+
+  .viewfinder-media-wrap {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    background-color: #000000;
+    border: 1px solid #202026;
+  }
+
+  .aspect-photo .viewfinder-media-wrap {
+    aspect-ratio: 4 / 3;
+  }
+
+  .aspect-vertical .viewfinder-media-wrap {
+    aspect-ratio: 9 / 16;
+  }
+
+  .viewfinder-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Viewfinder Grid Overlay */
+  .reticle-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .grid-line {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .grid-line.horizontal {
+    left: 0;
+    right: 0;
+    height: 1px;
+  }
+
+  .grid-line.horizontal.top {
+    top: 33.33%;
+  }
+
+  .grid-line.horizontal.bottom {
+    top: 66.66%;
+  }
+
+  .grid-line.vertical {
+    top: 0;
+    bottom: 0;
+    width: 1px;
+  }
+
+  .grid-line.vertical.left {
+    left: 33.33%;
+  }
+
+  .grid-line.vertical.right {
+    left: 66.66%;
+  }
+
+  .crosshair.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    border: 1px solid rgba(255, 85, 0, 0.6);
+    border-radius: 50%;
+  }
+
+  .crosshair.center::before, .crosshair.center::after {
+    content: "";
+    position: absolute;
+    background: rgba(255, 85, 0, 0.8);
+  }
+
+  .crosshair.center::before {
+    top: 50%;
+    left: -4px;
+    right: -4px;
+    height: 1px;
+    transform: translateY(-50%);
+  }
+
+  .crosshair.center::after {
+    left: 50%;
+    top: -4px;
+    bottom: -4px;
+    width: 1px;
+    transform: translateX(-50%);
+  }
+
+  .viewfinder-hud-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-text-dim);
+  }
+
+  .hud-brand {
+    letter-spacing: 0.12em;
+  }
+
+  .hud-raw-badge {
+    color: #4cd964;
+    font-weight: 700;
+  }
+
+  .frame-caption {
+    margin-top: 10px;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    text-align: center;
+    font-family: var(--font-mono);
+  }
+</style>

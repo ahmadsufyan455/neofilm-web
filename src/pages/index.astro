@@ -1,0 +1,1136 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StoreBadgeButtons from '../components/StoreBadgeButtons.astro';
+import ScreenshotFrame from '../components/ScreenshotFrame.astro';
+import ProPricingCard from '../components/ProPricingCard.astro';
+import FaqAccordion, { type FaqItem } from '../components/FaqAccordion.astro';
+import { siteConfig } from '../config/site';
+
+const homepageFaq: FaqItem[] = [
+  {
+    question: 'How do NeoFilm presets emulate real analog film?',
+    answer:
+      '<p>NeoFilm presets use composite 3D color matrices, optical halation bloom, and analog grain density curves engineered to match classic 35mm film stocks. Each profile replicates authentic tone response, highlight roll-off, and spectral color distribution on supported devices.</p>',
+  },
+  {
+    question: 'Can I use my NeoFilm purchase on another device?',
+    answer:
+      '<p>Yes. If you are using another device on the same platform, sign in with the Apple Account or Google Account used for the purchase, then tap <strong>Restore Purchases</strong> in NeoFilm’s Settings or paywall. Purchases are tied to your store account.</p>',
+  },
+  {
+    question: 'What happens to my photos if I cancel my Pro subscription?',
+    answer:
+      '<p>All photos saved to your phone camera roll or NeoFilm Studio remain yours forever. We never lock, watermark, compress, or delete your exported photos.</p>',
+  },
+  {
+    question: 'How does the seven-day trial work?',
+    answer:
+      '<p>An eligible annual subscription unlocks all 30+ Pro film stocks, RAW DNG sensor capture, and manual exposure controls with an introductory seven-day trial. You can cancel anytime in your App Store or Google Play subscription settings before the trial ends to avoid recurring charges.</p>',
+  },
+  {
+    question: 'Where are my RAW (DNG) digital negatives saved?',
+    answer:
+      '<p>When <em>Save to Photos</em> is enabled, RAW DNG files are saved directly to your device photo library and organized in the dedicated NeoFilm album. RAW capture availability is subject to hardware and lens support on your specific device.</p>',
+  },
+  {
+    question: 'How do I share or import Custom Recipes?',
+    answer:
+      '<p>In the Recipe Lab, tap the QR icon to generate a shareable QR card with your custom color adjustments, grain, halation, and tone curves. In the Film Selector or Darkroom, tap the QR scanner icon to instantly import any recipe code created by other photographers.</p>',
+  },
+];
+---
+
+<BaseLayout
+  title="NeoFilm – Vintage Film Camera for iPhone & Android"
+  description="Capture authentic analog character with handcrafted film profiles, manual RAW controls, custom recipes, and a mobile darkroom for iPhone and Android."
+  canonicalPath="/"
+  includeAppSchema={true}
+  faqItems={homepageFaq}
+>
+  <!-- 1. HERO SECTION -->
+  <section class="hero-section" aria-labelledby="hero-title">
+    <div class="container hero-container">
+      <div class="hero-content">
+        <div class="hero-pill-badge">
+          <span class="live-dot" aria-hidden="true"></span>
+          <span>VINTAGE FILM CAMERA APP</span>
+        </div>
+
+        <h1 id="hero-title" class="hero-h1">
+          NeoFilm — Vintage Film Camera
+        </h1>
+
+        <p class="hero-tagline">
+          Analog character. Modern control.
+        </p>
+
+        <p class="hero-lead">
+          Capture with handcrafted film profiles, create custom recipes, shoot RAW, and develop every frame in NeoFilm’s mobile darkroom. Designed for photographers who value tactile control and authentic film aesthetics.
+        </p>
+
+        <!-- CTAs -->
+        <div class="hero-cta-group">
+          <a
+            href={siteConfig.stores.ios.url}
+            class="btn-primary hero-btn-ios"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.77 1.05-1.84.93-2.92-.91.04-2.02.61-2.67 1.38-.57.65-1.07 1.74-.93 2.79 1.02.08 2.05-.48 2.67-1.25z"/>
+            </svg>
+            <span>Download for iPhone</span>
+          </a>
+
+          <a
+            href={siteConfig.stores.android.url}
+            class="btn-secondary hero-btn-android"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9993.4482.9993.9993.0001.5511-.4483.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.589 8.2435 13.8524 7.8 12 7.8c-1.8524 0-3.589.4435-5.1368 1.15l-2.0223-3.503a.416.416 0 00-.5676-.1521.416.416 0 00-.1521.5676l1.9973 3.4592C2.6889 10.9867.3432 14.7587 0 19.2h24c-.3432-4.4413-2.6889-8.2133-6.1185-9.8786"/>
+            </svg>
+            <span>Get it on Google Play</span>
+          </a>
+        </div>
+
+        <div class="hero-specs-row">
+          <span class="spec-item"><span class="spec-label">OS:</span> iOS 17.0+ · Android 8.0+</span>
+          <span class="spec-divider" aria-hidden="true">/</span>
+          <span class="spec-item"><span class="spec-label">Engine:</span> 100% On-Device</span>
+          <span class="spec-divider" aria-hidden="true">/</span>
+          <span class="spec-item"><span class="spec-label">Capture:</span> RAW DNG / HEIC / JPEG</span>
+        </div>
+      </div>
+
+      <!-- Hero Visual Viewfinder -->
+      <div class="hero-visual">
+        <ScreenshotFrame
+          imageSrc="/images/samples/sample-portra.jpg"
+          imageAlt="Authentic analog film photograph shot on NeoFilm showing warm golden tones and organic grain"
+          filmTag="PORTRA WARM 400"
+          iso="ISO 400"
+          shutter="1/250s · f/1.8"
+          frameNumber="EXP 24/36"
+          aspectRatio="photo"
+          priority={true}
+          caption="Actual camera output rendered on-device with Portra Warm 400 profile"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. FILM PROFILES SECTION -->
+  <section class="section-padding profiles-section" id="film-profiles">
+    <div class="container">
+      <div class="section-header-centered">
+        <span class="badge-mono badge-accent">AUTHENTIC FILM EMULATION</span>
+        <h2 class="section-title">30+ Handcrafted Film Profiles</h2>
+        <p class="section-lead">
+          From golden-hour portraits to moody black-and-white street photography, NeoFilm renders distinctive spectral color responses, non-linear film grain, and realistic optical halation in real time.
+        </p>
+      </div>
+
+      <div class="profiles-showcase-grid">
+        <!-- Stock 1 -->
+        <div class="chassis-card stock-card">
+          <div class="stock-header">
+            <span class="stock-canister-tag" style="border-left-color: #D8BF66;">COLOR NEGATIVE</span>
+            <span class="stock-speed">ISO 400</span>
+          </div>
+          <h3 class="stock-name">Portra Warm 400</h3>
+          <p class="stock-desc">Soft skin tones, gentle highlights, and warm golden undertones for editorial portraits.</p>
+          <div class="stock-attributes">
+            <span class="attr-pill">Halation: Daylight Amber</span>
+            <span class="attr-pill">Grain: Subtle 35mm</span>
+          </div>
+        </div>
+
+        <!-- Stock 2 -->
+        <div class="chassis-card stock-card">
+          <div class="stock-header">
+            <span class="stock-canister-tag" style="border-left-color: #E29B42;">JAPANESE 35MM</span>
+            <span class="stock-speed">ISO 400</span>
+          </div>
+          <h3 class="stock-name">FX Daily 400 <span class="badge-pro">PRO</span></h3>
+          <p class="stock-desc">Warm 90s Japanese analog aesthetic: Creamy peachy skin tones, soft amber cafe glow, and gentle highlight roll-off.</p>
+          <div class="stock-attributes">
+            <span class="attr-pill">Halation: Amber Glow</span>
+            <span class="attr-pill">Split Toning: Warm/Cyan</span>
+          </div>
+        </div>
+
+        <!-- Stock 3 -->
+        <div class="chassis-card stock-card">
+          <div class="stock-header">
+            <span class="stock-canister-tag" style="border-left-color: #8E8E93;">MONOCHROME</span>
+            <span class="stock-speed">ISO 400</span>
+          </div>
+          <h3 class="stock-name">Street Mono 400</h3>
+          <p class="stock-desc">High-contrast black-and-white with deep rich blacks, gritty silver-halide grain, and punchy midtone separation.</p>
+          <div class="stock-attributes">
+            <span class="attr-pill">Halation: Silver Sheen</span>
+            <span class="attr-pill">Grain: Gritty Silver</span>
+          </div>
+        </div>
+
+        <!-- Stock 4 -->
+        <div class="chassis-card stock-card">
+          <div class="stock-header">
+            <span class="stock-canister-tag" style="border-left-color: #3A8891;">CINEMATIC</span>
+            <span class="stock-speed">ISO 500</span>
+          </div>
+          <h3 class="stock-name">Cinema Tungsten 500 <span class="badge-pro">PRO</span></h3>
+          <p class="stock-desc">Night cinema look inspired by motion-picture stocks, rich teal shadows, and vibrant tungsten crimson halation blooms.</p>
+          <div class="stock-attributes">
+            <span class="attr-pill">Halation: Tungsten Crimson</span>
+            <span class="attr-pill">Color: Cool Cyan/Teal</span>
+          </div>
+        </div>
+
+        <!-- Stock 5 -->
+        <div class="chassis-card stock-card">
+          <div class="stock-header">
+            <span class="stock-canister-tag" style="border-left-color: #C86D51;">COLOR SLIDE</span>
+            <span class="stock-speed">ISO 64</span>
+          </div>
+          <h3 class="stock-name">Retro Slide 64 <span class="badge-pro">PRO</span></h3>
+          <p class="stock-desc">Rich color saturation, punchy warm reds, and deep dynamic range modeled after legendary reversal slide film.</p>
+          <div class="stock-attributes">
+            <span class="attr-pill">Dynamic Range: High Contrast</span>
+            <span class="attr-pill">Grain: Fine Grain</span>
+          </div>
+        </div>
+
+        <!-- Stock 6 -->
+        <div class="chassis-card stock-card">
+          <div class="stock-header">
+            <span class="stock-canister-tag" style="border-left-color: #5B8FB9;">EARLY DIGITAL</span>
+            <span class="stock-speed">CCD-02</span>
+          </div>
+          <h3 class="stock-name">CCD Flashback 02 <span class="badge-pro">PRO</span></h3>
+          <p class="stock-desc">Nostalgic Y2K digicam color balance with punchy blues, direct flash handling, and distinct vintage sensor saturation.</p>
+          <div class="stock-attributes">
+            <span class="attr-pill">Look: Y2K Digicam</span>
+            <span class="attr-pill">Highlights: Sharp Flash</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-cta-center">
+        <a href="/film-recipes/" class="btn-secondary">
+          <span>Explore All 30+ Profiles &amp; Custom Recipes</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. MANUAL CAMERA CONTROLS SECTION -->
+  <section class="section-padding manual-section" id="manual-controls">
+    <div class="container">
+      <div class="manual-grid">
+        <div class="manual-copy">
+          <span class="badge-mono badge-accent">MANUAL CAMERA HARDWARE</span>
+          <h2 class="section-title">Tactile Mechanical Controls &amp; RAW Capture</h2>
+          <p class="section-lead">
+            Take total creative authority over exposure and focus. NeoFilm replaces auto-pilot smartphone algorithms with intuitive analog wheels and tactile physical feedback.
+          </p>
+
+          <div class="manual-features-list">
+            <div class="manual-feature-item">
+              <div class="feature-icon" aria-hidden="true">ISO</div>
+              <div class="feature-detail">
+                <h4>Manual ISO &amp; Shutter Speed</h4>
+                <p>Precise sensitivity and exposure-time stepping from 1/8000s freeze-action to 1s long exposures. Available on supported devices and lenses.</p>
+              </div>
+            </div>
+
+            <div class="manual-feature-item">
+              <div class="feature-icon" aria-hidden="true">MF</div>
+              <div class="feature-detail">
+                <h4>Manual Focus with Live Peaking</h4>
+                <p>Silky smooth manual focus dial with high-contrast color edge peaking to ensure razor-sharp focus on your subject before tripping the shutter.</p>
+              </div>
+            </div>
+
+            <div class="manual-feature-item">
+              <div class="feature-icon" aria-hidden="true">RAW</div>
+              <div class="feature-detail">
+                <h4>Uncompressed RAW DNG Negatives</h4>
+                <p>Preserve direct linear sensor data alongside your processed analog frame. Ideal for maximum latitude in post-production and digital darkroom re-development.</p>
+              </div>
+            </div>
+
+            <div class="manual-feature-item">
+              <div class="feature-icon" aria-hidden="true">LVL</div>
+              <div class="feature-detail">
+                <h4>Live Histogram &amp; Virtual Horizon</h4>
+                <p>Real-time RGB exposure luminance graphs and hardware-accelerated dual-axis level indicators keep your framing balanced and horizons level.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="device-qualification-note">
+            <p>
+              <strong>Device Compatibility Notice:</strong> Full manual exposure, manual focus, and RAW DNG capture are available on supported devices and lenses. Camera hardware capabilities vary by manufacturer and device specifications.
+            </p>
+          </div>
+        </div>
+
+        <div class="manual-viewfinder-col">
+          <ScreenshotFrame
+            imageSrc="/images/samples/sample-viewfinder.jpg"
+            imageAlt="NeoFilm camera viewfinder showing live framing grid, exposure compensation dial, and film canister selector"
+            filmTag="FX-DAILY 400"
+            iso="ISO 400"
+            shutter="1/500s · EV -0.7"
+            frameNumber="EXP 12/36"
+            aspectRatio="vertical"
+            caption="Real-time optical viewfinder with live halation and manual focus controls"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. CUSTOM FILM RECIPES & QR LAB -->
+  <section class="section-padding recipes-section" id="recipes-lab">
+    <div class="container">
+      <div class="section-header-centered">
+        <span class="badge-mono badge-accent">RECIPE LAB</span>
+        <h2 class="section-title">Design, Save &amp; Share Custom Film Recipes</h2>
+        <p class="section-lead">
+          Build your own signature aesthetic. Adjust 8-channel HSL color, highlight/shadow split tones, organic grain density, optical bloom, and light leaks — then export shareable QR cards.
+        </p>
+      </div>
+
+      <div class="recipe-cards-grid">
+        <div class="chassis-card recipe-highlight-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+              <path d="M2 12h20"></path>
+            </svg>
+          </div>
+          <h3>Deep Tone &amp; HSL Matrix</h3>
+          <p>Control individual Hue, Saturation, and Luminance for Red, Orange, Yellow, Green, Cyan, Blue, Purple, and Magenta color channels to craft rich film palettes.</p>
+        </div>
+
+        <div class="chassis-card recipe-highlight-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="6"></circle>
+              <circle cx="12" cy="12" r="2"></circle>
+              <line x1="12" y1="2" x2="12" y2="4"></line>
+              <line x1="12" y1="20" x2="12" y2="22"></line>
+            </svg>
+          </div>
+          <h3>Organic Optical Effects</h3>
+          <p>Layer realistic 35mm optical imperfections: analog grain density, tungsten crimson or amber halation, highlight bloom, film fade, and subtle perimeter light leaks.</p>
+        </div>
+
+        <div class="chassis-card recipe-highlight-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+          </div>
+          <h3>QR Code Sharing &amp; Importing</h3>
+          <p>Generate compact QR recipe cards for social sharing. Point the NeoFilm scanner at any recipe code to instantly import and shoot with the recipe immediately.</p>
+        </div>
+      </div>
+
+      <div class="section-cta-center">
+        <a href="/film-recipes/" class="btn-primary">Learn How Recipes Work</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. DIGITAL DARKROOM SECTION -->
+  <section class="section-padding darkroom-section" id="darkroom-flow">
+    <div class="container">
+      <div class="darkroom-split-grid">
+        <div class="darkroom-image-col">
+          <div class="darkroom-visual-card">
+            <img
+              src="/images/samples/sample-portra.jpg"
+              alt="Photo in NeoFilm mobile darkroom being re-developed with custom borders and date stamp"
+              class="darkroom-preview-img"
+              loading="lazy"
+            />
+            <div class="darkroom-hud-badge">DARKROOM LAB · REPROCESSING</div>
+          </div>
+        </div>
+
+        <div class="darkroom-copy-col">
+          <span class="badge-mono badge-accent">NON-DESTRUCTIVE WORKFLOW</span>
+          <h2 class="section-title">The Mobile Film Darkroom</h2>
+          <p class="section-lead">
+            Developing your photograph doesn’t end when the shutter clicks. NeoFilm’s built-in studio lets you re-develop captures, swap film stocks, and prepare frame-perfect exports.
+          </p>
+
+          <ul class="darkroom-feature-bullets">
+            <li>
+              <strong>Non-Destructive Reprocessing:</strong> Change film stocks, fine-tune exposure, or apply custom recipes to previously captured frames at any time.
+            </li>
+            <li>
+              <strong>Crop &amp; Straighten:</strong> Level your horizon with precision micro-degree angle rotation and crop to classic analog aspect ratios (1:1, 4:5, 3:2, 16:9).
+            </li>
+            <li>
+              <strong>Borders &amp; Date Stamps:</strong> Authentic analog frame borders with customizable amber LCD date stamps and optional location details.
+            </li>
+            <li>
+              <strong>Film-Roll Organization &amp; Contact Sheets:</strong> Organize shots by vintage 36-exposure film rolls and export complete multi-frame contact sheets.
+            </li>
+            <li>
+              <strong>Batch Export:</strong> Export your entire developed roll in full resolution without compression or watermarking.
+            </li>
+          </ul>
+
+          <div class="darkroom-cta">
+            <a href="/darkroom/" class="btn-secondary">Explore Darkroom Capabilities</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. TACTILE CAMERA EXPERIENCE -->
+  <section class="section-padding tactile-experience-section">
+    <div class="container">
+      <div class="tactile-card chassis-card">
+        <div class="tactile-grid">
+          <div class="tactile-copy">
+            <span class="badge-mono">THE HARDWARE FEEL</span>
+            <h2 class="tactile-title">Built Like a Mechanical Rangefinder</h2>
+            <p>
+              Every switch, slider, and dial in NeoFilm is engineered with mechanical haptic resistance and authentic shutter sounds. From the click of the lens wheel to the tactile vibration of film advancing, NeoFilm brings physical satisfaction back to mobile photography.
+            </p>
+            <div class="tactile-points">
+              <div class="tactile-point">
+                <span class="tactile-badge">HAPTICS</span>
+                <p>Calibrated physical clicks match analog dial detents and shutter releases.</p>
+              </div>
+              <div class="tactile-point">
+                <span class="tactile-badge">AUDIO</span>
+                <p>Authentic mechanical shutter sounds sampled from vintage film cameras.</p>
+              </div>
+              <div class="tactile-point">
+                <span class="tactile-badge">CHASSIS</span>
+                <p>Matte magnesium textures, textured grips, and focused, distraction-free viewfinders.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="tactile-stats">
+            <div class="stat-box">
+              <span class="stat-num">30+</span>
+              <span class="stat-label">Handcrafted Film Profiles</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num">100%</span>
+              <span class="stat-label">On-Device Processing</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num">RAW</span>
+              <span class="stat-label">DNG Sensor Negatives</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num">0</span>
+              <span class="stat-label">Data Trackers or Ads</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. PLATFORM SPECIFICATIONS -->
+  <section class="section-padding platform-section" id="platforms">
+    <div class="container">
+      <div class="section-header-centered">
+        <span class="badge-mono badge-accent">DEVICE SUPPORT</span>
+        <h2 class="section-title">Optimized for iOS &amp; Android</h2>
+        <p class="section-lead">
+          Engineered natively for both mobile operating systems to take full advantage of native camera sensors, Metal / OpenGL hardware acceleration, and system photo libraries.
+        </p>
+      </div>
+
+      <div class="platform-cards-grid">
+        <!-- iOS Card -->
+        <div class="chassis-card platform-spec-card">
+          <div class="platform-icon-row">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.77 1.05-1.84.93-2.92-.91.04-2.02.61-2.67 1.38-.57.65-1.07 1.74-.93 2.79 1.02.08 2.05-.48 2.67-1.25z"/>
+            </svg>
+            <div>
+              <h3>Apple iPhone</h3>
+              <span class="platform-sub">iOS 17.0 or later</span>
+            </div>
+          </div>
+          <ul class="platform-specs-list">
+            <li><strong>Frameworks:</strong> 100% Native SwiftUI, AVFoundation &amp; MetalKit</li>
+            <li><strong>Rendering:</strong> Custom GPU Metal shaders for real-time halation</li>
+            <li><strong>Sensor Capture:</strong> RAW DNG via AVCapturePhotoOutput on supported models</li>
+            <li><strong>Haptics:</strong> Apple CoreHaptics engine integration</li>
+            <li><strong>Storage:</strong> Direct integration with Apple Photos and Photo Library</li>
+          </ul>
+          <div class="platform-card-btn">
+            <a href={siteConfig.stores.ios.url} class="btn-primary" target="_blank" rel="noopener noreferrer">
+              Download on the App Store
+            </a>
+          </div>
+        </div>
+
+        <!-- Android Card -->
+        <div class="chassis-card platform-spec-card">
+          <div class="platform-icon-row">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9993.4482.9993.9993.0001.5511-.4483.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.589 8.2435 13.8524 7.8 12 7.8c-1.8524 0-3.589.4435-5.1368 1.15l-2.0223-3.503a.416.416 0 00-.5676-.1521.416.416 0 00-.1521.5676l1.9973 3.4592C2.6889 10.9867.3432 14.7587 0 19.2h24c-.3432-4.4413-2.6889-8.2133-6.1185-9.8786"/>
+            </svg>
+            <div>
+              <h3>Android</h3>
+              <span class="platform-sub">Android 8.0 (Oreo) or later</span>
+            </div>
+          </div>
+          <ul class="platform-specs-list">
+            <li><strong>Frameworks:</strong> Modern Jetpack Compose &amp; CameraX</li>
+            <li><strong>Rendering:</strong> Hardware-accelerated OpenGL film grain &amp; color kernels</li>
+            <li><strong>Sensor Capture:</strong> Camera2 RAW_SENSOR capture on supported devices</li>
+            <li><strong>Storage:</strong> Android Scoped Storage compliant (Media.Images)</li>
+            <li><strong>Privacy:</strong> No tracking permissions; 100% on-device rendering</li>
+          </ul>
+          <div class="platform-card-btn">
+            <a href={siteConfig.stores.android.url} class="btn-primary" target="_blank" rel="noopener noreferrer">
+              Get it on Google Play
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. NEOFILM PRO PRICING & TIERS -->
+  <section class="section-padding pro-pricing-section">
+    <div class="container">
+      <ProPricingCard showComparison={true} />
+    </div>
+  </section>
+
+  <!-- 9. VISIBLE FAQ SECTION -->
+  <section class="section-padding faq-section" id="faq">
+    <div class="container">
+      <FaqAccordion
+        title="Frequently Asked Questions"
+        subtitle="Common questions about NeoFilm features, RAW sensor compatibility, and Pro subscriptions."
+        items={homepageFaq}
+      />
+    </div>
+  </section>
+
+  <!-- 10. FINAL CALL TO ACTION -->
+  <section class="final-cta-section">
+    <div class="container">
+      <div class="chassis-card final-cta-card">
+        <span class="badge-mono badge-accent">START CREATING</span>
+        <h2 class="final-cta-h2">Experience the Tactile Joy of Analog Photography</h2>
+        <p class="final-cta-lead">
+          Download NeoFilm for free today. Shoot with handcrafted film stocks, control every exposure setting manually, and create photographs with authentic soul.
+        </p>
+        <div class="final-cta-buttons">
+          <StoreBadgeButtons size="large" alignment="center" />
+        </div>
+        <p class="final-cta-sub">
+          Available on the Apple App Store and Google Play. No ads, no image uploads, 100% on-device.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .section-padding {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  /* 1. Hero Styles */
+  .hero-section {
+    padding-top: 60px;
+    padding-bottom: 80px;
+    border-bottom: 1px solid var(--color-seam);
+    position: relative;
+  }
+
+  .hero-container {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .hero-pill-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    background-color: var(--color-accent-subtle);
+    border: 1px solid rgba(255, 85, 0, 0.3);
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    margin-bottom: 20px;
+    letter-spacing: 0.1em;
+  }
+
+  .live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    box-shadow: 0 0 6px var(--color-accent);
+  }
+
+  .hero-h1 {
+    font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+
+  .hero-tagline {
+    font-family: var(--font-mono);
+    font-size: clamp(1.125rem, 1.8vw, 1.375rem);
+    color: var(--color-accent);
+    letter-spacing: 0.04em;
+    margin-bottom: 20px;
+  }
+
+  .hero-lead {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    line-height: 1.65;
+    margin-bottom: 32px;
+    max-width: 580px;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .hero-btn-ios, .hero-btn-android {
+    padding: 14px 22px;
+  }
+
+  .hero-specs-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--color-text-dim);
+  }
+
+  .spec-label {
+    color: var(--color-text-secondary);
+  }
+
+  .spec-divider {
+    color: var(--color-border);
+  }
+
+  /* 2. Section Header Centered */
+  .section-header-centered {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 56px auto;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 3.2vw, 2.75rem);
+    margin-top: 14px;
+    margin-bottom: 16px;
+  }
+
+  .section-lead {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    line-height: 1.65;
+  }
+
+  .section-cta-center {
+    text-align: center;
+    margin-top: 48px;
+  }
+
+  /* Profiles Showcase Grid */
+  .profiles-showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .stock-card {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stock-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+
+  .stock-canister-tag {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--color-text-secondary);
+    border-left: 3px solid #ff5500;
+    padding-left: 8px;
+  }
+
+  .stock-speed {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-dim);
+  }
+
+  .stock-name {
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .stock-desc {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    flex-grow: 1;
+    margin-bottom: 18px;
+  }
+
+  .stock-attributes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .attr-pill {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    background-color: var(--color-surface-elevated);
+    border: 1px solid var(--color-seam);
+    color: var(--color-text-secondary);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* 3. Manual Camera Section */
+  .manual-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .manual-features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 32px;
+    margin-bottom: 28px;
+  }
+
+  .manual-feature-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .feature-icon {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--color-accent);
+    background-color: var(--color-surface-subtle);
+    border: 1px solid var(--color-seam);
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .feature-detail h4 {
+    font-size: 1.0625rem;
+    margin-bottom: 4px;
+  }
+
+  .feature-detail p {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+
+  .device-qualification-note {
+    background-color: var(--color-surface-chassis);
+    border-left: 3px solid var(--color-border);
+    padding: 14px 18px;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  }
+
+  .device-qualification-note p {
+    font-size: 0.8125rem;
+    color: var(--color-text-dim);
+    line-height: 1.5;
+  }
+
+  .manual-viewfinder-col {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  /* 4. Recipe Section */
+  .recipe-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  .recipe-highlight-card {
+    padding: 32px 24px;
+  }
+
+  .card-icon {
+    color: var(--color-accent);
+    margin-bottom: 16px;
+  }
+
+  .recipe-highlight-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+
+  .recipe-highlight-card p {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  /* 5. Darkroom Split */
+  .darkroom-split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .darkroom-visual-card {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 2px solid var(--color-seam);
+    box-shadow: var(--shadow-chassis);
+    background-color: #000;
+  }
+
+  .darkroom-preview-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .darkroom-hud-badge {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    background-color: rgba(10, 10, 12, 0.85);
+    border: 1px solid var(--color-seam);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-accent);
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    letter-spacing: 0.08em;
+  }
+
+  .darkroom-feature-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 24px;
+    margin-bottom: 32px;
+  }
+
+  .darkroom-feature-bullets li {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    position: relative;
+    padding-left: 20px;
+  }
+
+  .darkroom-feature-bullets li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-size: 1.25rem;
+    line-height: 1;
+    top: 2px;
+  }
+
+  .darkroom-feature-bullets strong {
+    color: var(--color-text-primary);
+  }
+
+  /* 6. Tactile Section */
+  .tactile-card {
+    padding: 48px;
+  }
+
+  .tactile-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .tactile-title {
+    font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+    margin-top: 12px;
+    margin-bottom: 16px;
+  }
+
+  .tactile-points {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .tactile-point {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .tactile-badge {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    background-color: var(--color-accent-subtle);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    min-width: 65px;
+    text-align: center;
+  }
+
+  .tactile-point p {
+    font-size: 0.875rem;
+    margin: 0;
+  }
+
+  .tactile-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .stat-box {
+    background-color: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .stat-num {
+    font-family: var(--font-mono);
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: var(--color-accent);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+  }
+
+  /* 7. Platform Cards */
+  .platform-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+
+  .platform-spec-card {
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .platform-icon-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--color-seam);
+    padding-bottom: 18px;
+  }
+
+  .platform-sub {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-accent);
+  }
+
+  .platform-specs-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 32px;
+    flex-grow: 1;
+  }
+
+  .platform-specs-list li {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+
+  .platform-specs-list strong {
+    color: var(--color-text-primary);
+  }
+
+  .platform-card-btn .btn-primary {
+    width: 100%;
+  }
+
+  /* 10. Final CTA */
+  .final-cta-section {
+    padding: 80px 0;
+  }
+
+  .final-cta-card {
+    text-align: center;
+    padding: 64px 32px;
+    background-image: 
+      radial-gradient(ellipse 60% 60% at 50% 0%, rgba(255, 85, 0, 0.12), transparent 70%),
+      linear-gradient(180deg, #18181c 0%, #101012 100%);
+  }
+
+  .final-cta-h2 {
+    font-size: clamp(2.2rem, 3.5vw, 3rem);
+    margin-top: 14px;
+    margin-bottom: 16px;
+  }
+
+  .final-cta-lead {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    max-width: 640px;
+    margin: 0 auto 36px auto;
+    line-height: 1.6;
+  }
+
+  .final-cta-buttons {
+    margin-bottom: 20px;
+  }
+
+  .final-cta-sub {
+    font-size: 0.8125rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-muted);
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 960px) {
+    .hero-container {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 40px;
+    }
+    .hero-lead {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-cta-group {
+      justify-content: center;
+    }
+    .hero-specs-row {
+      justify-content: center;
+    }
+    .hero-visual {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .profiles-showcase-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .manual-grid {
+      grid-template-columns: 1fr;
+    }
+    .recipe-cards-grid {
+      grid-template-columns: 1fr;
+    }
+    .darkroom-split-grid {
+      grid-template-columns: 1fr;
+    }
+    .tactile-grid {
+      grid-template-columns: 1fr;
+    }
+    .platform-cards-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .profiles-showcase-grid {
+      grid-template-columns: 1fr;
+    }
+    .hero-cta-group {
+      flex-direction: column;
+      width: 100%;
+    }
+    .hero-btn-ios, .hero-btn-android {
+      width: 100%;
+    }
+    .tactile-card {
+      padding: 28px 20px;
+    }
+    .tactile-stats {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

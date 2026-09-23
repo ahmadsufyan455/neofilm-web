@@ -1,0 +1,501 @@
+---
+import { siteConfig } from '../config/site';
+
+export interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = Astro.url.pathname } = Astro.props;
+
+const navItems = siteConfig.navigation;
+
+const isActive = (href: string) => {
+  if (href === '/' && currentPath === '/') return true;
+  if (href !== '/' && currentPath.startsWith(href)) return true;
+  return false;
+};
+---
+
+<header class="site-header" id="site-header">
+  <div class="container header-container">
+    <!-- Brand Wordmark & Logo -->
+    <a href="/" class="brand-link" aria-label="NeoFilm Home">
+      <div class="brand-icon-wrapper">
+        <img
+          src="/images/logo/neofilm-icon.png"
+          alt=""
+          width="36"
+          height="36"
+          class="brand-icon"
+        />
+      </div>
+      <div class="brand-text">
+        <span class="brand-name">{siteConfig.name}</span>
+        <span class="brand-tag">ANALOG</span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="desktop-nav" aria-label="Main Navigation">
+      <ul class="nav-list">
+        {navItems.map((item) => (
+          <li class="nav-item">
+            <a
+              href={item.href}
+              class:list={['nav-link', { active: isActive(item.href) }]}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Header Actions (CTA) -->
+    <div class="header-actions">
+      <a
+        href={siteConfig.stores.ios.url}
+        class="btn-header-cta"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Download NeoFilm on the App Store"
+      >
+        <span class="cta-dot"></span>
+        <span>Get the App</span>
+      </a>
+
+      <!-- Mobile Menu Toggle Button -->
+      <button
+        type="button"
+        class="mobile-menu-toggle"
+        id="mobile-menu-toggle"
+        aria-label="Toggle Navigation Menu"
+        aria-expanded="false"
+        aria-controls="mobile-nav-drawer"
+      >
+        <span class="hamburger-bar top"></span>
+        <span class="hamburger-bar middle"></span>
+        <span class="hamburger-bar bottom"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation Drawer -->
+  <div
+    class="mobile-nav-drawer"
+    id="mobile-nav-drawer"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Mobile Navigation"
+    hidden
+  >
+    <div class="mobile-nav-backdrop" id="mobile-nav-backdrop"></div>
+    <div class="mobile-nav-content">
+      <div class="mobile-nav-header">
+        <span class="brand-name">{siteConfig.name}</span>
+        <button
+          type="button"
+          class="mobile-nav-close"
+          id="mobile-nav-close"
+          aria-label="Close Navigation Menu"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <nav class="mobile-nav-list" aria-label="Mobile Navigation Links">
+        <ul>
+          {navItems.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class:list={['mobile-nav-link', { active: isActive(item.href) }]}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a
+              href="/privacy/"
+              class:list={['mobile-nav-link', { active: isActive('/privacy/') }]}
+            >
+              Privacy Policy
+            </a>
+          </li>
+          <li>
+            <a
+              href="/terms/"
+              class:list={['mobile-nav-link', { active: isActive('/terms/') }]}
+            >
+              Terms of Use
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="mobile-nav-footer">
+        <p class="mobile-download-label">Download NeoFilm</p>
+        <div class="mobile-badge-stack">
+          <a
+            href={siteConfig.stores.ios.url}
+            class="mobile-store-btn"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="/images/badges/app-store-badge.svg" alt="Download on the App Store" width="120" height="40" />
+          </a>
+          <a
+            href={siteConfig.stores.android.url}
+            class="mobile-store-btn"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="/images/badges/google-play-badge.svg" alt="Get it on Google Play" width="135" height="40" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    height: var(--header-height);
+    background-color: rgba(14, 14, 17, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--color-seam);
+    transition: background-color var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .header-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Brand Link */
+  .brand-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .brand-icon-wrapper {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background-color: var(--color-surface-card);
+    border: 1px solid var(--color-seam);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .brand-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .brand-text {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+
+  .brand-name {
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+  }
+
+  .brand-tag {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--color-accent);
+    padding: 1px 5px;
+    background-color: var(--color-accent-subtle);
+    border-radius: var(--radius-sm);
+  }
+
+  /* Desktop Navigation */
+  .desktop-nav {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-link {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    padding: 6px 0;
+    position: relative;
+    transition: color var(--transition-fast);
+  }
+
+  .nav-link:hover {
+    color: #ffffff;
+  }
+
+  .nav-link.active {
+    color: #ffffff;
+  }
+
+  .nav-link.active::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--color-accent);
+    border-radius: 1px;
+    box-shadow: 0 0 8px var(--color-accent);
+  }
+
+  /* Header CTA */
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .btn-header-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+  }
+
+  .btn-header-cta:hover {
+    background-color: var(--color-surface-subtle);
+    border-color: var(--color-accent);
+    color: #ffffff;
+  }
+
+  .cta-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    box-shadow: 0 0 6px var(--color-accent);
+  }
+
+  /* Mobile Toggle */
+  .mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: 1px solid var(--color-seam);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .hamburger-bar {
+    width: 20px;
+    height: 2px;
+    background-color: var(--color-text-primary);
+    border-radius: 1px;
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
+  }
+
+  /* Mobile Drawer */
+  .mobile-nav-drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+  }
+
+  .mobile-nav-backdrop {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .mobile-nav-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(320px, 85vw);
+    background-color: var(--color-surface-chassis);
+    border-left: 1px solid var(--color-seam);
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.8);
+    transform: translateX(0);
+    transition: transform var(--transition-normal);
+  }
+
+  .mobile-nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-seam);
+    margin-bottom: 20px;
+  }
+
+  .mobile-nav-close {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-surface-elevated);
+    border: 1px solid var(--color-seam);
+    border-radius: var(--radius-md);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+  }
+
+  .mobile-nav-close:hover {
+    color: #ffffff;
+    border-color: var(--color-border);
+  }
+
+  .mobile-nav-list ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .mobile-nav-link {
+    display: block;
+    padding: 12px 14px;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+  }
+
+  .mobile-nav-link:hover, .mobile-nav-link.active {
+    color: #ffffff;
+    background-color: var(--color-surface-elevated);
+  }
+
+  .mobile-nav-link.active {
+    border-left: 3px solid var(--color-accent);
+  }
+
+  .mobile-nav-footer {
+    margin-top: auto;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-seam);
+  }
+
+  .mobile-download-label {
+    font-size: 0.8125rem;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    margin-bottom: 12px;
+  }
+
+  .mobile-badge-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  @media (max-width: 860px) {
+    .desktop-nav {
+      display: none;
+    }
+    .btn-header-cta {
+      display: none;
+    }
+    .mobile-menu-toggle {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  // Accessible Mobile Menu Toggle logic
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const drawer = document.getElementById('mobile-nav-drawer');
+  const closeBtn = document.getElementById('mobile-nav-close');
+  const backdrop = document.getElementById('mobile-nav-backdrop');
+
+  function openMenu() {
+    if (!drawer || !toggleBtn) return;
+    drawer.removeAttribute('hidden');
+    toggleBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    closeBtn?.focus();
+  }
+
+  function closeMenu() {
+    if (!drawer || !toggleBtn) return;
+    drawer.setAttribute('hidden', '');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    toggleBtn.focus();
+  }
+
+  toggleBtn?.addEventListener('click', () => {
+    const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+    if (isExpanded) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  closeBtn?.addEventListener('click', closeMenu);
+  backdrop?.addEventListener('click', closeMenu);
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && drawer && !drawer.hasAttribute('hidden')) {
+      closeMenu();
+    }
+  });
+</script>

@@ -1,0 +1,544 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ScreenshotFrame from '../components/ScreenshotFrame.astro';
+import StoreBadgeButtons from '../components/StoreBadgeButtons.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Features', url: '/features/' },
+];
+---
+
+<BaseLayout
+  title="Features & Manual Camera Controls – NeoFilm Vintage Film Camera"
+  description="Explore NeoFilm manual vintage camera controls: manual ISO, shutter speed, manual focus with peaking, live histogram, RAW DNG sensor capture, and real-time film simulation."
+  canonicalPath="/features/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="features-page-header">
+    <div class="container text-center">
+      <span class="badge-mono badge-accent">TECHNICAL SPECIFICATIONS</span>
+      <h1 class="page-h1">Manual Vintage Camera Controls &amp; RAW Simulation</h1>
+      <p class="page-lead">
+        Engineered for photographers who demand tactile, physical control over every parameter of exposure, framing, and analog rendering.
+      </p>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Feature Group 1: Live Film Simulation & Viewfinder -->
+    <section class="feature-detail-row">
+      <div class="feature-text-side">
+        <span class="badge-mono">OPTICAL PIPELINE</span>
+        <h2>Real-Time Live Viewfinder Simulation</h2>
+        <p>
+          Unlike camera apps that slap a static filter on top of an already-processed JPEG, NeoFilm renders its film simulation directly inside the live camera viewfinder at 60 FPS using GPU-accelerated Metal and OpenGL fragment shaders.
+        </p>
+        <ul class="feature-check-list">
+          <li><strong>Instant Optical Feedback:</strong> See exactly how exposure, film grain, color curves, and halation interact with ambient lighting before you release the shutter.</li>
+          <li><strong>Zero Preview Lag:</strong> Hardware-accelerated color matrices compute tone curve transformations in real time with minimal power consumption.</li>
+          <li><strong>Aspect Ratio Framing:</strong> Switch between 3:2 (standard 35mm), 4:3 (medium format), 1:1 (square), and 16:9 (cinematic) viewfinders with tactile bezel masking.</li>
+        </ul>
+      </div>
+
+      <div class="feature-visual-side">
+        <ScreenshotFrame
+          imageSrc="/images/samples/sample-viewfinder.jpg"
+          imageAlt="NeoFilm real-time live viewfinder showing frame guides, exposure wheel, and film canister"
+          filmTag="PORTRA 400"
+          iso="ISO 200"
+          shutter="1/500s"
+          aspectRatio="vertical"
+          caption="Live Metal/OpenGL viewfinder rendering at full sensor resolution"
+        />
+      </div>
+    </section>
+
+    <!-- Feature Group 2: Manual Exposure Controls -->
+    <section class="feature-detail-row reverse">
+      <div class="feature-text-side">
+        <span class="badge-mono">FULL EXPOSURE MASTERY</span>
+        <h2>Manual ISO, Shutter Speed &amp; EV Compensation</h2>
+        <p>
+          Step away from auto-exposure compromise. NeoFilm’s curved exposure deck gives you direct mechanical tactile control over sensor sensitivity and shutter opening time.
+        </p>
+        <ul class="feature-check-list">
+          <li><strong>Manual ISO Steps:</strong> Select standard calibrated ISO stops (ISO 50, 100, 200, 400, 800, 1600, 3200, 6400) or let Auto ISO manage sensor grain thresholds.</li>
+          <li><strong>Shutter Speed Control:</strong> Dial in exposure times from 1/8000s for sports and high-speed motion down to 1s handheld exposures with optical stabilization.</li>
+          <li><strong>EV Compensation (+/- 3 EV):</strong> Micro-adjust exposure values in 1/3-stop increments using a quick thumb dial when shooting in semi-automatic aperture priority mode.</li>
+        </ul>
+        <div class="device-note-box">
+          <p><strong>Hardware Notice:</strong> Manual shutter speed, ISO range, and exposure lock are available on supported devices and lenses. Minimum and maximum values depend on device camera sensor specifications.</p>
+        </div>
+      </div>
+
+      <div class="feature-visual-side">
+        <div class="chassis-card dial-showcase-card">
+          <div class="card-mono-header">EXPOSURE CONTROL DECK</div>
+          <div class="dial-mockup-wrap">
+            <div class="dial-display">
+              <span class="dial-unit">SHUTTER</span>
+              <span class="dial-val">1/250s</span>
+            </div>
+            <div class="dial-display">
+              <span class="dial-unit">ISO</span>
+              <span class="dial-val">400</span>
+            </div>
+            <div class="dial-display">
+              <span class="dial-unit">EV</span>
+              <span class="dial-val">-0.7</span>
+            </div>
+          </div>
+          <p class="dial-caption">Hardware-calibrated step increments with haptic vibration detents on every stop.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature Group 3: Manual Focus & Focus Peaking -->
+    <section class="feature-detail-row">
+      <div class="feature-text-side">
+        <span class="badge-mono">OPTICAL PRECISION</span>
+        <h2>Manual Focus with Live Color Focus Peaking</h2>
+        <p>
+          Never miss critical focus on eyes or portrait subjects. NeoFilm provides a tactile rotary focus ring alongside hardware-accelerated color focus peaking.
+        </p>
+        <ul class="feature-check-list">
+          <li><strong>Fluid Manual Focus Ring:</strong> Continuous smooth focus racking from macro close-up distance to true optical infinity.</li>
+          <li><strong>Color Focus Peaking:</strong> High-contrast edge highlights illuminate in-focus planes instantly, making manual focus fast, intuitive, and foolproof.</li>
+          <li><strong>One-Tap AF/MF Toggle:</strong> Instantly switch between auto-focus tap-to-track and manual rangefinder operation.</li>
+        </ul>
+      </div>
+
+      <div class="feature-visual-side">
+        <div class="chassis-card peaking-showcase-card">
+          <div class="card-mono-header">FOCUS ENGINE · METAL SHADER</div>
+          <div class="peaking-hud-box">
+            <div class="peaking-ring-graphic">
+              <span class="peaking-dist">0.85m</span>
+              <span class="peaking-label">PORTRAIT PLANE IN FOCUS</span>
+            </div>
+            <div class="peaking-status">
+              <span class="peaking-dot"></span>
+              <span>PEAKING HIGHLIGHT: AMBER</span>
+            </div>
+          </div>
+          <p class="dial-caption">Real-time Sobel gradient filter isolates micro-contrast edges directly on GPU.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature Group 4: White Balance, Histogram & Framing Helpers -->
+    <section class="feature-detail-row reverse">
+      <div class="feature-text-side">
+        <span class="badge-mono">COMPOSITION TOOLS</span>
+        <h2>Live Histogram, Virtual Horizon &amp; Framing Grids</h2>
+        <p>
+          Master your lighting balance and geometric alignment with professional composition overlays built directly into the viewfinder.
+        </p>
+        <ul class="feature-check-list">
+          <li><strong>Live Luminance Histogram:</strong> Real-time exposure distribution graph prevents clipped highlights and crushed shadow values.</li>
+          <li><strong>Dual-Axis Virtual Horizon:</strong> CoreMotion and sensor-driven gyroscope level indicator confirms pitch and roll to guarantee straight horizons.</li>
+          <li><strong>Custom Framing Grids:</strong> Choose Rule of Thirds, Golden Ratio Spiral, or Square 1:1 framing lines.</li>
+          <li><strong>Kelvin &amp; Tint Control:</strong> Adjust color temperature (2000K–9000K) and green/magenta tint to dial in the exact atmospheric white balance.</li>
+        </ul>
+      </div>
+
+      <div class="feature-visual-side">
+        <div class="chassis-card tools-showcase-card">
+          <div class="card-mono-header">INSTRUMENT OVERLAYS</div>
+          <div class="histogram-mockup">
+            <div class="histogram-bars">
+              <div class="bar" style="height: 25%;"></div>
+              <div class="bar" style="height: 45%;"></div>
+              <div class="bar" style="height: 70%;"></div>
+              <div class="bar" style="height: 85%;"></div>
+              <div class="bar" style="height: 60%;"></div>
+              <div class="bar" style="height: 40%;"></div>
+              <div class="bar" style="height: 20%;"></div>
+            </div>
+            <span class="hist-label">REAL-TIME RGB HISTOGRAM</span>
+          </div>
+
+          <div class="horizon-mockup">
+            <div class="horizon-line active">
+              <span class="horizon-center-mark"></span>
+            </div>
+            <span class="horizon-label">VIRTUAL HORIZON: 0.0° LEVEL</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature Group 5: Hardware Finishes, Sounds & Customization -->
+    <section class="feature-detail-row">
+      <div class="feature-text-side">
+        <span class="badge-mono">TACTILE CUSTOMIZATION</span>
+        <h2>Camera Finishes, LCD Counters &amp; Shutter Sounds</h2>
+        <p>
+          Make the camera your own. NeoFilm offers authentic customization options that mirror vintage mechanical equipment.
+        </p>
+        <ul class="feature-check-list">
+          <li><strong>Mechanical Shutter Sounds:</strong> Authentic acoustic clicks sampled from classic 35mm rangefinders and leaf-shutter cameras.</li>
+          <li><strong>LCD Frame Counter Styles:</strong> Customize your vintage frame counter with amber LED, inverted matrix, or classic mechanical odometer digits.</li>
+          <li><strong>Tactile Haptic Feedback:</strong> Finely tuned vibration pulses confirm dial rotations, focus locks, and shutter trips.</li>
+          <li><strong>Lens Switching &amp; Smooth Zoom:</strong> Seamlessly jump between wide, standard, telephoto, and ultra-wide camera lenses on multi-camera devices.</li>
+        </ul>
+      </div>
+
+      <div class="feature-visual-side">
+        <div class="chassis-card custom-showcase-card">
+          <div class="card-mono-header">CAMERA BODY CUSTOMIZATION</div>
+          <div class="sound-row">
+            <span class="sound-tag">SHUTTER AUDIO</span>
+            <span class="sound-val">Mechanical Leaf Click · Mirror Slap · Silent</span>
+          </div>
+          <div class="sound-row">
+            <span class="sound-tag">LCD COUNTER</span>
+            <span class="sound-val">Amber 80s LED · Silver Mechanical · Minimal</span>
+          </div>
+          <div class="sound-row">
+            <span class="sound-tag">LENS DIAL</span>
+            <span class="sound-val">0.5x Ultra-Wide · 1x Standard · 2x · 3x · 5x Tele</span>
+          </div>
+          <p class="dial-caption">Full customization settings accessible in NeoFilm Settings menu.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom CTA Bar -->
+    <div class="features-bottom-cta chassis-card">
+      <div class="cta-inner">
+        <h2>Experience Real Film Character on Your Phone</h2>
+        <p>Download NeoFilm today and enjoy authentic analog rendering with zero ads and zero tracking.</p>
+        <StoreBadgeButtons size="normal" alignment="center" />
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .features-page-header {
+    padding: 72px 0 48px 0;
+    border-bottom: 1px solid var(--color-seam);
+    margin-bottom: 64px;
+    background-image: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255, 85, 0, 0.05), transparent 70%);
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .page-h1 {
+    font-size: clamp(2.2rem, 3.8vw, 3.25rem);
+    margin-top: 14px;
+    margin-bottom: 16px;
+  }
+
+  .page-lead {
+    font-size: 1.1875rem;
+    color: var(--color-text-secondary);
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Detail Rows */
+  .feature-detail-row {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 64px;
+    align-items: center;
+    padding: 60px 0;
+    border-bottom: 1px solid var(--color-seam);
+  }
+
+  .feature-detail-row.reverse {
+    grid-template-columns: 0.9fr 1.1fr;
+  }
+
+  .feature-detail-row.reverse .feature-text-side {
+    order: 2;
+  }
+
+  .feature-detail-row.reverse .feature-visual-side {
+    order: 1;
+  }
+
+  .feature-text-side h2 {
+    font-size: clamp(1.8rem, 2.5vw, 2.25rem);
+    margin-top: 12px;
+    margin-bottom: 16px;
+  }
+
+  .feature-text-side p {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+
+  .feature-check-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .feature-check-list li {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.55;
+    position: relative;
+    padding-left: 24px;
+  }
+
+  .feature-check-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  .feature-check-list strong {
+    color: var(--color-text-primary);
+  }
+
+  .device-note-box {
+    background-color: var(--color-surface-chassis);
+    border-left: 3px solid var(--color-accent);
+    padding: 12px 16px;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  }
+
+  .device-note-box p {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  /* Dial showcase */
+  .dial-showcase-card, .peaking-showcase-card, .tools-showcase-card, .custom-showcase-card {
+    padding: 32px 28px;
+  }
+
+  .card-mono-header {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    letter-spacing: 0.12em;
+    border-bottom: 1px solid var(--color-seam);
+    padding-bottom: 12px;
+    margin-bottom: 24px;
+  }
+
+  .dial-mockup-wrap {
+    display: flex;
+    gap: 16px;
+    justify-content: space-around;
+    background-color: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 24px 16px;
+    margin-bottom: 20px;
+  }
+
+  .dial-display {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .dial-unit {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-text-muted);
+  }
+
+  .dial-val {
+    font-family: var(--font-mono);
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  .dial-caption {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  /* Peaking Graphic */
+  .peaking-hud-box {
+    background-color: #0d0d0f;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .peaking-ring-graphic {
+    width: 120px;
+    height: 120px;
+    border: 2px dashed var(--color-accent);
+    border-radius: 50%;
+    margin: 0 auto 16px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 85, 0, 0.05);
+  }
+
+  .peaking-dist {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  .peaking-label {
+    font-family: var(--font-mono);
+    font-size: 0.5625rem;
+    color: var(--color-accent);
+    letter-spacing: 0.06em;
+  }
+
+  .peaking-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+  }
+
+  .peaking-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    box-shadow: 0 0 8px var(--color-accent);
+  }
+
+  /* Histogram */
+  .histogram-mockup {
+    background-color: #0b0b0d;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .histogram-bars {
+    height: 60px;
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .histogram-bars .bar {
+    flex: 1;
+    background: linear-gradient(180deg, var(--color-accent) 0%, rgba(255, 85, 0, 0.2) 100%);
+    border-radius: 2px 2px 0 0;
+  }
+
+  .hist-label, .horizon-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-text-dim);
+    display: block;
+    text-align: center;
+  }
+
+  .horizon-mockup {
+    background-color: #0b0b0d;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 20px;
+  }
+
+  .horizon-line {
+    position: relative;
+    height: 2px;
+    background-color: #33333d;
+    margin: 16px 0;
+  }
+
+  .horizon-line.active {
+    background-color: var(--color-success);
+    box-shadow: 0 0 10px rgba(48, 209, 88, 0.4);
+  }
+
+  .horizon-center-mark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--color-success);
+    border-radius: 50%;
+  }
+
+  /* Custom sound rows */
+  .sound-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--color-seam);
+  }
+
+  .sound-tag {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-accent);
+    letter-spacing: 0.08em;
+  }
+
+  .sound-val {
+    font-size: 0.9375rem;
+    color: #ffffff;
+  }
+
+  /* Bottom CTA */
+  .features-bottom-cta {
+    margin: 80px 0 40px 0;
+    padding: 56px 32px;
+    text-align: center;
+    background-image: radial-gradient(ellipse 60% 60% at 50% 0%, rgba(255, 85, 0, 0.1), transparent 70%);
+  }
+
+  .cta-inner h2 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+
+  .cta-inner p {
+    color: var(--color-text-secondary);
+    margin-bottom: 28px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (max-width: 960px) {
+    .feature-detail-row, .feature-detail-row.reverse {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .feature-detail-row.reverse .feature-text-side {
+      order: 1;
+    }
+    .feature-detail-row.reverse .feature-visual-side {
+      order: 2;
+    }
+  }
+</style>

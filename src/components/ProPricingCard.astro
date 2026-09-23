@@ -1,0 +1,471 @@
+---
+import { siteConfig } from '../config/site';
+
+export interface Props {
+  showComparison?: boolean;
+}
+
+const { showComparison = true } = Astro.props;
+---
+
+<div class="pro-section-wrap" id="pro-pricing">
+  <div class="pro-header">
+    <div class="pro-title-row">
+      <span class="pro-badge-main">NEOFILM PRO</span>
+      <span class="pro-subtitle-tag">TIERED UPGRADE</span>
+    </div>
+    <h2 class="pro-headline">Unleash the Complete Analog Darkroom</h2>
+    <p class="pro-subheadline">
+      Whether you choose an annual pass, monthly access, or a one-time lifetime unlock, NeoFilm Pro expands your creative toolkit with complete optical film simulation and uncompressed RAW sensor control.
+    </p>
+  </div>
+
+  <!-- Pricing Option Cards -->
+  <div class="pricing-cards-grid">
+    <!-- Annual Card (Best Value) -->
+    <div class="pricing-card featured">
+      <div class="card-ribbon">MOST POPULAR</div>
+      <div class="card-top">
+        <h3 class="tier-title">Annual Pass</h3>
+        <p class="tier-desc">Complete creative freedom billed once per year.</p>
+        <div class="tier-price-placeholder">
+          <span class="price-notice">Local currency pricing in App Store / Google Play</span>
+        </div>
+        <div class="trial-pill">
+          <span class="trial-dot"></span>
+          <span>7-Day Introductory Trial</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <ul class="tier-benefits">
+          <li>✓ All 30+ film profiles unlocked</li>
+          <li>✓ RAW DNG sensor capture</li>
+          <li>✓ Full manual controls & peaking</li>
+          <li>✓ Darkroom lab re-processing</li>
+          <li>✓ Unlimited batch export</li>
+        </ul>
+      </div>
+      <div class="card-action">
+        <a href={siteConfig.stores.ios.url} class="btn-primary btn-block" target="_blank" rel="noopener noreferrer">
+          View in App Store
+        </a>
+      </div>
+      <p class="tier-disclaimer">
+        A seven-day introductory trial may be available to eligible annual subscribers. Auto-renews annually unless canceled in store account settings at least 24 hours before renewal.
+      </p>
+    </div>
+
+    <!-- Lifetime Access (Pay Once) -->
+    <div class="pricing-card">
+      <div class="card-top">
+        <h3 class="tier-title">Lifetime Access</h3>
+        <p class="tier-desc">One-time purchase for permanent, unending access.</p>
+        <div class="tier-price-placeholder">
+          <span class="price-notice">One-time non-consumable purchase</span>
+        </div>
+        <div class="pay-once-pill">
+          <span>PAY ONCE · OWN FOREVER</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <ul class="tier-benefits">
+          <li>✓ Permanent access to all Pro features</li>
+          <li>✓ No recurring fees or renewals</li>
+          <li>✓ All future film profiles included</li>
+          <li>✓ Family Sharing on supported platforms</li>
+          <li>✓ One-tap Restore Purchases on new devices</li>
+        </ul>
+      </div>
+      <div class="card-action">
+        <a href={siteConfig.stores.android.url} class="btn-secondary btn-block" target="_blank" rel="noopener noreferrer">
+          View in Google Play
+        </a>
+      </div>
+      <p class="tier-disclaimer">
+        Pay once for lifetime access. Permanently attached to your Apple or Google account.
+      </p>
+    </div>
+
+    <!-- Monthly Pass -->
+    <div class="pricing-card">
+      <div class="card-top">
+        <h3 class="tier-title">Monthly Pass</h3>
+        <p class="tier-desc">Flexible month-to-month access with auto-renewal.</p>
+        <div class="tier-price-placeholder">
+          <span class="price-notice">Billed monthly via App Store or Google Play</span>
+        </div>
+        <div class="flex-pill">
+          <span>FLEXIBLE MEMBERSHIP</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <ul class="tier-benefits">
+          <li>✓ All 30+ film profiles unlocked</li>
+          <li>✓ RAW DNG sensor capture</li>
+          <li>✓ Full manual controls & peaking</li>
+          <li>✓ Darkroom lab re-processing</li>
+          <li>✓ Cancel anytime with ease</li>
+        </ul>
+      </div>
+      <div class="card-action">
+        <a href={siteConfig.stores.ios.url} class="btn-secondary btn-block" target="_blank" rel="noopener noreferrer">
+          Get Monthly Pass
+        </a>
+      </div>
+      <p class="tier-disclaimer">
+        Auto-renews monthly until canceled in your Apple ID or Google Play subscriptions.
+      </p>
+    </div>
+  </div>
+
+  <!-- Free vs Pro Comparison Table -->
+  {showComparison && (
+    <div class="comparison-container">
+      <h3 class="comparison-title">Free Version vs. NeoFilm Pro</h3>
+      <div class="comparison-table-wrap">
+        <table class="comparison-table" aria-label="Feature comparison between Free and NeoFilm Pro">
+          <thead>
+            <tr>
+              <th scope="col" class="th-feature">Feature</th>
+              <th scope="col" class="th-free">NeoFilm Free</th>
+              <th scope="col" class="th-pro">NeoFilm Pro</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Handcrafted Film Profiles</td>
+              <td>Core selection (Portra, Street Mono, High Speed)</td>
+              <td><span class="pro-text">All 30+ profiles + all future releases</span></td>
+            </tr>
+            <tr>
+              <td>Real-Time Live Viewfinder</td>
+              <td>Included</td>
+              <td><span class="pro-text">Included</span></td>
+            </tr>
+            <tr>
+              <td>RAW DNG Sensor Capture</td>
+              <td>Standard Processed Capture</td>
+              <td><span class="pro-text">RAW DNG + Dual RAW/Processed mode</span></td>
+            </tr>
+            <tr>
+              <td>Full Manual Controls (ISO, Shutter, MF)</td>
+              <td>Auto Exposure & Manual EV</td>
+              <td><span class="pro-text">Full Manual ISO, Shutter, Focus & Peaking</span></td>
+            </tr>
+            <tr>
+              <td>Custom Film Recipe Lab</td>
+              <td>1 Custom Recipe slot</td>
+              <td><span class="pro-text">Unlimited custom recipes & QR codes</span></td>
+            </tr>
+            <tr>
+              <td>Mobile Darkroom Reprocessing</td>
+              <td>Basic adjustments</td>
+              <td><span class="pro-text">Complete non-destructive film reprocessing</span></td>
+            </tr>
+            <tr>
+              <td>Photo Export</td>
+              <td>Individual high-res export</td>
+              <td><span class="pro-text">Unlimited individual & batch export</span></td>
+            </tr>
+            <tr>
+              <td>Watermarking / Lockout</td>
+              <td>Zero watermarks, photos are yours forever</td>
+              <td><span class="pro-text">Zero watermarks, photos are yours forever</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )}
+
+  <!-- Billing Compliance Notice -->
+  <div class="billing-compliance-card">
+    <div class="compliance-icon" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+      </svg>
+    </div>
+    <div class="compliance-text">
+      <h4>Transparent Billing & Secure Management</h4>
+      <p>
+        All transactions are securely processed directly by <strong>Apple</strong> (App Store) or <strong>Google</strong> (Google Play Store) and managed via RevenueCat. NeoFilm never handles or stores payment card numbers. Prices are displayed in your local currency within the app before purchase. Subscriptions can be managed or canceled at any time in your device account settings. If you switch devices, your purchases can be restored instantly with one tap using <strong>Restore Purchases</strong>.
+      </p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .pro-section-wrap {
+    margin: 60px 0;
+  }
+
+  .pro-header {
+    text-align: center;
+    max-width: 780px;
+    margin: 0 auto 48px auto;
+  }
+
+  .pro-title-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .pro-badge-main {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    background: linear-gradient(135deg, #ff6d00 0%, #ff3d00 100%);
+    color: #ffffff;
+    padding: 4px 12px;
+    border-radius: var(--radius-sm);
+  }
+
+  .pro-subtitle-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.1em;
+  }
+
+  .pro-headline {
+    font-size: clamp(2rem, 3vw, 2.75rem);
+    margin-bottom: 16px;
+  }
+
+  .pro-subheadline {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  /* Pricing Cards Grid */
+  .pricing-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 56px;
+  }
+
+  .pricing-card {
+    background-color: var(--color-surface-chassis);
+    border: 1px solid var(--color-seam);
+    border-radius: var(--radius-lg);
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: var(--shadow-chassis);
+  }
+
+  .pricing-card.featured {
+    border-color: rgba(255, 85, 0, 0.5);
+    background-image: linear-gradient(180deg, rgba(255, 85, 0, 0.05) 0%, rgba(20, 20, 22, 1) 100%);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7), 0 0 24px rgba(255, 85, 0, 0.15);
+  }
+
+  .card-ribbon {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #ff6d00 0%, #ff3d00 100%);
+    color: #ffffff;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    box-shadow: 0 4px 12px rgba(255, 85, 0, 0.4);
+  }
+
+  .card-top {
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--color-seam);
+    padding-bottom: 20px;
+  }
+
+  .tier-title {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+
+  .tier-desc {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    min-height: 40px;
+    margin-bottom: 16px;
+  }
+
+  .tier-price-placeholder {
+    margin-bottom: 14px;
+  }
+
+  .price-notice {
+    font-size: 0.875rem;
+    font-family: var(--font-mono);
+    color: #e4e4eb;
+    display: inline-block;
+  }
+
+  .trial-pill, .pay-once-pill, .flex-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+  }
+
+  .trial-pill {
+    background-color: var(--color-accent-subtle);
+    color: var(--color-accent);
+    border: 1px solid rgba(255, 85, 0, 0.3);
+  }
+
+  .trial-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+  }
+
+  .pay-once-pill {
+    background-color: rgba(48, 209, 88, 0.12);
+    color: #30d158;
+    border: 1px solid rgba(48, 209, 88, 0.3);
+  }
+
+  .flex-pill {
+    background-color: var(--color-surface-subtle);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+  }
+
+  .card-body {
+    flex-grow: 1;
+    margin-bottom: 24px;
+  }
+
+  .tier-benefits {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .tier-benefits li {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.45;
+  }
+
+  .btn-block {
+    width: 100%;
+  }
+
+  .tier-disclaimer {
+    font-size: 0.75rem;
+    color: var(--color-text-dim);
+    line-height: 1.5;
+    margin-top: 14px;
+  }
+
+  /* Comparison Table */
+  .comparison-container {
+    background-color: var(--color-surface-chassis);
+    border: 1px solid var(--color-seam);
+    border-radius: var(--radius-lg);
+    padding: 36px 32px;
+    margin-bottom: 40px;
+    box-shadow: var(--shadow-chassis);
+  }
+
+  .comparison-title {
+    font-size: 1.375rem;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  .comparison-table-wrap {
+    overflow-x: auto;
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+    text-align: left;
+  }
+
+  .comparison-table th {
+    padding: 14px 16px;
+    border-bottom: 2px solid var(--color-border);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-primary);
+  }
+
+  .comparison-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--color-seam);
+    color: var(--color-text-secondary);
+    vertical-align: middle;
+  }
+
+  .comparison-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .pro-text {
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  /* Compliance Card */
+  .billing-compliance-card {
+    background-color: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .compliance-icon {
+    color: var(--color-accent);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .compliance-text h4 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  .compliance-text p {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 960px) {
+    .pricing-cards-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .pricing-card.featured {
+      order: -1;
+    }
+  }
+</style>

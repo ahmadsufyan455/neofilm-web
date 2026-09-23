@@ -1,0 +1,601 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StoreBadgeButtons from '../components/StoreBadgeButtons.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Film Recipes', url: '/film-recipes/' },
+];
+
+const profilesList = [
+  { name: 'Portra Warm 400', category: 'Color Negative', iso: '400', desc: 'Soft skin tones, gentle highlights, and warm golden undertones for portraits.', isPro: false },
+  { name: 'FX Daily 400', category: 'Japanese 35mm', iso: '400', desc: 'Creamy peachy skin tones, soft amber cafe glow, and gentle highlight roll-off.', isPro: true },
+  { name: 'Street Mono 400', category: 'Monochrome', iso: '400', desc: 'High-contrast black & white with rich blacks and silver-halide grain.', isPro: false },
+  { name: 'Cinema Tungsten 500', category: 'Cinematic', iso: '500', desc: 'Motion picture look with rich teal shadows and vibrant tungsten crimson halation.', isPro: true },
+  { name: 'Retro Slide 64', category: 'Color Slide', iso: '64', desc: 'High saturation, punchy warm reds, and deep dynamic range modeled after reversal slide film.', isPro: true },
+  { name: 'CCD Flashback 02', category: 'Early Digital', iso: 'CCD', desc: 'Nostalgic Y2K digicam color balance with sharp direct-flash handling and cool blues.', isPro: true },
+  { name: 'Golden Hour 200', category: 'Color Negative', iso: '200', desc: 'Warm amber glow, radiant highlights, and low-contrast shadow details for sunset light.', isPro: true },
+  { name: 'Silky Mono 400', category: 'Monochrome', iso: '400', desc: 'Subtle gray tones, smooth tonal gradations, and ultra-fine grain structure.', isPro: true },
+  { name: 'Ultra Max 400', category: 'Color Negative', iso: '400', desc: 'Vibrant primaries, rich blue skies, and high versatility across diverse daylight scenes.', isPro: true },
+  { name: 'High Speed 1600', category: 'Night Film', iso: '1600', desc: 'Heavy organic grain, boosted shadow sensitivity, and moody low-light rendering.', isPro: false },
+  { name: 'Nordic Forest 400', category: 'Muted Earth', iso: '400', desc: 'Desaturated greens, earthy moss tones, and cool moody highlights for atmospheric nature.', isPro: true },
+  { name: 'Neon Night 800', category: 'Cinematic Night', iso: '800', desc: 'Vibrant city glow with intense halation bloom on neon lights and streetlamps.', isPro: true },
+];
+---
+
+<BaseLayout
+  title="Custom Vintage Film Recipes & Analog Effects – NeoFilm"
+  description="Create, fine-tune, and share custom vintage film recipes. Dial in 8-channel HSL color, grain density, optical halation, highlight bloom, and QR sharing in NeoFilm."
+  canonicalPath="/film-recipes/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="recipes-page-header">
+    <div class="container text-center">
+      <span class="badge-mono badge-accent">CREATIVE FILM ENGINE</span>
+      <h1 class="page-h1">Custom Vintage Film Recipes &amp; Analog Effects</h1>
+      <p class="page-lead">
+        Build bespoke analog aesthetics from authentic film stock foundations. Control color channels, optical halation, split-toning, and grain density — then share via QR recipe cards.
+      </p>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Section 1: The Anatomy of a NeoFilm Recipe -->
+    <section class="recipe-anatomy-section">
+      <div class="section-intro text-center">
+        <span class="badge-mono">PARAMETER ARCHITECTURE</span>
+        <h2>How a Film Recipe is Crafted</h2>
+        <p>Every custom recipe starts from a foundational film stock profile and allows meticulous shaping across five dedicated parameter decks.</p>
+      </div>
+
+      <div class="anatomy-grid">
+        <!-- Deck 1 -->
+        <div class="chassis-card anatomy-card">
+          <div class="anatomy-num">01</div>
+          <h3>Light &amp; Tone</h3>
+          <p>Micro-tune dynamic range curves without destroying highlight detail:</p>
+          <ul class="anatomy-list">
+            <li><strong>Exposure &amp; Contrast:</strong> Overall scene luminance and midtone separation.</li>
+            <li><strong>Highlights &amp; Shadows:</strong> Tame harsh sun roll-off or lift shadow detail.</li>
+            <li><strong>Whites &amp; Blacks:</strong> Set the exact analog black floor and paper white ceiling.</li>
+          </ul>
+        </div>
+
+        <!-- Deck 2 -->
+        <div class="chassis-card anatomy-card">
+          <div class="anatomy-num">02</div>
+          <h3>Color &amp; Atmosphere</h3>
+          <p>Replicate ambient laboratory chemical balances:</p>
+          <ul class="anatomy-list">
+            <li><strong>Temperature &amp; Tint:</strong> Warm amber glow or cool twilight balancing.</li>
+            <li><strong>Vibrance &amp; Saturation:</strong> Selective chromatic richness preserving skin tones.</li>
+            <li><strong>Split-Toning:</strong> Independent hue and saturation for highlights and shadows.</li>
+          </ul>
+        </div>
+
+        <!-- Deck 3 -->
+        <div class="chassis-card anatomy-card">
+          <div class="anatomy-num">03</div>
+          <h3>8-Channel HSL Mixer</h3>
+          <p>Targeted color transformations per spectral channel:</p>
+          <ul class="anatomy-list">
+            <li><strong>8 Isolated Channels:</strong> Red, Orange, Yellow, Green, Cyan, Blue, Purple, Magenta.</li>
+            <li><strong>Independent Controls:</strong> Shift Hue, Saturation, and Luminance individually.</li>
+            <li><strong>Skin Tone Engine:</strong> Protects natural peachy complexion while stylizing backgrounds.</li>
+          </ul>
+        </div>
+
+        <!-- Deck 4 -->
+        <div class="chassis-card anatomy-card">
+          <div class="anatomy-num">04</div>
+          <h3>Optical Textures &amp; Halation</h3>
+          <p>Recreate the physical physics of 35mm celluloid:</p>
+          <ul class="anatomy-list">
+            <li><strong>Film Grain:</strong> Procedural non-linear grain scaled to ISO density.</li>
+            <li><strong>Halation (Crimson / Amber / Silver):</strong> Red-orange glow around bright light sources.</li>
+            <li><strong>Bloom &amp; Fade:</strong> Optical softness and vintage lifted matte black fogging.</li>
+            <li><strong>Vignette &amp; Light Leaks:</strong> Lens fall-off shading and realistic edge flares.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: QR Recipe Sharing & Scanning -->
+    <section class="qr-workflow-section">
+      <div class="qr-grid">
+        <div class="qr-copy">
+          <span class="badge-mono badge-accent">INSTANT COMMUNITY SHARING</span>
+          <h2>QR Recipe Sharing &amp; One-Tap Importing</h2>
+          <p>
+            Sharing analog film recipes has never been easier. When you create a recipe you love, NeoFilm packages all your color parameters into an aesthetic, high-resolution QR recipe card.
+          </p>
+          <div class="qr-steps">
+            <div class="qr-step-item">
+              <span class="step-badge">1</span>
+              <div>
+                <h4>Save to Your Recipe Library</h4>
+                <p>Name your custom creation, select a brand tag, and save it to your local film collection.</p>
+              </div>
+            </div>
+            <div class="qr-step-item">
+              <span class="step-badge">2</span>
+              <div>
+                <h4>Export Shareable QR Card</h4>
+                <p>Tap the QR button to render an elegant graphic containing the recipe name, sample colors, and encoded matrix data.</p>
+              </div>
+            </div>
+            <div class="qr-step-item">
+              <span class="step-badge">3</span>
+              <div>
+                <h4>Scan to Import Instantly</h4>
+                <p>Point NeoFilm’s built-in QR scanner at any printed card or screen. The recipe loads immediately into your camera viewfinder.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qr-visual">
+          <div class="chassis-card qr-card-mockup">
+            <div class="qr-card-header">
+              <span class="qr-card-brand">NEOFILM RECIPE LAB</span>
+              <span class="qr-card-pro">PRO READY</span>
+            </div>
+            <div class="qr-code-box" aria-label="NeoFilm QR Recipe Mockup">
+              <!-- Visual QR representation -->
+              <svg width="160" height="160" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M2 2h8v8H2V2zm2 2v4h4V4H4zm10-2h8v8h-8V2zm2 2v4h4V4h-4zM2 14h8v8H2v-8zm2 2v4h4v-4H4zm14 2h2v4h-4v-2h2v-2zm-4-4h2v2h-2v-2zm4 0h4v2h-2v2h-2v-4zm-2 4h-2v-2h2v2zm-2 2h2v2h-2v-2zm4 0h2v2h-2v-2z"/>
+              </svg>
+            </div>
+            <div class="qr-card-footer">
+              <span class="qr-recipe-title">FX DAILY WARMTH</span>
+              <span class="qr-recipe-meta">BASE: JAPANESE 35MM · ISO 400</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Curated Film Profiles Catalog -->
+    <section class="profiles-catalog-section">
+      <div class="section-intro text-center">
+        <span class="badge-mono">PROFILE INVENTORY</span>
+        <h2>30+ Handcrafted Film Profiles</h2>
+        <p>Explore a selection of the analog profiles available inside NeoFilm. Built natively with authentic color sciences.</p>
+      </div>
+
+      <div class="catalog-grid">
+        {profilesList.map((item) => (
+          <div class="chassis-card catalog-card">
+            <div class="catalog-card-top">
+              <span class="catalog-category">{item.category}</span>
+              <span class="catalog-iso">{item.iso}</span>
+            </div>
+            <h3 class="catalog-name">
+              {item.name}
+              {item.isPro && <span class="badge-pro">PRO</span>}
+            </h3>
+            <p class="catalog-desc">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Section 4: Workflow Applications -->
+    <section class="workflow-apply-section">
+      <div class="chassis-card workflow-apply-card">
+        <div class="workflow-apply-grid">
+          <div>
+            <span class="badge-mono badge-accent">DUAL-WORKFLOW INTEGRATION</span>
+            <h2>Shoot in the Field, Re-Develop in the Darkroom</h2>
+            <p>
+              Your recipes aren’t limited to the moment of capture. Apply any recipe directly through the live camera viewfinder for instant shooting satisfaction, or take RAW captures into the Mobile Darkroom to experiment with different recipes non-destructively.
+            </p>
+            <div class="apply-buttons">
+              <a href="/darkroom/" class="btn-primary">Learn About Darkroom Reprocessing</a>
+            </div>
+          </div>
+          <div class="workflow-stats-col">
+            <div class="workflow-stat">
+              <span class="wf-val">Live Viewfinder</span>
+              <span class="wf-sub">Real-time GPU shader preview</span>
+            </div>
+            <div class="workflow-stat">
+              <span class="wf-val">Digital Darkroom</span>
+              <span class="wf-sub">Post-capture non-destructive re-development</span>
+            </div>
+            <div class="workflow-stat">
+              <span class="wf-val">Zero Compression</span>
+              <span class="wf-sub">Export at full sensor fidelity</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Store Badges -->
+    <div class="recipes-bottom-cta">
+      <h2>Start Crafting Your Custom Film Recipes</h2>
+      <p>Download NeoFilm on iOS or Android and join the analog photography movement.</p>
+      <StoreBadgeButtons size="normal" alignment="center" />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .recipes-page-header {
+    padding: 72px 0 48px 0;
+    border-bottom: 1px solid var(--color-seam);
+    margin-bottom: 64px;
+    background-image: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255, 85, 0, 0.05), transparent 70%);
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .page-h1 {
+    font-size: clamp(2.2rem, 3.8vw, 3.25rem);
+    margin-top: 14px;
+    margin-bottom: 16px;
+  }
+
+  .page-lead {
+    font-size: 1.1875rem;
+    color: var(--color-text-secondary);
+    max-width: 760px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .section-intro {
+    max-width: 720px;
+    margin: 0 auto 48px auto;
+  }
+
+  .section-intro h2 {
+    font-size: 2.25rem;
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+
+  .section-intro p {
+    font-size: 1.0625rem;
+    color: var(--color-text-secondary);
+  }
+
+  /* Anatomy Grid */
+  .recipe-anatomy-section {
+    padding-bottom: 80px;
+    border-bottom: 1px solid var(--color-seam);
+  }
+
+  .anatomy-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+
+  .anatomy-card {
+    padding: 36px 30px;
+    position: relative;
+  }
+
+  .anatomy-num {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-accent);
+    margin-bottom: 12px;
+  }
+
+  .anatomy-card h3 {
+    font-size: 1.375rem;
+    margin-bottom: 10px;
+  }
+
+  .anatomy-card p {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 16px;
+  }
+
+  .anatomy-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .anatomy-list li {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    position: relative;
+    padding-left: 18px;
+  }
+
+  .anatomy-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+  }
+
+  .anatomy-list strong {
+    color: var(--color-text-primary);
+  }
+
+  /* QR Section */
+  .qr-workflow-section {
+    padding: 80px 0;
+    border-bottom: 1px solid var(--color-seam);
+  }
+
+  .qr-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .qr-copy h2 {
+    font-size: clamp(1.8rem, 2.8vw, 2.5rem);
+    margin-top: 14px;
+    margin-bottom: 16px;
+  }
+
+  .qr-copy p {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+
+  .qr-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .qr-step-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .step-badge {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--color-surface-subtle);
+    border: 1px solid var(--color-accent);
+    color: var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.875rem;
+    flex-shrink: 0;
+  }
+
+  .qr-step-item h4 {
+    font-size: 1.0625rem;
+    margin-bottom: 4px;
+  }
+
+  .qr-step-item p {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* QR Card Mockup */
+  .qr-card-mockup {
+    padding: 32px;
+    text-align: center;
+    max-width: 320px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, #1f1f24 0%, #121214 100%);
+    border: 2px solid var(--color-border);
+  }
+
+  .qr-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-text-muted);
+    margin-bottom: 24px;
+  }
+
+  .qr-card-pro {
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  .qr-code-box {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 20px;
+    border-radius: var(--radius-md);
+    display: inline-block;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .qr-card-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .qr-recipe-title {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.08em;
+  }
+
+  .qr-recipe-meta {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-accent);
+  }
+
+  /* Catalog Section */
+  .profiles-catalog-section {
+    padding: 80px 0;
+    border-bottom: 1px solid var(--color-seam);
+  }
+
+  .catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .catalog-card {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .catalog-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .catalog-category {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .catalog-iso {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  .catalog-name {
+    font-size: 1.1875rem;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .catalog-desc {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+
+  /* Workflow Section */
+  .workflow-apply-section {
+    padding: 80px 0 40px 0;
+  }
+
+  .workflow-apply-card {
+    padding: 48px;
+  }
+
+  .workflow-apply-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .workflow-apply-grid h2 {
+    font-size: 2rem;
+    margin-top: 12px;
+    margin-bottom: 16px;
+  }
+
+  .workflow-apply-grid p {
+    font-size: 1.0625rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .workflow-stats-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .workflow-stat {
+    background-color: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .wf-val {
+    font-family: var(--font-mono);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  .wf-sub {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+  }
+
+  /* Bottom CTA */
+  .recipes-bottom-cta {
+    padding: 60px 0 80px 0;
+    text-align: center;
+  }
+
+  .recipes-bottom-cta h2 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+
+  .recipes-bottom-cta p {
+    color: var(--color-text-secondary);
+    margin-bottom: 28px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (max-width: 960px) {
+    .anatomy-grid {
+      grid-template-columns: 1fr;
+    }
+    .qr-grid {
+      grid-template-columns: 1fr;
+    }
+    .catalog-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .workflow-apply-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .catalog-grid {
+      grid-template-columns: 1fr;
+    }
+    .workflow-apply-card {
+      padding: 32px 20px;
+    }
+  }
+</style>

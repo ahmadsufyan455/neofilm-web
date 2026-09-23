@@ -1,0 +1,569 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FaqAccordion, { type FaqItem } from '../components/FaqAccordion.astro';
+import { siteConfig } from '../config/site';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Support', url: '/support/' },
+];
+
+const supportFaqList: FaqItem[] = [
+  {
+    id: 'faq-restore',
+    question: 'How do I restore my NeoFilm Pro purchase on a new phone?',
+    answer:
+      '<p>Make sure you are signed in with the same Apple Account (on iOS) or Google Account (on Android) used for the original purchase. Open NeoFilm, open <strong>Settings</strong>, and tap <strong>Restore Purchases</strong>. Your Pro entitlement will be verified instantly and activated without any additional charge.</p>',
+  },
+  {
+    id: 'faq-cancel',
+    question: 'How do I cancel or manage my subscription?',
+    answer:
+      '<p>Because all payments are processed directly by Apple and Google, subscriptions must be managed through your device store account:</p><ul><li><strong>iOS (iPhone):</strong> Open iPhone Settings &gt; Tap your Apple Account name at the top &gt; Subscriptions &gt; Select NeoFilm &gt; Cancel Subscription. You can also visit <a href="https://support.apple.com/HT202039" target="_blank" rel="noopener noreferrer">Apple Subscription Support</a>.</li><li><strong>Android:</strong> Open Google Play Store &gt; Tap your profile icon at top right &gt; Payments &amp; Subscriptions &gt; Subscriptions &gt; NeoFilm &gt; Cancel. You can also visit <a href="https://play.google.com/store/account/subscriptions" target="_blank" rel="noopener noreferrer">Google Play Subscriptions</a>.</li></ul>',
+  },
+  {
+    id: 'faq-trial',
+    question: 'How does the seven-day trial eligibility work?',
+    answer:
+      '<p>A seven-day introductory trial may be available to eligible first-time annual subscribers. If you have previously utilized a free trial for NeoFilm on your Apple Account or Google Account, the store will bill the standard annual rate immediately upon purchase confirmation.</p>',
+  },
+  {
+    id: 'faq-lifetime',
+    question: 'Does the Lifetime Access purchase include future updates?',
+    answer:
+      '<p>Yes. The Lifetime Access option is a non-consumable one-time purchase. It permanently unlocks all current Pro film stocks, RAW DNG capture, manual controls, and all future film profile updates with no recurring fees.</p>',
+  },
+  {
+    id: 'faq-permissions-camera',
+    question: 'Why does NeoFilm need Camera permission?',
+    answer:
+      '<p>NeoFilm is an optical camera and viewfinder application. Camera access is strictly required to capture photos, stream sensor data into the viewfinder, and control hardware focus and exposure. NeoFilm never streams or uploads your camera feed to external servers.</p>',
+  },
+  {
+    id: 'faq-permissions-storage',
+    question: 'Why does NeoFilm need Photo Library / Media Storage permission?',
+    answer:
+      '<p>Photo Library permission (iOS <code>PHPhotoLibrary</code> or Android Scoped Storage) is required to save your developed analog photographs and RAW DNG negatives to your device gallery. On iOS, photos are organized inside the dedicated <em>NeoFilm</em> album.</p>',
+  },
+  {
+    id: 'faq-permissions-location',
+    question: 'Why does NeoFilm request Location permission?',
+    answer:
+      '<p>Location access is entirely optional. When granted, NeoFilm looks up the approximate city name locally to stamp it on your analog film borders and embed GPS coordinates in EXIF metadata. Your location coordinates are processed strictly on your device and are never transmitted to any cloud servers.</p>',
+  },
+  {
+    id: 'faq-raw-compat',
+    question: 'Why is RAW DNG or Manual Shutter Speed not available on my device?',
+    answer:
+      '<p>RAW DNG capture and full manual exposure (ISO, shutter speed, manual focus) require underlying hardware sensor and camera driver support provided by your device manufacturer. Some front-facing cameras, secondary ultra-wide lenses, or older Android devices do not expose RAW sensor buffers or manual exposure controls to third-party applications.</p>',
+  },
+  {
+    id: 'faq-prices-loading',
+    question: 'What should I do if prices or in-app products fail to load?',
+    answer:
+      '<p>Ensure your device has an active internet connection so RevenueCat can query Apple App Store or Google Play servers for localized catalog pricing. If prices still fail to appear, restart the application or verify that in-app purchases are enabled in your device parental or content restrictions.</p>',
+  },
+  {
+    id: 'faq-refunds',
+    question: 'How do I request a refund?',
+    answer:
+      '<p>All transactions, billing, and refunds are handled exclusively by Apple or Google under their respective storefront terms:</p><ul><li><strong>Apple:</strong> Submit a refund request through <a href="https://reportaproblem.apple.com/" target="_blank" rel="noopener noreferrer">reportaproblem.apple.com</a>.</li><li><strong>Google:</strong> Request a refund through <a href="https://support.google.com/googleplay/answer/2479637" target="_blank" rel="noopener noreferrer">Google Play Refund Support</a>.</li></ul>',
+  },
+];
+---
+
+<BaseLayout
+  title="NeoFilm Support & FAQ – Official Help Center"
+  description="Official NeoFilm support center for iOS and Android. Troubleshooting guides for camera permissions, RAW sensor compatibility, restoring purchases, and subscription management."
+  canonicalPath="/support/"
+  breadcrumbs={breadcrumbs}
+  faqItems={supportFaqList}
+>
+  <div class="support-page-header">
+    <div class="container text-center">
+      <span class="badge-mono badge-accent">HELP CENTER</span>
+      <h1 class="page-h1">NeoFilm Support</h1>
+      <p class="page-lead">
+        Find solutions for setup, device permissions, RAW compatibility, subscription billing, and troubleshooting.
+      </p>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Quick Contact Card -->
+    <div class="chassis-card support-contact-hero" id="contact">
+      <div class="contact-hero-grid">
+        <div class="contact-info-col">
+          <span class="badge-mono">DIRECT ASSISTANCE</span>
+          <h2>Contact the Developer</h2>
+          <p>
+            Have a bug to report, a camera compatibility question, or feedback on a film recipe? Reach out directly via email.
+          </p>
+          <div class="email-action-row">
+            <a href={`mailto:${siteConfig.supportEmail}`} class="btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <span>Email: {siteConfig.supportEmail}</span>
+            </a>
+          </div>
+          <p class="response-time-note">Inquiries are typically answered within 24 to 48 business hours.</p>
+        </div>
+
+        <div class="submission-guidelines-col">
+          <h3>What to Include in Your Message</h3>
+          <p class="guideline-intro">To help resolve your issue quickly, please provide:</p>
+          <ul class="guideline-checklist">
+            <li><strong>Platform:</strong> iOS or Android</li>
+            <li><strong>Device Model:</strong> e.g., iPhone 15 Pro, Google Pixel 8, Samsung Galaxy S23</li>
+            <li><strong>Operating System Version:</strong> e.g., iOS 17.5, Android 14</li>
+            <li><strong>NeoFilm App Version:</strong> Found at the bottom of NeoFilm Settings</li>
+            <li><strong>Clear Description:</strong> What happened and steps to reproduce</li>
+            <li><strong>Screenshots:</strong> Please blur or exclude any private personal information</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Security & Anti-Phishing Advisory -->
+    <div class="security-advisory-card">
+      <div class="advisory-icon" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+      </div>
+      <div class="advisory-text">
+        <h4>Official NeoFilm Security Notice</h4>
+        <p>
+          NeoFilm support will <strong>NEVER</strong> ask for your Apple Account password, Google Account password, two-factor authentication codes, or full credit card numbers. All purchases and billing transactions are executed exclusively through official Apple App Store and Google Play interfaces.
+        </p>
+      </div>
+    </div>
+
+    <!-- Common Troubleshooting Categories Grid -->
+    <section class="troubleshooting-section" id="troubleshooting">
+      <div class="section-intro text-center">
+        <span class="badge-mono badge-accent">STEP-BY-STEP GUIDES</span>
+        <h2>Troubleshooting &amp; Permissions</h2>
+        <p>Quick fixes for common camera, storage, and permission questions.</p>
+      </div>
+
+      <div class="trouble-grid">
+        <!-- Card 1: Camera Access -->
+        <div class="chassis-card trouble-card">
+          <div class="trouble-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+              <circle cx="12" cy="13" r="4"></circle>
+            </svg>
+          </div>
+          <h3>Camera Permission Blocked</h3>
+          <p>If the viewfinder displays a black screen or permission prompt:</p>
+          <ol class="trouble-steps">
+            <li><strong>iOS:</strong> Open iPhone Settings &gt; Scroll to NeoFilm &gt; Toggle <em>Camera</em> ON.</li>
+            <li><strong>Android:</strong> Open Settings &gt; Apps &gt; NeoFilm &gt; Permissions &gt; Camera &gt; Select <em>Allow while using app</em>.</li>
+          </ol>
+        </div>
+
+        <!-- Card 2: Photo Library -->
+        <div class="chassis-card trouble-card">
+          <div class="trouble-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+          </div>
+          <h3>Photos Not Saving to Gallery</h3>
+          <p>If captured shots do not appear in your photo album:</p>
+          <ol class="trouble-steps">
+            <li><strong>iOS:</strong> Open Settings &gt; NeoFilm &gt; Photos &gt; Select <em>Full Access</em> or <em>Add Photos Only</em>.</li>
+            <li><strong>Android:</strong> Verify storage space is available. Android 10+ uses Scoped Storage to save directly to Pictures/DCIM.</li>
+          </ol>
+        </div>
+
+        <!-- Card 3: Location Tagging -->
+        <div class="chassis-card trouble-card">
+          <div class="trouble-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </div>
+          <h3>Location City Stamp Missing</h3>
+          <p>If city stamps do not appear on film borders:</p>
+          <ol class="trouble-steps">
+            <li>Enable Location permission for NeoFilm (<em>While Using App</em>).</li>
+            <li>In NeoFilm Settings, turn <strong>Location Stamp</strong> ON. Location lookup occurs strictly on-device.</li>
+          </ol>
+        </div>
+
+        <!-- Card 4: RAW Support -->
+        <div class="chassis-card trouble-card">
+          <div class="trouble-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </div>
+          <h3>RAW DNG Compatibility</h3>
+          <p>RAW mode requires primary back sensor hardware support:</p>
+          <ol class="trouble-steps">
+            <li>Ensure you are using the primary wide rear lens (0.5x ultra-wide and telephoto lenses may not support RAW output on some phone models).</li>
+            <li>Ensure you have NeoFilm Pro unlocked (RAW capture is a Pro feature).</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- Subscriptions & Store Management Section -->
+    <section class="subscriptions-mgmt-section" id="subscriptions">
+      <div class="chassis-card sub-mgmt-card">
+        <span class="badge-mono badge-accent">BILLING &amp; RESTORE</span>
+        <h2>Official Store Links &amp; Subscription Help</h2>
+        <p>
+          Because Apple and Google handle all billing transactions directly, subscription status and refunds are managed through their official customer portals:
+        </p>
+
+        <div class="store-links-grid">
+          <div class="store-link-box">
+            <h4>Apple (iOS) Account Services</h4>
+            <ul class="store-portal-links">
+              <li><a href="https://support.apple.com/HT202039" target="_blank" rel="noopener noreferrer">Manage or Cancel Apple Subscriptions</a></li>
+              <li><a href="https://reportaproblem.apple.com/" target="_blank" rel="noopener noreferrer">Request a Refund from Apple</a></li>
+              <li><a href="https://support.apple.com/billing" target="_blank" rel="noopener noreferrer">Apple Billing &amp; Payment Support</a></li>
+            </ul>
+          </div>
+
+          <div class="store-link-box">
+            <h4>Google Play (Android) Account Services</h4>
+            <ul class="store-portal-links">
+              <li><a href="https://play.google.com/store/account/subscriptions" target="_blank" rel="noopener noreferrer">Manage or Cancel Google Play Subscriptions</a></li>
+              <li><a href="https://support.google.com/googleplay/answer/2479637" target="_blank" rel="noopener noreferrer">Request a Refund from Google Play</a></li>
+              <li><a href="https://support.google.com/googleplay/topic/3364260" target="_blank" rel="noopener noreferrer">Google Play Payment &amp; Gift Cards Support</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visible FAQ Section -->
+    <section class="support-faq-wrapper">
+      <FaqAccordion
+        title="Comprehensive Support FAQ"
+        subtitle="Detailed answers regarding purchases, photo storage, recipe sharing, and platform features."
+        items={supportFaqList}
+      />
+    </section>
+
+    <!-- Bottom Legal Navigation Links -->
+    <div class="support-legal-nav text-center">
+      <p>Looking for legal documentation?</p>
+      <div class="legal-btn-links">
+        <a href="/privacy/" class="btn-secondary">Read Privacy Policy</a>
+        <a href="/terms/" class="btn-secondary">Read Terms of Use</a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .support-page-header {
+    padding: 72px 0 48px 0;
+    border-bottom: 1px solid var(--color-seam);
+    margin-bottom: 64px;
+    background-image: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255, 85, 0, 0.05), transparent 70%);
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .page-h1 {
+    font-size: clamp(2.2rem, 3.8vw, 3.25rem);
+    margin-top: 14px;
+    margin-bottom: 16px;
+  }
+
+  .page-lead {
+    font-size: 1.1875rem;
+    color: var(--color-text-secondary);
+    max-width: 760px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Contact Hero */
+  .support-contact-hero {
+    padding: 48px;
+    margin-bottom: 32px;
+  }
+
+  .contact-hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: flex-start;
+  }
+
+  .contact-info-col h2 {
+    font-size: 2rem;
+    margin-top: 14px;
+    margin-bottom: 14px;
+  }
+
+  .contact-info-col p {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .email-action-row {
+    margin-bottom: 14px;
+  }
+
+  .response-time-note {
+    font-size: 0.8125rem;
+    color: var(--color-text-dim);
+    font-style: italic;
+  }
+
+  .submission-guidelines-col {
+    background-color: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 24px;
+  }
+
+  .submission-guidelines-col h3 {
+    font-size: 1.125rem;
+    margin-bottom: 8px;
+  }
+
+  .guideline-intro {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 14px;
+  }
+
+  .guideline-checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .guideline-checklist li {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    position: relative;
+    padding-left: 18px;
+  }
+
+  .guideline-checklist li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+  }
+
+  .guideline-checklist strong {
+    color: var(--color-text-primary);
+  }
+
+  /* Security Advisory */
+  .security-advisory-card {
+    background-color: #121215;
+    border: 1px solid var(--color-seam);
+    border-radius: var(--radius-md);
+    padding: 20px 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 64px;
+  }
+
+  .advisory-icon {
+    color: var(--color-accent);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .advisory-text h4 {
+    font-size: 0.9375rem;
+    margin-bottom: 4px;
+  }
+
+  .advisory-text p {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Troubleshooting Grid */
+  .troubleshooting-section {
+    padding-bottom: 80px;
+    border-bottom: 1px solid var(--color-seam);
+  }
+
+  .section-intro {
+    max-width: 720px;
+    margin: 0 auto 48px auto;
+  }
+
+  .section-intro h2 {
+    font-size: 2.25rem;
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+
+  .section-intro p {
+    font-size: 1.0625rem;
+    color: var(--color-text-secondary);
+  }
+
+  .trouble-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .trouble-card {
+    padding: 28px;
+  }
+
+  .trouble-icon {
+    color: var(--color-accent);
+    margin-bottom: 14px;
+  }
+
+  .trouble-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+
+  .trouble-card p {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 14px;
+  }
+
+  .trouble-steps {
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .trouble-steps li {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+
+  .trouble-steps strong {
+    color: var(--color-text-primary);
+  }
+
+  /* Subscription Management */
+  .subscriptions-mgmt-section {
+    padding: 64px 0;
+    border-bottom: 1px solid var(--color-seam);
+  }
+
+  .sub-mgmt-card {
+    padding: 40px;
+  }
+
+  .sub-mgmt-card h2 {
+    font-size: 2rem;
+    margin-top: 12px;
+    margin-bottom: 14px;
+  }
+
+  .sub-mgmt-card p {
+    font-size: 1.0625rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 28px;
+  }
+
+  .store-links-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+
+  .store-link-box {
+    background-color: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 24px;
+  }
+
+  .store-link-box h4 {
+    font-size: 1.0625rem;
+    margin-bottom: 14px;
+    color: var(--color-text-primary);
+  }
+
+  .store-portal-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .store-portal-links a {
+    color: var(--color-accent);
+    font-size: 0.9375rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color var(--transition-fast);
+  }
+
+  .store-portal-links a:hover {
+    color: var(--color-accent-hover);
+  }
+
+  /* Legal links */
+  .support-legal-nav {
+    padding: 48px 0 80px 0;
+  }
+
+  .support-legal-nav p {
+    font-size: 1.0625rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 16px;
+  }
+
+  .legal-btn-links {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  @media (max-width: 960px) {
+    .contact-hero-grid {
+      grid-template-columns: 1fr;
+    }
+    .trouble-grid {
+      grid-template-columns: 1fr;
+    }
+    .store-links-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .support-contact-hero {
+      padding: 28px 20px;
+    }
+    .sub-mgmt-card {
+      padding: 28px 20px;
+    }
+  }
+</style>

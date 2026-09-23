@@ -1,0 +1,543 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StoreBadgeButtons from '../components/StoreBadgeButtons.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Darkroom', url: '/darkroom/' },
+];
+---
+
+<BaseLayout
+  title="RAW Photo Editor & Mobile Film Darkroom – NeoFilm"
+  description="Discover the NeoFilm Mobile Darkroom: non-destructive RAW DNG editing, film stock swapping, crop and straighten wheels, film borders, contact sheets, and batch export."
+  canonicalPath="/darkroom/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="darkroom-page-header">
+    <div class="container text-center">
+      <span class="badge-mono badge-accent">POST-PROCESSING LAB</span>
+      <h1 class="page-h1">RAW Photo Editor &amp; Mobile Film Darkroom</h1>
+      <p class="page-lead">
+        Re-develop your frames with uncompressed latitude. Swap film stocks, fine-tune optical textures, crop and level, apply analog borders, and export complete rolls in seconds.
+      </p>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Section 1: The RAW Sensor Foundation -->
+    <section class="raw-overview-section">
+      <div class="raw-overview-grid">
+        <div class="raw-copy">
+          <span class="badge-mono">SENSOR LATITUDE</span>
+          <h2>Direct Sensor RAW (DNG) Capture</h2>
+          <p>
+            Smartphones typically compress sensor output into processed JPEGs or HEIC files with baked-in sharpening and dynamic range clamping. NeoFilm unlocks direct uncompressed <strong>RAW DNG</strong> capture.
+          </p>
+          <ul class="raw-bullet-list">
+            <li><strong>Direct Bayer / Quad-Bayer Negatives:</strong> Preserve full sensor dynamic range, shadow recovery headroom, and highlight roll-off.</li>
+            <li><strong>Dual Capture Mode:</strong> Save both the processed analog film rendition for instant sharing and the pristine digital negative DNG for deep editing.</li>
+            <li><strong>Non-Destructive Development:</strong> Re-open your RAW capture inside NeoFilm’s studio anytime to re-render using a completely different film stock or custom recipe.</li>
+          </ul>
+          <div class="device-qualification-box">
+            <p><strong>Device Compatibility:</strong> RAW DNG sensor capture is available on supported camera hardware and lens configurations on iOS 17+ and Android 8.0+.</p>
+          </div>
+        </div>
+
+        <div class="raw-visual">
+          <div class="chassis-card raw-badge-card">
+            <div class="raw-card-top">
+              <span class="raw-dng-pill">RAW DNG</span>
+              <span class="raw-bitrate">14-BIT SENSOR DATA</span>
+            </div>
+            <div class="raw-specs-body">
+              <div class="spec-row">
+                <span class="spec-k">Color Space</span>
+                <span class="spec-v">Linear sRGB / Display P3</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-k">Dynamic Range</span>
+                <span class="spec-v">Unclamped Sensor Maximum</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-k">Noise Reduction</span>
+                <span class="spec-v">Zero Smearing Algorithms</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-k">Sharpening</span>
+                <span class="spec-v">Organic / Grain-Driven</span>
+              </div>
+            </div>
+            <p class="raw-card-footer-text">Pure sensor negative developed through custom film-grade color transforms.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Non-Destructive Darkroom Reprocessing -->
+    <section class="reprocess-section">
+      <div class="section-intro text-center">
+        <span class="badge-mono badge-accent">STUDIO LAB WORKFLOW</span>
+        <h2>Non-Destructive Reprocessing Lab</h2>
+        <p>Your creative decisions remain flexible long after you shoot. Transform any frame with five core darkroom modules.</p>
+      </div>
+
+      <div class="modules-grid">
+        <!-- Module 1 -->
+        <div class="chassis-card module-card">
+          <div class="module-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+          </div>
+          <h3>Stock Swapping</h3>
+          <p>Instantly switch between any of the 30+ film profiles or your custom user recipes with real-time GPU preview.</p>
+        </div>
+
+        <!-- Module 2 -->
+        <div class="chassis-card module-card">
+          <div class="module-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
+            </svg>
+          </div>
+          <h3>Straighten &amp; Angle Dial</h3>
+          <p>Micro-adjust frame tilt with a precision rotary straighten wheel accurate to 0.1° without pixel distortion.</p>
+        </div>
+
+        <!-- Module 3 -->
+        <div class="chassis-card module-card">
+          <div class="module-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 2v14a2 2 0 0 0 2 2h14"></path>
+              <path d="M18 22V8a2 2 0 0 0-2-2H2"></path>
+            </svg>
+          </div>
+          <h3>Aspect Ratio Framing</h3>
+          <p>Crop freely or lock to classic film ratios: 1:1 square, 4:5 portrait, 3:2 standard 35mm, or 16:9 cinematic.</p>
+        </div>
+
+        <!-- Module 4 -->
+        <div class="chassis-card module-card">
+          <div class="module-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <rect x="7" y="7" width="10" height="10"></rect>
+            </svg>
+          </div>
+          <h3>Film Frame Borders</h3>
+          <p>Wrap your photo with authentic film stock border overlays, realistic sprocket holes, or clean minimalist passe-partout borders.</p>
+        </div>
+
+        <!-- Module 5 -->
+        <div class="chassis-card module-card">
+          <div class="module-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          </div>
+          <h3>Amber Date &amp; Location Stamps</h3>
+          <p>Imprint vintage 80s/90s dot-matrix amber date stamps, custom text, or optional reverse-geocoded city stamps into frame borders.</p>
+        </div>
+
+        <!-- Module 6 -->
+        <div class="chassis-card module-card">
+          <div class="module-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="21 8 21 21 3 21 3 8"></polyline>
+              <line x1="1" y1="3" x2="23" y2="3"></line>
+              <path d="M10 12h4"></path>
+            </svg>
+          </div>
+          <h3>Film-Roll Organization</h3>
+          <p>Manage shots in authentic 36-exposure film rolls. View canisters, track exposure numbers, and maintain thematic albums.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Contact Sheets & Batch Export -->
+    <section class="export-workflow-section">
+      <div class="export-grid">
+        <div class="export-copy">
+          <span class="badge-mono badge-accent">DEVELOPMENT FINISH</span>
+          <h2>Contact Sheets &amp; Batch Export</h2>
+          <p>
+            Just like an analog photographer inspecting developed negatives on a light table, NeoFilm enables instant contact-sheet generation and batch export workflows.
+          </p>
+
+          <div class="export-detail-blocks">
+            <div class="export-block">
+              <h4>Multi-Frame Contact Sheets</h4>
+              <p>Compile entire film rolls into high-resolution contact sheets with frame numbers, date stamps, and film stock metadata. Perfect for editorial overviews and portfolio presentation.</p>
+            </div>
+            <div class="export-block">
+              <h4>Unlimited Batch Export</h4>
+              <p>Export individual frames or entire 36-shot rolls simultaneously at native sensor resolution. Zero watermarks, zero quality throttling, and zero subscription lock-in.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="export-visual">
+          <div class="chassis-card contact-sheet-mockup">
+            <div class="cs-header">
+              <span class="cs-title">NEOFILM CONTACT SHEET · ROLL #04</span>
+              <span class="cs-stock">K-PORTRA 400</span>
+            </div>
+            <div class="cs-thumbnails-grid">
+              <div class="cs-thumb"><span class="cs-frame-num">01A</span></div>
+              <div class="cs-thumb"><span class="cs-frame-num">02A</span></div>
+              <div class="cs-thumb"><span class="cs-frame-num">03A</span></div>
+              <div class="cs-thumb"><span class="cs-frame-num">04A</span></div>
+              <div class="cs-thumb"><span class="cs-frame-num">05A</span></div>
+              <div class="cs-thumb"><span class="cs-frame-num">06A</span></div>
+            </div>
+            <div class="cs-footer">
+              <span>DEVELOPED 100% ON-DEVICE</span>
+              <span>35MM FILM CANISTER SIMULATION</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Store Badges -->
+    <div class="darkroom-bottom-cta">
+      <h2>Develop Your Vision in the Mobile Darkroom</h2>
+      <p>Download NeoFilm today on iPhone or Android and take complete control over your analog workflow.</p>
+      <StoreBadgeButtons size="normal" alignment="center" />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .darkroom-page-header {
+    padding: 72px 0 48px 0;
+    border-bottom: 1px solid var(--color-seam);
+    margin-bottom: 64px;
+    background-image: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255, 85, 0, 0.05), transparent 70%);
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .page-h1 {
+    font-size: clamp(2.2rem, 3.8vw, 3.25rem);
+    margin-top: 14px;
+    margin-bottom: 16px;
+  }
+
+  .page-lead {
+    font-size: 1.1875rem;
+    color: var(--color-text-secondary);
+    max-width: 760px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* RAW Overview */
+  .raw-overview-section {
+    padding-bottom: 80px;
+    border-bottom: 1px solid var(--color-seam);
+  }
+
+  .raw-overview-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .raw-copy h2 {
+    font-size: clamp(1.8rem, 2.8vw, 2.5rem);
+    margin-top: 14px;
+    margin-bottom: 16px;
+  }
+
+  .raw-copy p {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+
+  .raw-bullet-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .raw-bullet-list li {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.55;
+    position: relative;
+    padding-left: 20px;
+  }
+
+  .raw-bullet-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+  }
+
+  .raw-bullet-list strong {
+    color: var(--color-text-primary);
+  }
+
+  .device-qualification-box {
+    background-color: var(--color-surface-chassis);
+    border-left: 3px solid var(--color-accent);
+    padding: 12px 16px;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  }
+
+  .device-qualification-box p {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  /* RAW Card */
+  .raw-badge-card {
+    padding: 36px 30px;
+  }
+
+  .raw-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color-seam);
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+  }
+
+  .raw-dng-pill {
+    background-color: rgba(48, 209, 88, 0.14);
+    color: var(--color-success);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+  }
+
+  .raw-bitrate {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .raw-specs-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .spec-k {
+    color: var(--color-text-muted);
+  }
+
+  .spec-v {
+    font-family: var(--font-mono);
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .raw-card-footer-text {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+    margin: 0;
+  }
+
+  /* Modules Section */
+  .reprocess-section {
+    padding: 80px 0;
+    border-bottom: 1px solid var(--color-seam);
+  }
+
+  .section-intro {
+    max-width: 720px;
+    margin: 0 auto 48px auto;
+  }
+
+  .section-intro h2 {
+    font-size: 2.25rem;
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+
+  .section-intro p {
+    font-size: 1.0625rem;
+    color: var(--color-text-secondary);
+  }
+
+  .modules-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .module-card {
+    padding: 28px;
+  }
+
+  .module-icon {
+    color: var(--color-accent);
+    margin-bottom: 14px;
+  }
+
+  .module-card h3 {
+    font-size: 1.1875rem;
+    margin-bottom: 8px;
+  }
+
+  .module-card p {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.55;
+  }
+
+  /* Export Section */
+  .export-workflow-section {
+    padding: 80px 0;
+    border-bottom: 1px solid var(--color-seam);
+  }
+
+  .export-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .export-copy h2 {
+    font-size: 2.25rem;
+    margin-top: 12px;
+    margin-bottom: 16px;
+  }
+
+  .export-copy p {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .export-detail-blocks {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .export-block h4 {
+    font-size: 1.125rem;
+    margin-bottom: 6px;
+  }
+
+  .export-block p {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Contact Sheet Mockup */
+  .contact-sheet-mockup {
+    padding: 28px;
+    background-color: #0b0b0d;
+  }
+
+  .cs-header {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-accent);
+    border-bottom: 1px solid var(--color-seam);
+    padding-bottom: 10px;
+    margin-bottom: 16px;
+  }
+
+  .cs-thumbnails-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .cs-thumb {
+    aspect-ratio: 3 / 2;
+    background-color: #1a1a1f;
+    border: 1px solid var(--color-seam);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: flex-end;
+    padding: 4px;
+  }
+
+  .cs-frame-num {
+    font-family: var(--font-mono);
+    font-size: 0.5625rem;
+    color: #ff9900;
+  }
+
+  .cs-footer {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    color: var(--color-text-dim);
+  }
+
+  /* Bottom CTA */
+  .darkroom-bottom-cta {
+    padding: 60px 0 80px 0;
+    text-align: center;
+  }
+
+  .darkroom-bottom-cta h2 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+
+  .darkroom-bottom-cta p {
+    color: var(--color-text-secondary);
+    margin-bottom: 28px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (max-width: 960px) {
+    .raw-overview-grid {
+      grid-template-columns: 1fr;
+    }
+    .modules-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .export-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .modules-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,177 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { siteConfig } from '../config/site';
+---
+
+<LegalLayout
+  title="Privacy Policy – NeoFilm Vintage Film Camera"
+  documentTitle="Privacy Policy"
+  description="Official NeoFilm Privacy Policy for iOS and Android. Comprehensive audit of on-device image processing, camera permissions, in-app purchases, and diagnostics."
+  canonicalPath="/privacy/"
+  effectiveDate={siteConfig.legal.privacyEffectiveDate}
+  lastUpdated={siteConfig.legal.lastUpdated}
+>
+  <div class="callout-notice">
+    <strong>Privacy Summary:</strong> NeoFilm is designed with a strict on-device architecture. Your photos, RAW DNG files, camera streams, and custom film recipes are processed <strong>100% locally on your smartphone</strong>. We do not operate photo-hosting servers, we do not upload your images, and we do not sell or monetize personal data.
+  </div>
+
+  <h2>1. Introduction &amp; Operator Identity</h2>
+  <p>
+    This Privacy Policy governs the mobile applications known as <strong>NeoFilm - Vintage Film Camera</strong> (including iOS application package <code>com.zerodev.neofilm</code> and Android application package <code>com.zerodev.neofilm</code>), collectively referred to as "NeoFilm", "the App", "we", "us", or "our".
+  </p>
+  <p>
+    The data controller and publisher responsible for the NeoFilm applications is <strong>SimpelKode / ZeroDev</strong> (represented by Ahmad Sufyan). For any privacy concerns, data subject requests, or regulatory inquiries, contact us directly at <a href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a>.
+  </p>
+
+  <h2>2. 100% On-Device Photo &amp; Image Processing</h2>
+  <p>
+    The core philosophy of NeoFilm is complete photographic privacy:
+  </p>
+  <ul>
+    <li>
+      <strong>Zero Image Uploads:</strong> When you photograph with NeoFilm, apply film stock simulations, develop RAW DNG negatives, or export photos, all color transformations, grain rendering, and optical halation kernels run entirely on your device’s local graphics processor (Apple MetalKit and CoreImage on iOS; OpenGL ES and CameraX on Android).
+    </li>
+    <li>
+      <strong>No Cloud Storage:</strong> We do not operate cloud servers that receive, process, store, or inspect your pictures or live camera feeds.
+    </li>
+    <li>
+      <strong>Local Darkroom Studio:</strong> Re-development, cropping, straightening, border application, and contact-sheet synthesis occur entirely within the local sandbox of the application.
+    </li>
+  </ul>
+
+  <h2>3. Device Permissions &amp; Data Access</h2>
+  <p>
+    To operate as a camera and darkroom, NeoFilm requests access to specific device capabilities. Each permission is limited strictly to its stated operational purpose:
+  </p>
+
+  <h3>A. Camera Permission (<code>NSCameraUsageDescription</code> / <code>android.permission.CAMERA</code>)</h3>
+  <p>
+    <strong>Purpose:</strong> Required to display the real-time optical viewfinder, adjust manual exposure (ISO and shutter speed), perform manual focus with live peaking, and capture photographs.<br />
+    <strong>Behavior:</strong> Camera sensor buffers are streamed directly to on-device memory for real-time shader rendering. Video buffers are never transmitted over the internet.
+  </p>
+
+  <h3>B. Photo Library &amp; Storage Access (<code>NSPhotoLibraryUsageDescription</code> / <code>NSPhotoLibraryAddUsageDescription</code> / Scoped Storage)</h3>
+  <p>
+    <strong>Purpose:</strong> Required to save your final processed photos, RAW DNG digital negatives, and exported contact sheets to your device gallery, and to allow you to import existing images into the Mobile Darkroom for reprocessing.<br />
+    <strong>Behavior:</strong> On iOS, NeoFilm adds photos to your Photos library and creates a designated "NeoFilm" album. On Android (Android 10+), NeoFilm uses system Scoped Storage (<code>MediaStore.Images</code>), requiring zero broad storage permissions. For legacy Android 8 and 9 devices (API 26–28), <code>WRITE_EXTERNAL_STORAGE</code> is requested solely to write image files to the shared DCIM directory.
+  </p>
+
+  <h3>C. Location Permission (<code>NSLocationWhenInUseUsageDescription</code> / <code>ACCESS_FINE_LOCATION</code> / <code>ACCESS_COARSE_LOCATION</code>)</h3>
+  <p>
+    <strong>Purpose:</strong> Entirely optional. Used exclusively to look up the approximate city name on-device and optionally stamp it onto your film frame borders, as well as embedding standard geographic coordinates into the photo’s local EXIF metadata.<br />
+    <strong>Behavior:</strong> Reverse geocoding occurs locally using operating-system location services. Geographic coordinates are never transmitted to our servers or third-party marketing services.
+  </p>
+
+  <h3>D. Microphone</h3>
+  <p>
+    <strong>Status:</strong> NeoFilm <strong>does not request microphone access</strong> and does not record audio. Mechanical shutter sounds are synthesized locally using pre-packaged audio files.
+  </p>
+
+  <h2>4. Custom Film Recipes &amp; QR Code Sharing</h2>
+  <p>
+    NeoFilm enables photographers to create, save, and share custom analog recipe settings (color curves, HSL channel shifts, grain intensity, halation bloom, and vignette):
+  </p>
+  <ul>
+    <li>
+      <strong>Local Storage:</strong> Custom recipes are stored locally in your device app data store (SwiftData/UserDefaults on iOS; Jetpack DataStore on Android).
+    </li>
+    <li>
+      <strong>QR Code Generation &amp; Scanning:</strong> When you share a recipe, NeoFilm encodes the parameter values into a visual QR code image. When you scan a recipe, the camera reads the code locally using Apple Vision or Google ML Kit. No external recipe servers or user accounts are involved.
+    </li>
+  </ul>
+
+  <h2>5. In-App Purchases, Subscriptions &amp; Billing</h2>
+  <p>
+    NeoFilm offers optional NeoFilm Pro upgrades (Annual Subscriptions, Monthly Subscriptions, and Lifetime non-consumable unlocks). All transactions are processed through official mobile storefront billing systems:
+  </p>
+  <ul>
+    <li>
+      <strong>Apple App Store (StoreKit):</strong> On iOS devices, purchases are processed by Apple Inc. under Apple’s standard terms.
+    </li>
+    <li>
+      <strong>Google Play In-App Billing:</strong> On Android devices, purchases are processed by Google LLC under Google Play terms.
+    </li>
+    <li>
+      <strong>Payment Card Information:</strong> We never collect, see, or store your credit card, debit card, or bank account details. All financial transactions are secured by Apple or Google.
+    </li>
+    <li>
+      <strong>RevenueCat (Receipt &amp; Entitlement Management):</strong> We use RevenueCat (RevenueCat, Inc.) to validate subscription status, verify promotional trial eligibility, and facilitate cross-device "Restore Purchases" operations. RevenueCat receives an anonymous, randomly generated App User ID and cryptographically signed purchase receipts from Apple or Google. RevenueCat does not receive your name, email address, photos, or location. For more details, consult <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener noreferrer">RevenueCat's Privacy Policy</a>.
+    </li>
+  </ul>
+
+  <h2>6. Diagnostics &amp; Crash Reporting (Android Only)</h2>
+  <p>
+    To maintain stability across thousands of Android device models, the Android version of NeoFilm integrates <strong>Firebase Crashlytics</strong> (provided by Google LLC):
+  </p>
+  <ul>
+    <li>
+      <strong>Information Collected:</strong> In the event of an abnormal application crash, Crashlytics collects anonymous technical diagnostic data including operating system version, device model, memory state, and technical stack traces.
+    </li>
+    <li>
+      <strong>No PII or Photos:</strong> Crash reports contain strictly technical stack information. Photos, camera buffers, location coordinates, and personal user identifiers are never included in crash reports.
+    </li>
+    <li>
+      <strong>iOS Platform Status:</strong> The iOS application contains zero third-party crash reporting SDKs and relies exclusively on Apple’s native, opt-in Crash Diagnostics managed in iOS Settings.
+    </li>
+  </ul>
+
+  <h2>7. Third-Party Analytics, Advertising &amp; Tracking</h2>
+  <div class="callout-notice">
+    <strong>Zero Commercial Trackers:</strong> NeoFilm contains NO advertising networks, NO marketing analytics SDKs (such as Facebook SDK, Google Analytics for Firebase, or AppsFlyer), NO tracking pixels, and NO commercial behavioral data brokers.
+  </div>
+  <p>
+    We do not sell, rent, or trade your personal information or photographs to any third party for monetary or other valuable consideration under California Consumer Privacy Act (CCPA/CPRA) or any other privacy framework.
+  </p>
+
+  <h2>8. Data Retention &amp; User Deletion Rights</h2>
+  <p>
+    Because NeoFilm operates without user accounts and without remote photo databases:
+  </p>
+  <ul>
+    <li>
+      <strong>Photos &amp; Negatives:</strong> Your photographs remain on your device. You can delete individual photos, developed rolls, or RAW DNG files at any time via the NeoFilm Studio or your device Photos app.
+    </li>
+    <li>
+      <strong>Local Settings &amp; Recipes:</strong> Uninstalling the NeoFilm application from your device immediately deletes all locally stored preferences, user presets, and custom recipes.
+    </li>
+    <li>
+      <strong>Purchase Records:</strong> Purchase tokens and subscription receipts are retained by Apple, Google, and RevenueCat in accordance with statutory accounting requirements and store policies.
+    </li>
+    <li>
+      <strong>Rights Requests:</strong> If you have questions regarding data access or deletion requests under GDPR, UK GDPR, or CCPA, contact <a href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a>.
+    </li>
+  </ul>
+
+  <h2>9. Children’s Privacy</h2>
+  <p>
+    NeoFilm does not knowingly collect, solicit, or maintain personal information from children under the age of 13 (or under 16 in the European Economic Area). Because our application does not require registration and processes photos locally, it does not collect identifying personal data from any user. If you believe that a child has provided us with personal information through support correspondence, please contact us at <a href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a> so we can delete the correspondence immediately.
+  </p>
+
+  <h2>10. App Store Privacy &amp; Google Play Data Safety Alignment</h2>
+  <p>
+    This policy is structured to match the disclosures published on our store product pages:
+  </p>
+  <ul>
+    <li>
+      <strong>Apple App Privacy (iOS):</strong> "Data Not Linked to You" — Purchase history and diagnostics managed through RevenueCat and Apple StoreKit. Zero photos or contact information collected.
+    </li>
+    <li>
+      <strong>Google Play Data Safety (Android):</strong> "Data Shared" is limited to anonymous crash diagnostics (Firebase Crashlytics) and anonymous purchase tokens (RevenueCat / Google Play Billing). No photos, videos, location, or personal documents are shared or uploaded.
+    </li>
+  </ul>
+
+  <h2>11. Changes to This Privacy Policy</h2>
+  <p>
+    We may periodically update this Privacy Policy to reflect application updates, regulatory changes, or new platform features. Any modifications will be posted directly to this URL with an updated "Last Updated" timestamp. Material changes affecting data handling will be highlighted in the application update release notes.
+  </p>
+
+  <h2>12. Contact Information</h2>
+  <p>
+    If you have any questions, comments, or concerns regarding this Privacy Policy or our privacy practices, please contact our privacy representative:
+  </p>
+  <ul>
+    <li><strong>Email:</strong> <a href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a></li>
+    <li><strong>Developer / Publisher:</strong> SimpelKode / ZeroDev</li>
+    <li><strong>Official Website:</strong> <a href={siteConfig.url}>{siteConfig.url}</a></li>
+  </ul>
+</LegalLayout>
