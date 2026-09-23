@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PhotoGallery from '../components/PhotoGallery.astro';
 import StoreBadgeButtons from '../components/StoreBadgeButtons.astro';
+import { samplePhotos } from '../data/samplePhotos';
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -11,7 +12,7 @@ const breadcrumbs = [
 
 <BaseLayout
   title="Shot on NeoFilm – Authentic Sample Photo Gallery"
-  description="Browse 26 authentic analog film photographs shot and developed with NeoFilm on iOS and Android. Featuring 35mm film profiles, real optical halation, and darkroom borders."
+  description={`Browse ${samplePhotos.length} authentic analog film photographs shot and developed with NeoFilm on iOS and Android. Featuring 35mm film profiles, real optical halation, and darkroom borders.`}
   canonicalPath="/gallery/"
   breadcrumbs={breadcrumbs}
 >
@@ -29,7 +30,7 @@ const breadcrumbs = [
 
       <div class="header-specs-bar">
         <div class="spec-stat">
-          <span class="stat-number">26</span>
+          <span class="stat-number">{samplePhotos.length}</span>
           <span class="stat-label">Authentic Frames</span>
         </div>
         <div class="spec-divider" aria-hidden="true">/</div>

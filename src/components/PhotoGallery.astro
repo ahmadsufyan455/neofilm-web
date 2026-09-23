@@ -97,7 +97,6 @@ const { showFilters = true } = Astro.props;
         <div class="lightbox-hud-left">
           <span class="hud-live-indicator" aria-hidden="true"></span>
           <span class="hud-stock-label" id="lb-film-stock">PORTRA WARM 400</span>
-          <span class="hud-frame-label" id="lb-frame-num">EXP 01/26</span>
         </div>
 
         <div class="lightbox-hud-right">
@@ -215,7 +214,6 @@ const { showFilters = true } = Astro.props;
 
     const lbImage = document.getElementById('lb-image') as HTMLImageElement | null;
     const lbStock = document.getElementById('lb-film-stock');
-    const lbFrame = document.getElementById('lb-frame-num');
     const lbTitle = document.getElementById('lb-title');
     const lbLocation = document.getElementById('lb-location-text');
     const lbDesc = document.getElementById('lb-description');
@@ -271,7 +269,6 @@ const { showFilters = true } = Astro.props;
       lbImage.alt = photo.alt;
 
       if (lbStock) lbStock.textContent = photo.filmProfile;
-      if (lbFrame) lbFrame.textContent = photo.frameNumber;
       if (lbTitle) lbTitle.textContent = photo.title;
       if (lbLocation) lbLocation.textContent = photo.location;
       if (lbDesc) lbDesc.textContent = photo.description;
@@ -697,11 +694,6 @@ const { showFilters = true } = Astro.props;
     border-radius: var(--radius-sm);
     font-weight: 700;
     letter-spacing: 0.08em;
-  }
-
-  .hud-frame-label {
-    color: #ffaa33;
-    font-weight: 700;
   }
 
   .lightbox-hud-right {
