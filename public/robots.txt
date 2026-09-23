@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://neofilm.app/sitemap-index.xml
+Sitemap: https://neofilm.cam/sitemap-index.xml

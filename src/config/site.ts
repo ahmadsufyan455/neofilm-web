@@ -69,7 +69,7 @@ export const siteConfig: SiteConfig = {
   tagline: 'Analog character. Modern control.',
   description:
     'Capture authentic analog character with handcrafted film profiles, manual RAW controls, custom recipes, and a mobile darkroom for iPhone and Android.',
-  url: 'https://neofilm.app',
+  url: 'https://neofilm.cam',
   supportEmail: 'simpelkode@gmail.com',
   publisher: {
     name: 'NeoFilm',
@@ -106,6 +106,7 @@ export const siteConfig: SiteConfig = {
     { label: 'Features', href: '/features/' },
     { label: 'Film Recipes', href: '/film-recipes/' },
     { label: 'Darkroom', href: '/darkroom/' },
+    { label: 'Gallery', href: '/gallery/' },
     { label: 'Support', href: '/support/' },
   ],
   legal: {

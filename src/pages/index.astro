@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import StoreBadgeButtons from '../components/StoreBadgeButtons.astro';
 import ScreenshotFrame from '../components/ScreenshotFrame.astro';
+import PhotoGallery from '../components/PhotoGallery.astro';
 import ProPricingCard from '../components/ProPricingCard.astro';
 import FaqAccordion, { type FaqItem } from '../components/FaqAccordion.astro';
 import { siteConfig } from '../config/site';
@@ -393,7 +394,31 @@ const homepageFaq: FaqItem[] = [
     </div>
   </section>
 
-  <!-- 6. TACTILE CAMERA EXPERIENCE -->
+  <!-- 6. AUTHENTIC SAMPLE GALLERY -->
+  <section class="section-padding gallery-section" id="gallery">
+    <div class="container">
+      <div class="section-header-centered">
+        <span class="badge-mono badge-accent">SHOT ON NEOFILM</span>
+        <h2 class="section-title">Authentic Sample Photo Gallery</h2>
+        <p class="section-lead">
+          Every photograph below was captured and developed on-device with NeoFilm. No desktop post-processing, no external filters — just authentic spectral color profiles, optical halation, analog grain, and classic darkroom borders.
+        </p>
+      </div>
+
+      <PhotoGallery />
+
+      <div class="section-cta-center" style="margin-top: 40px;">
+        <a href="/gallery/" class="btn-secondary">
+          <span>View High-Res Photo Gallery Page</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. TACTILE CAMERA EXPERIENCE -->
   <section class="section-padding tactile-experience-section">
     <div class="container">
       <div class="tactile-card chassis-card">
@@ -887,7 +912,14 @@ const homepageFaq: FaqItem[] = [
     color: var(--color-text-primary);
   }
 
-  /* 6. Tactile Section */
+  /* 6. Authentic Sample Gallery */
+  .gallery-section {
+    border-top: 1px solid var(--color-seam);
+    border-bottom: 1px solid var(--color-seam);
+    background-color: rgba(14, 14, 18, 0.4);
+  }
+
+  /* 7. Tactile Section */
   .tactile-card {
     padding: 48px;
   }

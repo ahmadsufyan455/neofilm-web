@@ -1,0 +1,207 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PhotoGallery from '../components/PhotoGallery.astro';
+import StoreBadgeButtons from '../components/StoreBadgeButtons.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Gallery', url: '/gallery/' },
+];
+---
+
+<BaseLayout
+  title="Shot on NeoFilm – Authentic Sample Photo Gallery"
+  description="Browse 26 authentic analog film photographs shot and developed with NeoFilm on iOS and Android. Featuring 35mm film profiles, real optical halation, and darkroom borders."
+  canonicalPath="/gallery/"
+  breadcrumbs={breadcrumbs}
+>
+  <!-- Page Header -->
+  <div class="gallery-page-header">
+    <div class="container text-center">
+      <div class="header-pill">
+        <span class="live-dot" aria-hidden="true"></span>
+        <span class="badge-text">SHOT ON NEOFILM</span>
+      </div>
+      <h1 class="page-h1">Authentic Sample Photo Gallery</h1>
+      <p class="page-lead">
+        Explore real photographs captured and developed on-device with NeoFilm. Every frame showcases genuine 35mm film profiles, optical halation, organic grain density, and timeless darkroom borders with zero desktop post-processing.
+      </p>
+
+      <div class="header-specs-bar">
+        <div class="spec-stat">
+          <span class="stat-number">26</span>
+          <span class="stat-label">Authentic Frames</span>
+        </div>
+        <div class="spec-divider" aria-hidden="true">/</div>
+        <div class="spec-stat">
+          <span class="stat-number">100%</span>
+          <span class="stat-label">On-Device Rendering</span>
+        </div>
+        <div class="spec-divider" aria-hidden="true">/</div>
+        <div class="spec-stat">
+          <span class="stat-number">0</span>
+          <span class="stat-label">External Filters</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gallery Main Section -->
+  <main class="container gallery-main-content">
+    <PhotoGallery />
+  </main>
+
+  <!-- Gallery Download CTA -->
+  <section class="gallery-cta-section">
+    <div class="container">
+      <div class="chassis-card cta-card text-center">
+        <span class="badge-mono badge-accent">START CAPTURING</span>
+        <h2 class="cta-title">Create Photographs with Analog Soul</h2>
+        <p class="cta-lead">
+          Download NeoFilm today for iPhone and Android. Capture with handcrafted film stocks, manual exposure wheels, and develop timeless prints in your mobile darkroom.
+        </p>
+        <div class="cta-buttons">
+          <StoreBadgeButtons size="large" alignment="center" />
+        </div>
+        <p class="cta-note">
+          100% On-Device Processing · Zero Trackers · No Cloud Required
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .gallery-page-header {
+    padding-top: 60px;
+    padding-bottom: 40px;
+    text-align: center;
+    border-bottom: 1px solid var(--color-seam);
+  }
+
+  .header-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    background-color: var(--color-accent-subtle);
+    border: 1px solid rgba(255, 85, 0, 0.3);
+    padding: 4px 14px;
+    border-radius: var(--radius-full);
+    margin-bottom: 20px;
+    letter-spacing: 0.1em;
+  }
+
+  .live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    box-shadow: 0 0 8px var(--color-accent);
+  }
+
+  .page-h1 {
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    line-height: 1.15;
+    margin-bottom: 16px;
+    font-weight: 800;
+  }
+
+  .page-lead {
+    max-width: 680px;
+    margin: 0 auto 32px auto;
+    color: var(--color-text-secondary);
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  .header-specs-bar {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    background-color: #121216;
+    border: 1px solid #24242e;
+    padding: 10px 24px;
+    border-radius: var(--radius-full);
+    font-family: var(--font-mono);
+  }
+
+  @media (max-width: 640px) {
+    .header-specs-bar {
+      gap: 12px;
+      padding: 8px 16px;
+    }
+  }
+
+  .spec-stat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .stat-number {
+    color: var(--color-accent);
+    font-weight: 700;
+    font-size: 1rem;
+  }
+
+  .stat-label {
+    color: var(--color-text-dim);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+
+  .spec-divider {
+    color: #383844;
+    font-weight: 300;
+  }
+
+  .gallery-main-content {
+    padding-top: 48px;
+    padding-bottom: 80px;
+  }
+
+  /* CTA Section */
+  .gallery-cta-section {
+    padding-bottom: 80px;
+  }
+
+  .cta-card {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 48px 32px;
+    background: linear-gradient(180deg, #18181e 0%, #101014 100%);
+    border: 1px solid #282834;
+  }
+
+  .cta-title {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    margin-top: 16px;
+    margin-bottom: 12px;
+  }
+
+  .cta-lead {
+    max-width: 580px;
+    margin: 0 auto 28px auto;
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .cta-note {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-dim);
+    letter-spacing: 0.04em;
+    margin: 0;
+  }
+</style>

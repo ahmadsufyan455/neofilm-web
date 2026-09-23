@@ -3,7 +3,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://neofilm.app',
+  site: 'https://neofilm.cam',
   output: 'static',
   build: {
     format: 'directory'

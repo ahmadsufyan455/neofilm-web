@@ -3,9 +3,9 @@
 The official, privacy-first, search-optimized product website for **NeoFilm - Vintage Film Camera** on iOS and Android. Built with Astro, TypeScript, and modern semantic CSS.
 
 This static website serves as the official marketing presence, product showcase, and permanent host for App Store Connect and Google Play Console compliance pages:
-- **Support Center & FAQ**: [`/support/`](https://neofilm.app/support/)
-- **Privacy Policy**: [`/privacy/`](https://neofilm.app/privacy/)
-- **Terms of Use**: [`/terms/`](https://neofilm.app/terms/)
+- **Support Center & FAQ**: [`/support/`](https://neofilm.cam/support/)
+- **Privacy Policy**: [`/privacy/`](https://neofilm.cam/privacy/)
+- **Terms of Use**: [`/terms/`](https://neofilm.cam/terms/)
 
 ---
 
@@ -64,7 +64,7 @@ export const siteConfig = {
   name: 'NeoFilm',
   formalName: 'NeoFilm - Vintage Film Camera',
   tagline: 'Analog character. Modern control.',
-  url: 'https://neofilm.app',
+  url: 'https://neofilm.cam',
   supportEmail: 'simpelkode@gmail.com',
   publisher: {
     name: 'NeoFilm',
@@ -203,7 +203,7 @@ Deploy the `dist/` directory directly or use the official GitHub Actions Astro w
 
 When submitting NeoFilm to App Store Connect and Google Play Console, use these permanent URLs:
 
-- **Marketing URL**: `https://neofilm.app`
-- **Support URL**: `https://neofilm.app/support/`
-- **Privacy Policy URL**: `https://neofilm.app/privacy/`
-- **Terms of Use URL**: `https://neofilm.app/terms/`
+- **Marketing URL**: `https://neofilm.cam`
+- **Support URL**: `https://neofilm.cam/support/`
+- **Privacy Policy URL**: `https://neofilm.cam/privacy/`
+- **Terms of Use URL**: `https://neofilm.cam/terms/`

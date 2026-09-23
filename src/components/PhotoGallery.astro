@@ -1,0 +1,898 @@
+---
+import { samplePhotos, categoryFilters } from '../data/samplePhotos';
+
+export interface Props {
+  initialLimit?: number;
+  showFilters?: boolean;
+}
+
+const { showFilters = true } = Astro.props;
+---
+
+<div class="photo-gallery-wrapper" id="neofilm-gallery-root">
+  <!-- Category Filter Pills -->
+  {showFilters && (
+    <nav class="gallery-filters" aria-label="Photo categories">
+      <div class="filters-scroll-container">
+        {categoryFilters.map((filter, index) => (
+          <button
+            type="button"
+            class:list={['filter-pill', { active: index === 0 }]}
+            data-category={filter.id}
+            aria-pressed={index === 0 ? 'true' : 'false'}
+          >
+            <span class="filter-dot" aria-hidden="true"></span>
+            <span class="filter-label">{filter.label}</span>
+            <span class="filter-count">({filter.count})</span>
+          </button>
+        ))}
+      </div>
+    </nav>
+  )}
+
+  <!-- Gallery Masonry Grid -->
+  <div class="gallery-masonry" id="gallery-masonry" role="region" aria-label="Sample photo grid">
+    {samplePhotos.map((photo, index) => (
+      <article
+        class="gallery-item"
+        data-category={photo.category}
+        data-photo-index={index}
+      >
+        <button
+          type="button"
+          class="gallery-card"
+          data-photo-id={photo.id}
+          data-index={index}
+          aria-label={`View photo: ${photo.title} (${photo.filmProfile})`}
+        >
+          <!-- Photo Media Container -->
+          <div class="card-media">
+            <img
+              src={photo.src}
+              alt={photo.alt}
+              width={photo.width}
+              height={photo.height}
+              loading="lazy"
+              decoding="async"
+              class="photo-img"
+            />
+
+            <!-- Hover Information HUD -->
+            <div class="card-hover-hud" aria-hidden="true">
+              <div class="hud-bottom">
+                <h4 class="hud-title">{photo.title}</h4>
+                <p class="hud-location">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  <span>{photo.location}</span>
+                </p>
+                <div class="hud-specs">
+                  <span>{photo.shutter}</span>
+                  <span class="sep">·</span>
+                  <span>{photo.aperture}</span>
+                  <span class="sep">·</span>
+                  <span>{photo.iso}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </button>
+      </article>
+    ))}
+  </div>
+
+  <!-- Interactive Lightbox Modal -->
+  <dialog
+    id="gallery-lightbox"
+    class="gallery-lightbox"
+    aria-label="High-resolution photo viewer"
+  >
+    <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+
+    <div class="lightbox-shell">
+      <!-- Lightbox Header HUD -->
+      <div class="lightbox-header">
+        <div class="lightbox-hud-left">
+          <span class="hud-live-indicator" aria-hidden="true"></span>
+          <span class="hud-stock-label" id="lb-film-stock">PORTRA WARM 400</span>
+          <span class="hud-frame-label" id="lb-frame-num">EXP 01/26</span>
+        </div>
+
+        <div class="lightbox-hud-right">
+          <span class="hud-brand-tag">SHOT ON NEOFILM</span>
+          <button
+            type="button"
+            class="lightbox-close-btn"
+            id="lightbox-close-btn"
+            aria-label="Close photo viewer (Escape)"
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Stage with Image & Controls -->
+      <div class="lightbox-stage">
+        <!-- Prev Button -->
+        <button
+          type="button"
+          class="lightbox-nav-btn prev"
+          id="lb-btn-prev"
+          aria-label="Previous photo (Left arrow)"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+
+        <!-- Image Container -->
+        <div class="lightbox-image-container" id="lightbox-image-container">
+          <img
+            id="lb-image"
+            src=""
+            alt=""
+            class="lightbox-main-image"
+          />
+        </div>
+
+        <!-- Next Button -->
+        <button
+          type="button"
+          class="lightbox-nav-btn next"
+          id="lb-btn-next"
+          aria-label="Next photo (Right arrow)"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Lightbox Footer Info -->
+      <div class="lightbox-footer">
+        <div class="footer-title-group">
+          <h3 class="lb-title" id="lb-title">Photo Title</h3>
+          <p class="lb-location" id="lb-location">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span id="lb-location-text">Location</span>
+          </p>
+        </div>
+
+        <p class="lb-description" id="lb-description">Photo description text.</p>
+
+        <div class="footer-meta-pills">
+          <span class="meta-pill" id="lb-spec-shutter">1/1000s</span>
+          <span class="meta-pill" id="lb-spec-aperture">f/1.8</span>
+          <span class="meta-pill" id="lb-spec-iso">ISO 100</span>
+          <span class="meta-pill" id="lb-spec-ratio">3:4</span>
+          <span class="meta-pill format-pill">RAW DNG / DARKROOM</span>
+        </div>
+      </div>
+    </div>
+  </dialog>
+</div>
+
+<!-- Embedded Catalog JSON for Client Lightbox Engine -->
+<script is:inline id="neofilm-gallery-data" type="application/json" set:html={JSON.stringify(samplePhotos)} />
+
+<script>
+  import type { SamplePhoto } from '../data/samplePhotos';
+
+  // Client-side Filter & Lightbox Controller
+  function initGallery() {
+    const rawData = document.getElementById('neofilm-gallery-data');
+    if (!rawData) return;
+
+    let photos: SamplePhoto[] = [];
+    try {
+      photos = JSON.parse(rawData.textContent || '[]');
+    } catch (e) {
+      console.error('Failed to parse gallery data', e);
+      return;
+    }
+
+    let currentIndex = 0;
+    let activeCategory = 'all';
+
+    // Elements
+    const filterButtons = document.querySelectorAll<HTMLButtonElement>('.filter-pill');
+    const galleryItems = document.querySelectorAll<HTMLElement>('.gallery-item');
+    const cardButtons = document.querySelectorAll<HTMLButtonElement>('.gallery-card');
+
+    const dialog = document.getElementById('gallery-lightbox') as HTMLDialogElement | null;
+    const backdrop = document.getElementById('lightbox-backdrop');
+    const closeBtn = document.getElementById('lightbox-close-btn');
+    const prevBtn = document.getElementById('lb-btn-prev');
+    const nextBtn = document.getElementById('lb-btn-next');
+
+    const lbImage = document.getElementById('lb-image') as HTMLImageElement | null;
+    const lbStock = document.getElementById('lb-film-stock');
+    const lbFrame = document.getElementById('lb-frame-num');
+    const lbTitle = document.getElementById('lb-title');
+    const lbLocation = document.getElementById('lb-location-text');
+    const lbDesc = document.getElementById('lb-description');
+    const lbShutter = document.getElementById('lb-spec-shutter');
+    const lbAperture = document.getElementById('lb-spec-aperture');
+    const lbIso = document.getElementById('lb-spec-iso');
+    const lbRatio = document.getElementById('lb-spec-ratio');
+
+    let lastFocusedElement: HTMLElement | null = null;
+
+    // Filter Logic
+    filterButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const category = btn.dataset.category || 'all';
+        activeCategory = category;
+
+        filterButtons.forEach((b) => {
+          const isActive = b === btn;
+          b.classList.toggle('active', isActive);
+          b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+
+        galleryItems.forEach((item) => {
+          const itemCat = item.dataset.category;
+          if (category === 'all' || itemCat === category) {
+            item.style.display = '';
+            item.classList.remove('is-hidden');
+          } else {
+            item.style.display = 'none';
+            item.classList.add('is-hidden');
+          }
+        });
+      });
+    });
+
+    // Lightbox Logic
+    function getVisibleIndices(): number[] {
+      const visible: number[] = [];
+      photos.forEach((photo, idx) => {
+        if (activeCategory === 'all' || photo.category === activeCategory) {
+          visible.push(idx);
+        }
+      });
+      return visible;
+    }
+
+    function renderPhoto(index: number) {
+      if (!photos[index] || !lbImage) return;
+      currentIndex = index;
+      const photo = photos[index];
+
+      lbImage.src = photo.src;
+      lbImage.alt = photo.alt;
+
+      if (lbStock) lbStock.textContent = photo.filmProfile;
+      if (lbFrame) lbFrame.textContent = photo.frameNumber;
+      if (lbTitle) lbTitle.textContent = photo.title;
+      if (lbLocation) lbLocation.textContent = photo.location;
+      if (lbDesc) lbDesc.textContent = photo.description;
+      if (lbShutter) lbShutter.textContent = photo.shutter;
+      if (lbAperture) lbAperture.textContent = photo.aperture;
+      if (lbIso) lbIso.textContent = photo.iso;
+      if (lbRatio) lbRatio.textContent = photo.aspectRatio;
+    }
+
+    function openLightbox(index: number) {
+      if (!dialog) return;
+      lastFocusedElement = document.activeElement as HTMLElement | null;
+      renderPhoto(index);
+
+      if (typeof dialog.showModal === 'function') {
+        dialog.showModal();
+      } else {
+        dialog.setAttribute('open', '');
+      }
+      document.body.style.overflow = 'hidden';
+      if (closeBtn) closeBtn.focus();
+    }
+
+    function closeLightbox() {
+      if (!dialog) return;
+      if (typeof dialog.close === 'function') {
+        dialog.close();
+      } else {
+        dialog.removeAttribute('open');
+      }
+      document.body.style.overflow = '';
+      if (lastFocusedElement) {
+        lastFocusedElement.focus();
+      }
+    }
+
+    function stepPhoto(direction: 'next' | 'prev') {
+      const visible = getVisibleIndices();
+      if (visible.length === 0) return;
+
+      const currentPos = visible.indexOf(currentIndex);
+      let newPos = direction === 'next' ? currentPos + 1 : currentPos - 1;
+
+      if (newPos >= visible.length) newPos = 0;
+      if (newPos < 0) newPos = visible.length - 1;
+
+      renderPhoto(visible[newPos]);
+    }
+
+    // Card click events
+    cardButtons.forEach((card) => {
+      card.addEventListener('click', () => {
+        const index = parseInt(card.dataset.index || '0', 10);
+        openLightbox(index);
+      });
+    });
+
+    // Lightbox Controls
+    if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+    if (backdrop) backdrop.addEventListener('click', closeLightbox);
+    if (prevBtn) prevBtn.addEventListener('click', () => stepPhoto('prev'));
+    if (nextBtn) nextBtn.addEventListener('click', () => stepPhoto('next'));
+
+    // Keyboard controls
+    document.addEventListener('keydown', (e) => {
+      if (!dialog || !dialog.open) return;
+
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeLightbox();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        stepPhoto('prev');
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        stepPhoto('next');
+      }
+    });
+
+    // Touch swipe gestures on mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const stage = document.querySelector('.lightbox-stage');
+
+    if (stage) {
+      stage.addEventListener('touchstart', (e) => {
+        touchStartX = (e as TouchEvent).changedTouches[0].screenX;
+      }, { passive: true });
+
+      stage.addEventListener('touchend', (e) => {
+        touchEndX = (e as TouchEvent).changedTouches[0].screenX;
+        handleSwipe();
+      }, { passive: true });
+    }
+
+    function handleSwipe() {
+      const diff = touchEndX - touchStartX;
+      if (Math.abs(diff) > 45) {
+        if (diff > 0) {
+          stepPhoto('prev');
+        } else {
+          stepPhoto('next');
+        }
+      }
+    }
+  }
+
+  // Initialize on DOM load and Astro page swaps
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGallery);
+  } else {
+    initGallery();
+  }
+</script>
+
+<style>
+  .photo-gallery-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  /* 1. Category Filter Pills */
+  .gallery-filters {
+    margin-bottom: 36px;
+    width: 100%;
+  }
+
+  .filters-scroll-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 4px;
+  }
+
+  @media (max-width: 768px) {
+    .filters-scroll-container {
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 12px;
+      scrollbar-width: none;
+    }
+    .filters-scroll-container::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .filter-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #151518;
+    background: linear-gradient(180deg, #1b1b20 0%, #121215 100%);
+    border: 1px solid #2a2a32;
+    color: var(--color-text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  .filter-pill:hover {
+    color: var(--color-text-primary);
+    border-color: #3f3f4d;
+    background: linear-gradient(180deg, #24242c 0%, #16161a 100%);
+    transform: translateY(-1px);
+  }
+
+  .filter-pill.active {
+    background-color: var(--color-accent-subtle);
+    background: linear-gradient(180deg, rgba(255, 85, 0, 0.18) 0%, rgba(255, 85, 0, 0.08) 100%);
+    border-color: var(--color-accent);
+    color: #ffffff;
+    box-shadow: 0 0 16px rgba(255, 85, 0, 0.25);
+  }
+
+  .filter-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #4a4a58;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .filter-pill.active .filter-dot {
+    background-color: var(--color-accent);
+    box-shadow: 0 0 6px var(--color-accent);
+  }
+
+  .filter-count {
+    color: var(--color-text-dim);
+    font-size: 0.75rem;
+  }
+
+  .filter-pill.active .filter-count {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  /* 2. Masonry Multi-Column Grid */
+  .gallery-masonry {
+    column-count: 3;
+    column-gap: 24px;
+    width: 100%;
+  }
+
+  @media (max-width: 1024px) {
+    .gallery-masonry {
+      column-count: 2;
+      column-gap: 20px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .gallery-masonry {
+      column-count: 1;
+      column-gap: 16px;
+    }
+  }
+
+  .gallery-item {
+    break-inside: avoid;
+    margin-bottom: 24px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .gallery-item.is-hidden {
+    display: none;
+  }
+
+  .gallery-card {
+    display: block;
+    width: 100%;
+    background-color: #121215;
+    background: linear-gradient(180deg, #18181d 0%, #101013 100%);
+    border: 1px solid #26262e;
+    border-radius: var(--radius-lg);
+    padding: 8px;
+    cursor: pointer;
+    text-align: left;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.25s ease,
+                box-shadow 0.25s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gallery-card:hover,
+  .gallery-card:focus-visible {
+    transform: translateY(-4px);
+    border-color: #4a4a58;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7),
+                0 0 0 1px rgba(255, 85, 0, 0.4);
+    outline: none;
+  }
+
+  .card-media {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: calc(var(--radius-lg) - 4px);
+    background-color: #000000;
+  }
+
+  .photo-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .gallery-card:hover .photo-img {
+    transform: scale(1.02);
+  }
+
+  /* Hover HUD (clean bottom info overlay) */
+  .card-hover-hud {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      transparent 55%,
+      rgba(10, 10, 14, 0.88) 100%
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 16px;
+    opacity: 0;
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .gallery-card:hover .card-hover-hud,
+  .gallery-card:focus-visible .card-hover-hud {
+    opacity: 1;
+  }
+
+  .hud-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .hud-title {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.3;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  }
+
+  .hud-location {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+
+  .hud-specs {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-text-dim);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .hud-specs .sep {
+    color: #4a4a58;
+  }
+
+  /* 3. Interactive Fullscreen Lightbox */
+  .gallery-lightbox {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    display: none;
+    z-index: 9999;
+    overflow: hidden;
+  }
+
+  .gallery-lightbox[open] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox-backdrop {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(8, 8, 10, 0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    z-index: 1;
+  }
+
+  .lightbox-shell {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+    padding: 16px 24px;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 768px) {
+    .lightbox-shell {
+      padding: 12px 14px;
+    }
+  }
+
+  /* Lightbox HUD Header */
+  .lightbox-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+  }
+
+  .lightbox-hud-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hud-live-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    box-shadow: 0 0 8px var(--color-accent);
+  }
+
+  .hud-stock-label {
+    background-color: var(--color-accent-subtle);
+    color: var(--color-accent);
+    padding: 3px 10px;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .hud-frame-label {
+    color: #ffaa33;
+    font-weight: 700;
+  }
+
+  .lightbox-hud-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .hud-brand-tag {
+    color: var(--color-text-dim);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 640px) {
+    .hud-brand-tag {
+      display: none;
+    }
+  }
+
+  .lightbox-close-btn {
+    background: #1b1b22;
+    border: 1px solid #33333d;
+    color: #e0e0e6;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .lightbox-close-btn:hover {
+    background: #2a2a35;
+    color: #ffffff;
+    border-color: var(--color-accent);
+    transform: scale(1.08);
+  }
+
+  /* Lightbox Stage */
+  .lightbox-stage {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    padding: 12px 0;
+  }
+
+  .lightbox-image-container {
+    max-width: 90vw;
+    max-height: calc(100vh - 180px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+  }
+
+  .lightbox-main-image {
+    max-width: 100%;
+    max-height: calc(100vh - 190px);
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 4px;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* Navigation Buttons */
+  .lightbox-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    background-color: rgba(22, 22, 28, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+  }
+
+  .lightbox-nav-btn:hover {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .lightbox-nav-btn.prev {
+    left: 8px;
+  }
+
+  .lightbox-nav-btn.next {
+    right: 8px;
+  }
+
+  @media (max-width: 640px) {
+    .lightbox-nav-btn {
+      width: 40px;
+      height: 40px;
+      background-color: rgba(22, 22, 28, 0.7);
+    }
+    .lightbox-nav-btn.prev {
+      left: 2px;
+    }
+    .lightbox-nav-btn.next {
+      right: 2px;
+    }
+  }
+
+  /* Lightbox Footer */
+  .lightbox-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .footer-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .lb-title {
+    color: #ffffff;
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .lb-location {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    margin: 0;
+  }
+
+  .lb-description {
+    flex: 1 1 100%;
+    color: var(--color-text-muted);
+    font-size: 0.8125rem;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  @media (min-width: 1024px) {
+    .lb-description {
+      flex: 1 1 400px;
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+  }
+
+  .footer-meta-pills {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+  }
+
+  .meta-pill {
+    background-color: #1a1a20;
+    border: 1px solid #2e2e38;
+    color: #c0c0cc;
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+  }
+
+  .format-pill {
+    background-color: rgba(76, 217, 100, 0.15);
+    border-color: rgba(76, 217, 100, 0.4);
+    color: #4cd964;
+    font-weight: 700;
+  }
+</style>
