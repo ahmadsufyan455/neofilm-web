@@ -147,16 +147,18 @@ const isActive = (href: string) => {
             class="mobile-store-btn"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Download NeoFilm on the App Store"
           >
-            <img src="/images/badges/app-store-badge.svg" alt="Download on the App Store" width="120" height="40" />
+            <img src="/images/badges/download_on_app_store.svg" alt="Download on the App Store" width="135" height="40" class="mobile-badge-img" />
           </a>
           <a
             href={siteConfig.stores.android.url}
             class="mobile-store-btn"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Get NeoFilm on Google Play"
           >
-            <img src="/images/badges/google-play-badge.svg" alt="Get it on Google Play" width="135" height="40" />
+            <img src="/images/badges/get_it_on_google_play.svg" alt="Get it on Google Play" width="135" height="40" class="mobile-badge-img" />
           </a>
         </div>
       </div>
@@ -442,6 +444,18 @@ const isActive = (href: string) => {
     display: flex;
     flex-direction: column;
     gap: 10px;
+  }
+
+  .mobile-store-btn {
+    display: inline-block;
+    line-height: 0;
+  }
+
+  .mobile-badge-img {
+    height: 40px;
+    width: auto;
+    border-radius: 6px;
+    display: block;
   }
 
   @media (max-width: 860px) {
