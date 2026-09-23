@@ -73,9 +73,9 @@ export const siteConfig: SiteConfig = {
   supportEmail: 'simpelkode@gmail.com',
   publisher: {
     name: 'NeoFilm',
-    developer: 'SimpelKode (ZeroDev)',
+    developer: 'ZEROdev',
     copyrightYear: 2026,
-    copyrightText: '© 2026 NeoFilm / SimpelKode. All rights reserved.',
+    copyrightText: '© 2026 NeoFilm / ZEROdev. All rights reserved.',
   },
   stores: {
     ios: {
