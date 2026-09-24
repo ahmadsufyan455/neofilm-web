@@ -80,34 +80,51 @@ const isActive = (href: string) => {
       </button>
     </div>
   </div>
+</header>
 
-  <!-- Mobile Navigation Drawer -->
-  <div
-    class="mobile-nav-drawer"
-    id="mobile-nav-drawer"
-    role="dialog"
-    aria-modal="true"
-    aria-label="Mobile Navigation"
-    hidden
-  >
-    <div class="mobile-nav-backdrop" id="mobile-nav-backdrop"></div>
-    <div class="mobile-nav-content">
-      <div class="mobile-nav-header">
-        <span class="brand-name">{siteConfig.name}</span>
-        <button
-          type="button"
-          class="mobile-nav-close"
-          id="mobile-nav-close"
-          aria-label="Close Navigation Menu"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-      </div>
+<!-- Mobile Navigation Drawer (Rendered outside header to avoid backdrop-filter containing block trap) -->
+<div
+  class="mobile-nav-drawer"
+  id="mobile-nav-drawer"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Mobile Navigation"
+  aria-hidden="true"
+>
+  <div class="mobile-nav-backdrop" id="mobile-nav-backdrop" tabindex="-1"></div>
+  <div class="mobile-nav-content" id="mobile-nav-panel">
+    <div class="mobile-nav-header">
+      <a href="/" class="brand-link" aria-label="NeoFilm Home">
+        <div class="brand-icon-wrapper">
+          <img
+            src="/images/logo/neofilm-icon.png"
+            alt=""
+            width="36"
+            height="36"
+            class="brand-icon"
+          />
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">{siteConfig.name}</span>
+          <span class="brand-tag">VINTAGE</span>
+        </div>
+      </a>
+      <button
+        type="button"
+        class="mobile-nav-close"
+        id="mobile-nav-close"
+        aria-label="Close Navigation Menu"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
 
-      <nav class="mobile-nav-list" aria-label="Mobile Navigation Links">
+    <div class="mobile-nav-body">
+      <nav class="mobile-nav-list" aria-label="Primary Navigation">
+        <span class="mobile-nav-section-title">Navigation</span>
         <ul>
           {navItems.map((item) => (
             <li>
@@ -116,14 +133,25 @@ const isActive = (href: string) => {
                 class:list={['mobile-nav-link', { active: isActive(item.href) }]}
                 aria-current={isActive(item.href) ? 'page' : undefined}
               >
-                {item.label}
+                <span class="mobile-nav-link-text">{item.label}</span>
+                <svg class="mobile-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
               </a>
             </li>
           ))}
+        </ul>
+      </nav>
+
+      <div class="mobile-nav-divider"></div>
+
+      <nav class="mobile-nav-secondary" aria-label="Legal and Documentation">
+        <span class="mobile-nav-section-title">Legal &amp; Policy</span>
+        <ul class="mobile-secondary-list">
           <li>
             <a
               href="/privacy/"
-              class:list={['mobile-nav-link', { active: isActive('/privacy/') }]}
+              class:list={['mobile-secondary-link', { active: isActive('/privacy/') }]}
             >
               Privacy Policy
             </a>
@@ -131,40 +159,43 @@ const isActive = (href: string) => {
           <li>
             <a
               href="/terms/"
-              class:list={['mobile-nav-link', { active: isActive('/terms/') }]}
+              class:list={['mobile-secondary-link', { active: isActive('/terms/') }]}
             >
               Terms of Use
             </a>
           </li>
         </ul>
       </nav>
+    </div>
 
-      <div class="mobile-nav-footer">
+    <div class="mobile-nav-footer">
+      <div class="mobile-download-head">
+        <span class="cta-dot"></span>
         <p class="mobile-download-label">Download NeoFilm</p>
-        <div class="mobile-badge-stack">
-          <a
-            href={siteConfig.stores.ios.url}
-            class="mobile-store-btn"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Download NeoFilm on the App Store"
-          >
-            <img src="/images/badges/download_on_app_store.svg" alt="Download on the App Store" width="135" height="40" class="mobile-badge-img" />
-          </a>
-          <a
-            href={siteConfig.stores.android.url}
-            class="mobile-store-btn"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Get NeoFilm on Google Play"
-          >
-            <img src="/images/badges/get_it_on_google_play.svg" alt="Get it on Google Play" width="135" height="40" class="mobile-badge-img" />
-          </a>
-        </div>
+      </div>
+      <div class="mobile-badge-stack">
+        <a
+          href={siteConfig.stores.ios.url}
+          class="mobile-store-btn"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Download NeoFilm on the App Store"
+        >
+          <img src="/images/badges/download_on_app_store.svg" alt="Download on the App Store" width="135" height="40" class="mobile-badge-img" />
+        </a>
+        <a
+          href={siteConfig.stores.android.url}
+          class="mobile-store-btn"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Get NeoFilm on Google Play"
+        >
+          <img src="/images/badges/get_it_on_google_play.svg" alt="Get it on Google Play" width="135" height="40" class="mobile-badge-img" />
+        </a>
       </div>
     </div>
   </div>
-</header>
+</div>
 
 <style>
   .site-header {
@@ -346,44 +377,75 @@ const isActive = (href: string) => {
     position: fixed;
     inset: 0;
     z-index: 2000;
+    visibility: hidden;
+    pointer-events: none;
+    transition: visibility 0s linear 0.28s;
   }
 
+  .mobile-nav-drawer.is-open {
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
+  }
+
+  /* Full-viewport Backdrop */
   .mobile-nav-backdrop {
-    position: absolute;
+    position: fixed;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    background-color: rgba(6, 6, 8, 0.78);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity 0.28s ease;
   }
 
+  .mobile-nav-drawer.is-open .mobile-nav-backdrop {
+    opacity: 1;
+  }
+
+  /* Solid Chassis Drawer Content */
   .mobile-nav-content {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
-    width: min(320px, 85vw);
+    width: min(340px, 86vw);
+    height: 100%;
+    height: 100dvh;
     background-color: var(--color-surface-chassis);
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0) 100%);
     border-left: 1px solid var(--color-seam);
     display: flex;
     flex-direction: column;
-    padding: 24px;
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.8);
-    transform: translateX(0);
-    transition: transform var(--transition-normal);
+    padding: max(16px, env(safe-area-inset-top)) 20px max(24px, env(safe-area-inset-bottom)) 20px;
+    box-shadow: -14px 0 40px rgba(0, 0, 0, 0.9);
+    transform: translateX(100%);
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    z-index: 2001;
   }
 
+  .mobile-nav-drawer.is-open .mobile-nav-content {
+    transform: translateX(0);
+  }
+
+  /* Drawer Header */
   .mobile-nav-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-bottom: 20px;
+    padding-bottom: 16px;
     border-bottom: 1px solid var(--color-seam);
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+    flex-shrink: 0;
   }
 
   .mobile-nav-close {
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -392,52 +454,143 @@ const isActive = (href: string) => {
     border-radius: var(--radius-md);
     color: var(--color-text-secondary);
     cursor: pointer;
+    transition: color var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast), transform var(--transition-fast);
   }
 
   .mobile-nav-close:hover {
     color: #ffffff;
     border-color: var(--color-border);
+    background-color: var(--color-surface-subtle);
+  }
+
+  .mobile-nav-close:active {
+    transform: scale(0.96);
+  }
+
+  /* Drawer Scrollable Body */
+  .mobile-nav-body {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: auto;
+    padding-right: 4px;
+  }
+
+  .mobile-nav-section-title {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-text-muted);
+    margin-bottom: 8px;
+    padding-left: 12px;
   }
 
   .mobile-nav-list ul {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 4px;
   }
 
   .mobile-nav-link {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 12px 14px;
     font-size: 1.0625rem;
     font-weight: 600;
-    color: var(--color-text-secondary);
+    color: var(--color-text-primary);
     border-radius: var(--radius-md);
+    border: 1px solid transparent;
     transition: all var(--transition-fast);
   }
 
-  .mobile-nav-link:hover, .mobile-nav-link.active {
+  .mobile-nav-link:hover {
     color: #ffffff;
     background-color: var(--color-surface-elevated);
+    border-color: var(--color-seam);
   }
 
   .mobile-nav-link.active {
+    color: #ffffff;
+    background-color: var(--color-surface-elevated);
+    border-color: rgba(255, 85, 0, 0.35);
     border-left: 3px solid var(--color-accent);
   }
 
+  .mobile-nav-chevron {
+    color: var(--color-text-dim);
+    transition: color var(--transition-fast), transform var(--transition-fast);
+    flex-shrink: 0;
+  }
+
+  .mobile-nav-link:hover .mobile-nav-chevron,
+  .mobile-nav-link.active .mobile-nav-chevron {
+    color: var(--color-accent);
+    transform: translateX(2px);
+  }
+
+  .mobile-nav-divider {
+    height: 1px;
+    background-color: var(--color-seam);
+    margin: 4px 0;
+    flex-shrink: 0;
+  }
+
+  .mobile-secondary-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .mobile-secondary-link {
+    display: block;
+    padding: 9px 14px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    border-radius: var(--radius-md);
+    transition: color var(--transition-fast), background-color var(--transition-fast);
+  }
+
+  .mobile-secondary-link:hover,
+  .mobile-secondary-link.active {
+    color: #ffffff;
+    background-color: var(--color-surface-subtle);
+  }
+
+  .mobile-secondary-link.active {
+    color: var(--color-accent);
+  }
+
+  /* Drawer Footer */
   .mobile-nav-footer {
     margin-top: auto;
-    padding-top: 24px;
+    padding-top: 16px;
     border-top: 1px solid var(--color-seam);
+    flex-shrink: 0;
+  }
+
+  .mobile-download-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
   }
 
   .mobile-download-label {
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
     font-family: var(--font-mono);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-text-muted);
-    margin-bottom: 12px;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    color: var(--color-text-secondary);
+    margin: 0;
   }
 
   .mobile-badge-stack {
@@ -449,6 +602,16 @@ const isActive = (href: string) => {
   .mobile-store-btn {
     display: inline-block;
     line-height: 0;
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
+  }
+
+  .mobile-store-btn:hover {
+    transform: translateY(-1px);
+    opacity: 0.92;
+  }
+
+  .mobile-store-btn:active {
+    transform: translateY(0);
   }
 
   .mobile-badge-img {
@@ -480,7 +643,8 @@ const isActive = (href: string) => {
 
   function openMenu() {
     if (!drawer || !toggleBtn) return;
-    drawer.removeAttribute('hidden');
+    drawer.classList.add('is-open');
+    drawer.setAttribute('aria-hidden', 'false');
     toggleBtn.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
     closeBtn?.focus();
@@ -488,14 +652,15 @@ const isActive = (href: string) => {
 
   function closeMenu() {
     if (!drawer || !toggleBtn) return;
-    drawer.setAttribute('hidden', '');
+    drawer.classList.remove('is-open');
+    drawer.setAttribute('aria-hidden', 'true');
     toggleBtn.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
     toggleBtn.focus();
   }
 
   toggleBtn?.addEventListener('click', () => {
-    const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+    const isExpanded = drawer?.classList.contains('is-open');
     if (isExpanded) {
       closeMenu();
     } else {
@@ -506,9 +671,17 @@ const isActive = (href: string) => {
   closeBtn?.addEventListener('click', closeMenu);
   backdrop?.addEventListener('click', closeMenu);
 
+  // Close on nav link click
+  const navLinks = drawer?.querySelectorAll('a');
+  navLinks?.forEach((link) => {
+    link.addEventListener('click', () => {
+      closeMenu();
+    });
+  });
+
   // Close on Escape key
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && drawer && !drawer.hasAttribute('hidden')) {
+    if (e.key === 'Escape' && drawer && drawer.classList.contains('is-open')) {
       closeMenu();
     }
   });
