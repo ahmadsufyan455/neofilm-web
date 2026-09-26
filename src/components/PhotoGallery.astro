@@ -50,15 +50,21 @@ const displayedPhotos = maxPhotos ? samplePhotos.slice(0, maxPhotos) : samplePho
           aria-label={`View photo: ${photo.title} (${photo.filmProfile})`}
         >
           <!-- Photo Media Container -->
-          <div class="card-media">
+          <div
+            class="card-media"
+            style={`aspect-ratio: ${photo.width} / ${photo.height};`}
+          >
+            <div class="skeleton-shimmer" aria-hidden="true"></div>
             <img
-              src={photo.src}
+              src={photo.thumbSrc || photo.src}
               alt={photo.alt}
               width={photo.width}
               height={photo.height}
-              loading="lazy"
+              loading={index < 3 ? 'eager' : 'lazy'}
+              fetchpriority={index < 3 ? 'high' : 'auto'}
               decoding="async"
               class="photo-img"
+              onload="this.classList.add('is-loaded'); this.parentElement?.classList.add('has-loaded');"
             />
 
             <!-- Hover Information HUD -->
@@ -135,6 +141,10 @@ const displayedPhotos = maxPhotos ? samplePhotos.slice(0, maxPhotos) : samplePho
 
         <!-- Image Container -->
         <div class="lightbox-image-container" id="lightbox-image-container">
+          <div class="lb-loader" id="lb-loader" aria-hidden="true">
+            <div class="lb-spinner"></div>
+            <span class="lb-loader-text">DEVELOPING HIGH-RES NEGATIVE</span>
+          </div>
           <img
             id="lb-image"
             src=""
@@ -217,6 +227,7 @@ const displayedPhotos = maxPhotos ? samplePhotos.slice(0, maxPhotos) : samplePho
     const nextBtn = document.getElementById('lb-btn-next');
 
     const lbImage = document.getElementById('lb-image') as HTMLImageElement | null;
+    const lbLoader = document.getElementById('lb-loader');
     const lbStock = document.getElementById('lb-film-stock');
     const lbTitle = document.getElementById('lb-title');
     const lbLocation = document.getElementById('lb-location-text');
@@ -227,6 +238,20 @@ const displayedPhotos = maxPhotos ? samplePhotos.slice(0, maxPhotos) : samplePho
     const lbRatio = document.getElementById('lb-spec-ratio');
 
     let lastFocusedElement: HTMLElement | null = null;
+
+    // Check all grid images: if already cached/completed, mark them immediately
+    const gridImages = document.querySelectorAll<HTMLImageElement>('.photo-img');
+    gridImages.forEach((img) => {
+      const markLoaded = () => {
+        img.classList.add('is-loaded');
+        img.parentElement?.classList.add('has-loaded');
+      };
+      if (img.complete && img.naturalWidth > 0) {
+        markLoaded();
+      } else {
+        img.addEventListener('load', markLoaded, { once: true });
+      }
+    });
 
     // Filter Logic
     filterButtons.forEach((btn) => {
@@ -264,13 +289,44 @@ const displayedPhotos = maxPhotos ? samplePhotos.slice(0, maxPhotos) : samplePho
       return visible;
     }
 
+    function preloadAdjacent(currentIdx: number) {
+      const visible = getVisibleIndices();
+      const currentPos = visible.indexOf(currentIdx);
+      if (currentPos === -1 || visible.length <= 1) return;
+
+      const nextPos = (currentPos + 1) % visible.length;
+      const prevPos = (currentPos - 1 + visible.length) % visible.length;
+
+      [visible[nextPos], visible[prevPos]].forEach((idx) => {
+        const p = photos[idx];
+        if (p?.src) {
+          const preloadImg = new Image();
+          preloadImg.src = p.src;
+        }
+      });
+    }
+
     function renderPhoto(index: number) {
       if (!photos[index] || !lbImage) return;
       currentIndex = index;
       const photo = photos[index];
 
+      // Reset loading state for smooth crossfade
+      lbImage.classList.remove('is-loaded');
+      lbLoader?.classList.add('is-active');
+
+      const onImageReady = () => {
+        lbImage.classList.add('is-loaded');
+        lbLoader?.classList.remove('is-active');
+      };
+
+      lbImage.onload = onImageReady;
       lbImage.src = photo.src;
       lbImage.alt = photo.alt;
+
+      if (lbImage.complete && lbImage.naturalWidth > 0) {
+        onImageReady();
+      }
 
       if (lbStock) lbStock.textContent = photo.filmProfile;
       if (lbTitle) lbTitle.textContent = photo.title;
@@ -280,6 +336,8 @@ const displayedPhotos = maxPhotos ? samplePhotos.slice(0, maxPhotos) : samplePho
       if (lbAperture) lbAperture.textContent = photo.aperture;
       if (lbIso) lbIso.textContent = photo.iso;
       if (lbRatio) lbRatio.textContent = photo.aspectRatio;
+
+      preloadAdjacent(index);
     }
 
     function openLightbox(index: number) {
@@ -542,19 +600,66 @@ const displayedPhotos = maxPhotos ? samplePhotos.slice(0, maxPhotos) : samplePho
     width: 100%;
     overflow: hidden;
     border-radius: calc(var(--radius-lg) - 4px);
-    background-color: #000000;
+    background-color: #121216;
+  }
+
+  /* Skeleton Shimmer & Darkroom Pulse */
+  .skeleton-shimmer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      115deg,
+      #131317 0%,
+      #191922 25%,
+      #242430 40%,
+      #191922 55%,
+      #131317 100%
+    );
+    background-size: 250% 100%;
+    animation: skeletonShimmer 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity 0.4s ease-out;
+  }
+
+  .card-media.has-loaded .skeleton-shimmer {
+    opacity: 0;
+    animation: none;
+  }
+
+  @keyframes skeletonShimmer {
+    0% {
+      background-position: 250% 0;
+    }
+    100% {
+      background-position: -250% 0;
+    }
   }
 
   .photo-img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
     object-fit: cover;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0;
+    filter: blur(8px);
+    transform: scale(1.02);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    z-index: 2;
   }
 
-  .gallery-card:hover .photo-img {
-    transform: scale(1.02);
+  .photo-img.is-loaded {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+
+  .gallery-card:hover .photo-img.is-loaded,
+  .gallery-card:focus-visible .photo-img.is-loaded {
+    transform: scale(1.03);
   }
 
   /* Hover HUD (clean bottom info overlay) */
@@ -753,10 +858,57 @@ const displayedPhotos = maxPhotos ? samplePhotos.slice(0, maxPhotos) : samplePho
   .lightbox-image-container {
     max-width: 90vw;
     max-height: calc(100vh - 180px);
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+    min-width: 280px;
+    min-height: 280px;
+  }
+
+  .lb-loader {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background-color: rgba(12, 12, 16, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 5;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    border-radius: 4px;
+  }
+
+  .lb-loader.is-active {
+    opacity: 1;
+  }
+
+  .lb-spinner {
+    width: 32px;
+    height: 32px;
+    border: 2px solid rgba(255, 85, 0, 0.2);
+    border-top-color: var(--color-accent);
+    border-radius: 50%;
+    animation: lbSpin 0.75s linear infinite;
+  }
+
+  @keyframes lbSpin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .lb-loader-text {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    color: var(--color-text-secondary);
   }
 
   .lightbox-main-image {
@@ -768,6 +920,15 @@ const displayedPhotos = maxPhotos ? samplePhotos.slice(0, maxPhotos) : samplePho
     border-radius: 4px;
     user-select: none;
     -webkit-user-select: none;
+    opacity: 0;
+    transform: scale(0.985);
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .lightbox-main-image.is-loaded {
+    opacity: 1;
+    transform: scale(1);
   }
 
   /* Navigation Buttons */
@@ -890,5 +1051,23 @@ const displayedPhotos = maxPhotos ? samplePhotos.slice(0, maxPhotos) : samplePho
     border-color: rgba(76, 217, 100, 0.4);
     color: #4cd964;
     font-weight: 700;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .photo-img {
+      filter: none;
+      transform: none;
+      transition: opacity 0.2s ease;
+    }
+    .skeleton-shimmer {
+      animation: none;
+    }
+    .lightbox-main-image {
+      transform: none;
+      transition: opacity 0.2s ease;
+    }
+    .lb-spinner {
+      animation-duration: 2s;
+    }
   }
 </style>

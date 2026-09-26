@@ -10,6 +10,7 @@ export interface SamplePhoto {
   id: string;
   filename: string;
   src: string;
+  thumbSrc?: string;
   title: string;
   location: string;
   filmProfile: string;
@@ -31,7 +32,7 @@ export interface CategoryFilter {
   count: number;
 }
 
-export const samplePhotos: SamplePhoto[] = [
+const rawSamplePhotos: Omit<SamplePhoto, 'thumbSrc'>[] = [
   {
     id: 'photo-01',
     filename: 'NeoFilm_Darkroom_1787890794498.jpg',
@@ -465,6 +466,11 @@ export const samplePhotos: SamplePhoto[] = [
     description: 'Bold red graphic facade and geometric portholes contrasting with heritage tiled shophouse eaves.',
   },
 ];
+
+export const samplePhotos: SamplePhoto[] = rawSamplePhotos.map((photo) => ({
+  ...photo,
+  thumbSrc: `/images/photos/thumbs/${photo.filename.replace(/\.[^.]+$/, '')}.webp`,
+}));
 
 export const categoryFilters: CategoryFilter[] = [
   { id: 'all', label: 'All Photos', count: samplePhotos.length },
