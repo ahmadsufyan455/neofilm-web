@@ -16,7 +16,8 @@ const {
   canonicalPath = '',
   ogImage = siteConfig.seo.defaultOgImage,
   ogType = 'website',
-  includeSmartBanner = true,
+  // Disabled by default while iOS app is under Apple review
+  includeSmartBanner = false,
 } = Astro.props;
 
 // Ensure full canonical URL
