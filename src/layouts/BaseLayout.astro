@@ -4,6 +4,7 @@ import JsonLd, { type BreadcrumbItem, type FaqItem } from '../components/JsonLd.
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
 import AppStoreReviewModal from '../components/AppStoreReviewModal.astro';
 import '../styles/global.css';
 
@@ -63,8 +64,9 @@ const {
     <!-- Global Footer -->
     <Footer />
 
-    <!-- Vercel Web Analytics -->
+    <!-- Vercel Web Analytics & Speed Insights -->
     <Analytics />
+    <SpeedInsights />
 
     <!-- iOS App Store Review Status Modal -->
     <AppStoreReviewModal />
