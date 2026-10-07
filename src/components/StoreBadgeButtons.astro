@@ -4,105 +4,78 @@ import { siteConfig } from '../config/site';
 export interface Props {
   size?: 'normal' | 'large';
   alignment?: 'start' | 'center' | 'end';
+  showIosStatus?: boolean;
   class?: string;
 }
 
-const { size = 'normal', alignment = 'start', class: className = '' } = Astro.props;
+const {
+  size = 'normal',
+  alignment = 'start',
+  showIosStatus = true,
+  class: className = '',
+} = Astro.props;
 ---
 
-<div class:list={['store-badge-group', `align-${alignment}`, `size-${size}`, className]}>
-  <!-- App Store Button -->
-  <a
-    href={siteConfig.stores.ios.url}
-    class="store-badge-link"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Download NeoFilm - Vintage Film Camera on the Apple App Store"
-  >
-    <img
-      src="/images/badges/download_on_app_store.svg"
-      alt="Download on the App Store"
-      width="135"
-      height="40"
-      loading="lazy"
-      decoding="async"
-      class="badge-img"
-    />
-  </a>
-
-  <!-- Google Play Button -->
+<div class:list={['store-actions', `align-${alignment}`, `size-${size}`, className]}>
   <a
     href={siteConfig.stores.android.url}
-    class="store-badge-link"
+    class="play-link"
     target="_blank"
     rel="noopener noreferrer"
-    aria-label="Get NeoFilm - Vintage Film Camera on Google Play"
+    aria-label="Get NeoFilm on Google Play"
   >
     <img
       src="/images/badges/get_it_on_google_play.svg"
       alt="Get it on Google Play"
       width="135"
       height="40"
-      loading="lazy"
       decoding="async"
-      class="badge-img"
     />
   </a>
+  {showIosStatus && siteConfig.stores.ios.status === 'coming-soon' && (
+      <button
+        type="button"
+        class="app-store-link"
+        data-ios-coming-soon
+        aria-haspopup="dialog"
+        aria-controls="ios-coming-soon-dialog"
+        aria-label="Download NeoFilm for iPhone on the App Store"
+      >
+        <img
+          src="/images/badges/download_on_app_store.svg"
+          alt="Download on the App Store"
+          width="135"
+          height="40"
+          decoding="async"
+        />
+      </button>
+    )}
+  {showIosStatus && siteConfig.stores.ios.status === 'available' && (
+    <a
+      href={siteConfig.stores.ios.url}
+      class="app-store-link"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Download NeoFilm for iPhone on the App Store"
+    >
+      <img
+        src="/images/badges/download_on_app_store.svg"
+        alt="Download on the App Store"
+        width="135"
+        height="40"
+        decoding="async"
+      />
+    </a>
+  )}
 </div>
 
 <style>
-  .store-badge-group {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .align-center {
-    justify-content: center;
-  }
-
-  .align-start {
-    justify-content: flex-start;
-  }
-
-  .align-end {
-    justify-content: flex-end;
-  }
-
-  .store-badge-link {
-    display: inline-block;
-    line-height: 0;
-    border-radius: 8px;
-    transition: transform var(--transition-fast), filter var(--transition-fast), opacity var(--transition-fast);
-  }
-
-  .store-badge-link:hover {
-    transform: translateY(-2px);
-    filter: brightness(1.1);
-  }
-
-  .store-badge-link:active {
-    transform: translateY(0);
-  }
-
-  .badge-img {
-    height: 44px;
-    width: auto;
-    border-radius: 8px;
-    display: block;
-  }
-
-  .size-large .badge-img {
-    height: 50px;
-  }
-
-  @media (max-width: 480px) {
-    .store-badge-group {
-      gap: 10px;
-    }
-    .badge-img {
-      height: 42px;
-    }
-  }
+  .store-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+  .align-center { justify-content: center; }
+  .align-end { justify-content: flex-end; }
+  .play-link, .app-store-link { display: inline-flex; padding: 0; border: 0; border-radius: 8px; background: transparent; cursor: pointer; transition: transform var(--transition-fast), filter var(--transition-fast); }
+  .play-link:hover, .app-store-link:hover { transform: translateY(-2px); filter: brightness(1.08); }
+  .play-link img, .app-store-link img { height: 44px; width: auto; }
+  .size-large .play-link img, .size-large .app-store-link img { height: 52px; }
+  @media (max-width: 480px) { .store-actions { gap: 10px; } .play-link img, .app-store-link img { height: 42px; } }
 </style>

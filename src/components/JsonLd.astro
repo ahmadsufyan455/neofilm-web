@@ -27,22 +27,16 @@ const applicationSchema = {
   alternateName: siteConfig.name,
   description: siteConfig.description,
   applicationCategory: 'PhotographyApplication',
-  operatingSystem: 'iOS 17.0 or later, Android 8.0 or later',
+  operatingSystem: `${siteConfig.stores.android.minTarget}, ${siteConfig.stores.ios.minTarget}`,
   url: siteConfig.url,
   downloadUrl: [
-    siteConfig.stores.ios.url,
-    siteConfig.stores.android.url
+    siteConfig.stores.android.url,
+    ...(siteConfig.stores.ios.status === 'available' ? [siteConfig.stores.ios.url] : []),
   ],
   author: {
     '@type': 'Organization',
     name: siteConfig.publisher.name,
     url: siteConfig.url,
-  },
-  offers: {
-    '@type': 'Offer',
-    price: '0',
-    priceCurrency: 'USD',
-    description: 'Free download with optional NeoFilm Pro subscription or lifetime purchase'
   }
 };
 

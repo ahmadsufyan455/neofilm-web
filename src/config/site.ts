@@ -24,6 +24,7 @@ export interface SiteConfig {
   };
   stores: {
     ios: {
+      status: 'coming-soon' | 'available';
       title: string;
       bundleId: string;
       appId: string;
@@ -36,6 +37,7 @@ export interface SiteConfig {
       lifetimeProduct: string;
     };
     android: {
+      status: 'coming-soon' | 'available';
       title: string;
       packageId: string;
       url: string;
@@ -66,9 +68,9 @@ export interface SiteConfig {
 export const siteConfig: SiteConfig = {
   name: 'NeoFilm',
   formalName: 'NeoFilm - Vintage Film Camera',
-  tagline: 'Analog character. Modern control.',
+  tagline: 'Film-inspired color. Modern control.',
   description:
-    'Capture authentic analog character with handcrafted film profiles, manual RAW controls, custom recipes, and a mobile darkroom for iPhone and Android.',
+    'A vintage film camera and photo editor for Android and iPhone, with 30+ film-inspired looks, custom recipes, supported-device manual and RAW capture, and a mobile Darkroom.',
   url: 'https://neofilm.cam',
   supportEmail: 'simpelkode@gmail.com',
   publisher: {
@@ -79,6 +81,7 @@ export const siteConfig: SiteConfig = {
   },
   stores: {
     ios: {
+      status: 'coming-soon',
       title: 'Download on the App Store',
       bundleId: 'com.zerodev.neofilm',
       appId: '6814821237',
@@ -91,6 +94,7 @@ export const siteConfig: SiteConfig = {
       lifetimeProduct: 'com.zerodev.neofilm.pro.lifetime',
     },
     android: {
+      status: 'available',
       title: 'Get it on Google Play',
       packageId: 'com.zerodev.neofilm',
       url: 'https://play.google.com/store/apps/details?id=com.zerodev.neofilm',
@@ -104,22 +108,20 @@ export const siteConfig: SiteConfig = {
   },
   navigation: [
     { label: 'Features', href: '/features/' },
-    { label: 'Film Recipes', href: '/film-recipes/' },
-    { label: 'Darkroom', href: '/darkroom/' },
     { label: 'Gallery', href: '/gallery/' },
     { label: 'Support', href: '/support/' },
   ],
   legal: {
     privacyEffectiveDate: 'August 3, 2026',
     termsEffectiveDate: 'August 3, 2026',
-    lastUpdated: 'September 23, 2026',
+    lastUpdated: 'October 7, 2026',
     legacyFlyCricketPrivacyUrl:
       'https://doc-hosting.flycricket.io/neofilm-privacy/60a7b253-ef41-4c0c-b306-3facb7c194e2/privacy',
     legacyFlyCricketTermsUrl:
       'https://doc-hosting.flycricket.io/neofilm-terms/72cdcd34-5f63-44f1-9dad-d203d4b6ecfa/terms',
   },
   seo: {
-    primaryPhrase: 'vintage film camera app',
+    primaryPhrase: 'vintage film camera app for Android and iPhone',
     secondaryPhrases: [
       'analog film camera app',
       'retro camera app',
@@ -132,7 +134,7 @@ export const siteConfig: SiteConfig = {
       'RAW photo editor',
       'DNG camera app',
       'film grain and halation',
-      'camera app for iPhone and Android',
+      'film camera app for Android and iPhone',
     ],
     defaultOgImage: '/images/og/og-image.jpg',
   },

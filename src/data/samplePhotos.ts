@@ -1,7 +1,7 @@
 /**
- * Authentic sample photos captured and developed with NeoFilm.
- * All photos were shot on mobile devices using NeoFilm film profiles,
- * real-time halation, analog grain, and developed in the NeoFilm Darkroom.
+ * Sample photos used by the NeoFilm gallery.
+ * Public copy describes these as processed with NeoFilm and avoids inferring
+ * capture device or workflow details that are not embedded in this dataset.
  */
 
 export type PhotoCategory = 'all' | 'street' | 'architecture' | 'travel' | 'nature';
@@ -68,6 +68,24 @@ const rawSamplePhotos: Omit<SamplePhoto, 'thumbSrc'>[] = [
     frameNumber: 'EXP 02/24',
     alt: 'Suramadu suspension bridge steel mesh and soaring sky shot on NeoFilm Amber Transit 200',
     description: 'Dynamic geometric lines of the suspension bridge mesh framed against a bright midday sky.',
+  },
+  {
+    id: 'photo-bridge-walkway',
+    filename: 'NeoFilm_Darkroom_1787969420851.jpg',
+    src: '/images/photos/NeoFilm_Darkroom_1787969420851.jpg',
+    title: 'Bridge Walkway & Cable Stays',
+    location: 'Suramadu National Bridge',
+    filmProfile: 'Superia 400',
+    category: 'architecture',
+    iso: 'ISO 76',
+    shutter: '1/2000s',
+    aperture: 'f/1.8',
+    aspectRatio: '4:3',
+    width: 4059,
+    height: 3044,
+    frameNumber: 'EXP 03/26',
+    alt: 'Curved security mesh and bridge cable stays processed with NeoFilm Superia 400',
+    description: 'Vibrant sky and crisp steel tones along the ocean walkway.',
   },
   {
     id: 'photo-03',
@@ -338,6 +356,24 @@ const rawSamplePhotos: Omit<SamplePhoto, 'thumbSrc'>[] = [
     frameNumber: 'EXP 17/24',
     alt: 'Winding coastal roadway descending toward tropical sea shot on NeoFilm Superia 400',
     description: 'Sweeping wide-angle vista with organic grain and rich saturated ocean blues.',
+  },
+  {
+    id: 'photo-chinatown-market',
+    filename: 'NeoFilm_Darkroom_1789347946075.jpg',
+    src: '/images/photos/NeoFilm_Darkroom_1789347946075.jpg',
+    title: 'Chinatown Market & Heritage Architecture',
+    location: 'Pagoda Street, Singapore',
+    filmProfile: 'FX Daily 400',
+    category: 'street',
+    iso: 'ISO 125',
+    shutter: '1/500s',
+    aperture: 'f/1.8',
+    aspectRatio: '3:4',
+    width: 1334,
+    height: 1779,
+    frameNumber: 'EXP 19/26',
+    alt: 'Chinatown street market and heritage shophouses processed with NeoFilm FX Daily 400',
+    description: 'A street scene framed by heritage shophouse balconies.',
   },
   {
     id: 'photo-18',

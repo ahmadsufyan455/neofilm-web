@@ -1,0 +1,44 @@
+---
+import { siteConfig } from '../config/site';
+---
+
+<dialog id="ios-coming-soon-dialog" aria-labelledby="ios-dialog-title" aria-describedby="ios-dialog-description">
+  <div class="dialog-card">
+    <button type="button" class="close-button" data-ios-dialog-close aria-label="Close dialog">×</button>
+    <img src="/images/logo/neofilm-icon.png" alt="" width="56" height="56" />
+    <span class="eyebrow">iPhone release</span>
+    <h2 id="ios-dialog-title">NeoFilm for iPhone is coming soon.</h2>
+    <p id="ios-dialog-description">The iPhone release is getting close. Check back here for the App Store launch.</p>
+    <div class="dialog-actions">
+      <button type="button" class="btn-primary" data-ios-dialog-close>Got it</button>
+      <a class="btn-secondary" href={siteConfig.stores.android.url} target="_blank" rel="noopener noreferrer">Get it on Android</a>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('#ios-coming-soon-dialog');
+  const triggers = document.querySelectorAll<HTMLElement>('[data-ios-coming-soon]');
+  const closeButtons = dialog?.querySelectorAll<HTMLElement>('[data-ios-dialog-close]');
+
+  triggers.forEach((trigger) => trigger.addEventListener('click', () => dialog?.showModal()));
+  closeButtons?.forEach((button) => button.addEventListener('click', () => dialog?.close()));
+  dialog?.addEventListener('click', (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+</script>
+
+<style>
+  dialog { position: fixed; inset: 0; width: min(520px, calc(100% - 32px)); max-width: none; max-height: calc(100dvh - 32px); margin: auto; padding: 0; border: 1px solid var(--color-border); border-radius: var(--radius-xl); background: transparent; color: var(--color-text-primary); box-shadow: 0 28px 90px rgba(0,0,0,.7); overflow: auto; }
+  dialog[open] { animation: dialog-enter 220ms cubic-bezier(.2,.8,.2,1); }
+  dialog::backdrop { background: rgba(0,0,0,.72); backdrop-filter: blur(6px); animation: backdrop-enter 180ms ease-out; }
+  .dialog-card { position: relative; padding: clamp(28px, 6vw, 44px); background: radial-gradient(circle at 10% 0, rgba(255,85,0,.12), transparent 45%), var(--color-surface-elevated); }
+  .dialog-card > img { margin-bottom: 22px; border-radius: 13px; }
+  .dialog-card h2 { margin: 10px 42px 14px 0; font-size: clamp(1.8rem, 5vw, 2.5rem); }
+  .dialog-card p { max-width: 430px; }
+  .close-button { position: absolute; top: 18px; right: 18px; width: 42px; height: 42px; border: 1px solid var(--color-border); border-radius: 50%; background: var(--color-surface-card); color: white; font-size: 1.5rem; line-height: 1; cursor: pointer; }
+  .dialog-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+  @keyframes dialog-enter { from { opacity: 0; transform: translateY(10px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+  @keyframes backdrop-enter { from { opacity: 0; } to { opacity: 1; } }
+  @media (max-width: 480px) { .dialog-actions > * { width: 100%; } }
+</style>
