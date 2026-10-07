@@ -81,7 +81,7 @@ export const siteConfig: SiteConfig = {
   },
   stores: {
     ios: {
-      status: 'coming-soon',
+      status: 'available',
       title: 'Download on the App Store',
       bundleId: 'com.zerodev.neofilm',
       appId: '6814821237',
