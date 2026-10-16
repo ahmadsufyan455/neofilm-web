@@ -70,7 +70,7 @@ export const siteConfig: SiteConfig = {
   formalName: 'NeoFilm - Vintage Film Camera',
   tagline: 'Film-inspired color. Modern control.',
   description:
-    'A vintage film camera and photo editor for Android and iPhone, with 30+ film-inspired looks, custom recipes, supported-device manual and RAW capture, and a mobile Darkroom.',
+    'A vintage film camera and photo editor for Android and iPhone, with 40+ film-inspired looks, custom recipes, supported-device manual and RAW capture, and a mobile Darkroom.',
   url: 'https://neofilm.cam',
   supportEmail: 'simpelkode@gmail.com',
   publisher: {
