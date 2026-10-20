@@ -118,8 +118,8 @@ export const siteConfig: SiteConfig = {
     macLab: {
       status: 'available',
       title: 'Buy NeoFilm Lab for Mac',
-      price: '$11.40',
-      originalPrice: '$19',
+      price: '$5.99',
+      originalPrice: '$9.99',
       discountCode: 'NEOFILM40',
       discountPercent: '40%',
       version: '1.0.0',

@@ -60,7 +60,7 @@ const macApplicationSchema = {
   ],
   offers: {
     '@type': 'Offer',
-    price: '11.40',
+    price: siteConfig.stores.macLab.price.replace('$', ''),
     priceCurrency: 'USD',
     availability: 'https://schema.org/InStock',
     url: `${siteConfig.url}/lab/#buy`,
