@@ -48,6 +48,15 @@ export interface SiteConfig {
       monthlyProduct: string;
       lifetimeProduct: string;
     };
+    macLab: {
+      status: 'coming-soon' | 'available';
+      title: string;
+      price: string;
+      version: string;
+      minTarget: string;
+      checkoutUrl: string;
+      ordersUrl: string;
+    };
   };
   navigation: NavItem[];
   legal: {
@@ -70,7 +79,7 @@ export const siteConfig: SiteConfig = {
   formalName: 'NeoFilm - Vintage Film Camera',
   tagline: 'Film-inspired color. Modern control.',
   description:
-    'A vintage film camera and photo editor for Android and iPhone, with 40+ film-inspired looks, custom recipes, supported-device manual and RAW capture, and a mobile Darkroom.',
+    'A vintage film camera and photo editor for Android, iPhone, and macOS, with 40+ film-inspired looks, custom recipes, supported-device manual and RAW capture, and NeoFilm Lab for Mac.',
   url: 'https://neofilm.cam',
   supportEmail: 'simpelkode@gmail.com',
   publisher: {
@@ -105,9 +114,19 @@ export const siteConfig: SiteConfig = {
       monthlyProduct: 'neofilm_pro_monthly',
       lifetimeProduct: 'neofilm_pro_lifetime',
     },
+    macLab: {
+      status: 'available',
+      title: 'Buy NeoFilm Lab for Mac',
+      price: '$19',
+      version: '1.0.0',
+      minTarget: 'macOS 14.0 (Sonoma) or later · Apple Silicon & Intel',
+      checkoutUrl: 'https://neofilm.lemonsqueezy.com/checkout/buy/8afa2a77-78f9-437f-a66a-c5f7cfc68507',
+      ordersUrl: 'https://app.lemonsqueezy.com/my-orders',
+    },
   },
   navigation: [
     { label: 'Features', href: '/features/' },
+    { label: 'NeoFilm Lab', href: '/lab/' },
     { label: 'Gallery', href: '/gallery/' },
     { label: 'Support', href: '/support/' },
   ],

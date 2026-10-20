@@ -6,6 +6,7 @@ export interface Props {
   description?: string;
   canonicalPath?: string;
   ogImage?: string;
+  ogImageAlt?: string;
   ogType?: 'website' | 'article';
   includeSmartBanner?: boolean;
 }
@@ -15,6 +16,7 @@ const {
   description = siteConfig.description,
   canonicalPath = '',
   ogImage = siteConfig.seo.defaultOgImage,
+  ogImageAlt = 'NeoFilm vintage film camera and photo editor for Android, iPhone, and macOS',
   ogType = 'website',
   // Disabled by default while iOS app is under Apple review
   includeSmartBanner = false,
@@ -57,7 +59,7 @@ const fullOgImage = new URL(ogImage, siteConfig.url).href;
 <meta property="og:image" content={fullOgImage} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="NeoFilm vintage film camera and photo editor for Android and iPhone" />
+<meta property="og:image:alt" content={ogImageAlt} />
 
 <!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image" />
