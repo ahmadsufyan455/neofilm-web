@@ -63,8 +63,6 @@ export interface SiteConfig {
     privacyEffectiveDate: string;
     termsEffectiveDate: string;
     lastUpdated: string;
-    legacyFlyCricketPrivacyUrl: string;
-    legacyFlyCricketTermsUrl: string;
   };
   seo: {
     primaryPhrase: string;
@@ -134,10 +132,6 @@ export const siteConfig: SiteConfig = {
     privacyEffectiveDate: 'August 3, 2026',
     termsEffectiveDate: 'August 3, 2026',
     lastUpdated: 'October 7, 2026',
-    legacyFlyCricketPrivacyUrl:
-      'https://doc-hosting.flycricket.io/neofilm-privacy/60a7b253-ef41-4c0c-b306-3facb7c194e2/privacy',
-    legacyFlyCricketTermsUrl:
-      'https://doc-hosting.flycricket.io/neofilm-terms/72cdcd34-5f63-44f1-9dad-d203d4b6ecfa/terms',
   },
   seo: {
     primaryPhrase: 'vintage film camera app for Android and iPhone',
