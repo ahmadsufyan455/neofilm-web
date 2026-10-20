@@ -52,6 +52,9 @@ export interface SiteConfig {
       status: 'coming-soon' | 'available';
       title: string;
       price: string;
+      originalPrice?: string;
+      discountCode?: string;
+      discountPercent?: string;
       version: string;
       minTarget: string;
       checkoutUrl: string;
@@ -115,10 +118,13 @@ export const siteConfig: SiteConfig = {
     macLab: {
       status: 'available',
       title: 'Buy NeoFilm Lab for Mac',
-      price: '$19',
+      price: '$11.40',
+      originalPrice: '$19',
+      discountCode: 'NEOFILM40',
+      discountPercent: '40%',
       version: '1.0.0',
       minTarget: 'macOS 14.0 (Sonoma) or later · Apple Silicon & Intel',
-      checkoutUrl: 'https://neofilm.lemonsqueezy.com/checkout/buy/8afa2a77-78f9-437f-a66a-c5f7cfc68507',
+      checkoutUrl: 'https://neofilm.lemonsqueezy.com/checkout/buy/8afa2a77-78f9-437f-a66a-c5f7cfc68507?checkout[discount_code]=NEOFILM40',
       ordersUrl: 'https://app.lemonsqueezy.com/my-orders',
     },
   },
