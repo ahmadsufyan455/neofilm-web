@@ -313,7 +313,7 @@ const faqItems = [
   }
   .hero-header h1 {
     margin-bottom: 20px;
-    font-size: clamp(2.6rem, 6vw, 4.7rem);
+    font-size: clamp(2.1rem, 6vw, 4.7rem);
   }
   .hero-header h1 em {
     color: var(--color-accent-hover);
@@ -466,6 +466,10 @@ const faqItems = [
     grid-template-columns: 1fr 0.95fr;
     gap: clamp(36px, 7vw, 88px);
     align-items: center;
+    min-width: 0;
+  }
+  .pricing-copy {
+    min-width: 0;
   }
   .pricing-copy h2 {
     margin: 12px 0 18px;
@@ -487,6 +491,7 @@ const faqItems = [
     font-size: 0.92rem;
   }
   .pricing-card {
+    min-width: 0;
     padding: clamp(28px, 4vw, 40px);
     border-radius: var(--radius-xl);
     border: 1px solid rgba(255, 85, 0, 0.42);
@@ -602,6 +607,50 @@ const faqItems = [
     }
     .feature-split.reverse .feature-copy {
       order: 1;
+    }
+    .faq-grid {
+      gap: 36px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .cta-group {
+      flex-direction: column;
+      width: 100%;
+    }
+    .cta-group .btn-buy,
+    .cta-group .btn-secondary {
+      width: 100%;
+    }
+    .showcase-bar {
+      font-size: 0.78rem;
+      gap: 8px 12px;
+      padding: 12px 14px;
+    }
+    .pricing-card {
+      padding: 24px 18px;
+    }
+    .pricing-card-top {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .price-block {
+      text-align: left;
+    }
+    .price-row {
+      justify-content: flex-start;
+    }
+    .btn-buy.full-width {
+      padding: 0 14px;
+      font-size: 0.92rem;
+    }
+    .btn-buy.full-width span {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
     }
   }
 </style>

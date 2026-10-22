@@ -25,8 +25,8 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { background: var(--color-bg); color: var(--color-text-primary); font-family: var(--font-sans); line-height: 1.6; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-body { min-height: 100vh; display: flex; flex-direction: column; background: radial-gradient(circle at 50% 0, rgba(255,85,0,.045), transparent 36rem), var(--color-bg); overflow-x: hidden; }
+html { background: var(--color-bg); color: var(--color-text-primary); font-family: var(--font-sans); line-height: 1.6; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: clip; }
+body { min-height: 100vh; display: flex; flex-direction: column; background: radial-gradient(circle at 50% 0, rgba(255,85,0,.045), transparent 36rem), var(--color-bg); overflow-x: clip; }
 main { flex: 1; }
 img, svg, picture { display: block; max-width: 100%; height: auto; }
 a { color: var(--color-text-primary); text-decoration: none; transition: color var(--transition-fast); }
