@@ -1,6 +1,6 @@
 {
-  "version": "1.0.1",
-  "build": 2,
+  "version": "1.1.0",
+  "build": 3,
   "downloadURL": "https://app.lemonsqueezy.com/my-orders",
-  "releaseNotes": "improve stability performance"
+  "releaseNotes": "added text overlays and improved stability"
 }

@@ -122,7 +122,7 @@ export const siteConfig: SiteConfig = {
       originalPrice: '$9.99',
       discountCode: 'NEOFILM40',
       discountPercent: '40%',
-      version: '1.0.1',
+      version: '1.1.0',
       minTarget: 'macOS 14.0 (Sonoma) or later · Apple Silicon & Intel',
       checkoutUrl: 'https://neofilm.lemonsqueezy.com/checkout/buy/8afa2a77-78f9-437f-a66a-c5f7cfc68507?checkout[discount_code]=NEOFILM40',
       ordersUrl: 'https://app.lemonsqueezy.com/my-orders',
